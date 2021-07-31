@@ -427,6 +427,8 @@ class anggota extends Model
         $j_atp=0;
         $segments=Beasiswa::find($idBeasiswa)->segmentbulanan;
         $n=$segments->count();
+        if($n==0) return 0;
+
         foreach ($segments as $seg) 
         {
             $j_atp+=$this->getAtpSayaPadaSegment($seg->id);
@@ -440,6 +442,8 @@ class anggota extends Model
         $j_eb=0;
         $segments=Beasiswa::find($idBeasiswa)->segmentbulanan;
         $n=$segments->count();
+        if($n==0) return 0;
+
         foreach ($segments as $seg) 
         {
             $j_eb+=$this->getEbSayaPadaSegment($seg->id);

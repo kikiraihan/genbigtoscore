@@ -23,13 +23,100 @@
         
         <div class="flex justify-between items-center mt-6 capitalize">
             <div class="f-playfair font-bold text-2xl">Kehadiran</div>
-            <div><sup>Absen :</sup> {{$abs->title}}</div>
+            <div>
+                <div><sup>Absen :</sup> {{$abs->title}}</div>
+                <div class="py-3 px-6  flex items-center justify-center space-x-2">
+                    <div class="text-green-500 items-center flex space-x-1">
+                        <span class="material-icons-outlined text-base">
+                            task_alt
+                        </span> 
+                        <span>
+                            {{$abs->kehadiran()->hanyayanghadir()->count()}}
+                        </span>
+                    </div>
+                    <div class="text-pink-500 items-center flex space-x-1">
+                        <span class="material-icons-outlined text-base">
+                            cancel
+                        </span> 
+                        <span>
+                            {{$abs->kehadiran()->hanyayangtidakhadir()->count()}}
+                        </span>
+                    </div>
+                    <div class="text-gray-500 items-center flex space-x-1">
+                        <span class="material-icons-outlined text-base">
+                            info
+                        </span>
+                        <span>
+                            {{$abs->kehadiran()->hanyayangizin()->count()}}
+                        </span> 
+                    </div>
+                </div>
+            </div>
             <x-kiki.button-with-google-icon href="{{ route('manual.absen') }}" :icon="'arrow_back'" class="hover:text-blue-700">
                 Kembali
             </x-kiki.button-with-google-icon>
         </div>
 
         {{-- form --}}
+        {{-- form --}}
+        {{-- <form wire:submit.prevent="absenBanyak"> --}}
+
+            <div class="container mx-auto md:grid md:grid-cols-2 gap-2 px-2 mt-8">
+
+                <div>
+                    <label class="f-roboto ml-1 text-gray-500 text-sm">Absen Nama Banyak</label>
+                    <x-kiki.textarea-standar wire:model.lazy="namabanyak" id="namabanyak" 
+                    placeholder="A. Rehan Fajrul Islam;Abd. Wahid Ibrahim;Adinda Pratiwi Musa;"/>
+                    <x-kiki.error-input :kolom="'namabanyak'"/>
+                </div>
+    
+            </div>
+
+            <x-kiki.loading-spin wire:loading wire:target="absenBanyak"  class="text-blue-300"/>
+            <div class="px-2 mt-3 w-1/2" wire:loading.remove wire:target="absenBanyak">
+                <div class="flex space-x-2">
+
+                    
+                    {{-- <x-kiki.button-with-google-icon  :icon="'task_alt'" 
+                    wire:click="absenBanyak('hadir')" 
+                    class="transform hover:text-green-500 hover:scale-110 cursor-pointer">
+                        Hadir
+                    </x-kiki.button-with-google-icon>
+                    
+                    <x-kiki.button-with-google-icon  :icon="'unpublished'" 
+                    wire:click="absenBanyak('tidakhadir')" 
+                    class="transform hover:text-red-500 hover:scale-110 cursor-pointer">
+                        Tidak Hadir
+                    </x-kiki.button-with-google-icon> --}}
+
+                    <button wire:click="absenBanyak('tidakhadir')" type="button"
+                        class="shadow p-2 w-full rounded focus:outline-none focus:ring-2
+                        focus:ring-green-300  text-gray-600 bg-gray-200
+                        hover:bg-red-300
+                        ">
+                        <span class="material-icons-outlined text-base">
+                            unpublished
+                        </span>
+                        Tidak Hadir
+                    </button>
+                    
+                    <button wire:click="absenBanyak('hadir')" type="button"
+                        class="shadow p-2 w-full rounded focus:outline-none focus:ring-2
+                        focus:ring-green-300  text-gray-600 bg-gray-200
+                        hover:bg-green-300
+                        ">
+                        <span class="material-icons-outlined text-base">
+                            task_alt
+                        </span>
+                        Hadir
+                    </button>
+                    
+
+                </div>
+            </div>
+
+
+        {{-- </form> --}}
         {{-- disini form --}}
 
 

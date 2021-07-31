@@ -27,6 +27,7 @@ class ManualAbsen extends Component
     $absensiable_id,
     $pengurangan,
     
+    $inisial_kondisi,
     $searchSelectSkope,
     $terpilihSelectSkope
     ;
@@ -57,6 +58,7 @@ class ManualAbsen extends Component
 
     public function mount()
     {
+        $this->inisial_kondisi='hadir';
         $this->metode='newAbsen';
         $this->id_sb=Segmentbulanan::idTerkini();
     }
@@ -170,8 +172,12 @@ class ManualAbsen extends Component
         $abs->pengurangan       =$this->pengurangan;
         $abs->id_sb             =Segmentbulanan::idSegmentPadaBeasiswaTerkiniBulan($abs->date->month);
         // $abs->id_sb          =$this->id_sb;
+        //atur table saat ini di sb ...
+        $this->id_sb=$abs->id_sb;
+
         $abs->save();
-        $abs=$this->isiAnggota($abs);
+        $abs=$this->isiAnggota($abs,$this->inisial_kondisi);
+        
         
         $this->emit('swalAdded');
         $this->reset([
@@ -185,7 +191,7 @@ class ManualAbsen extends Component
         ]);
     }
 
-    protected function isiAnggota(Absensi $abs)
+    protected function isiAnggota(Absensi $abs,$inisial_kondisi)
     {
         if($abs->skope=='timkhu')
         {
@@ -197,6 +203,7 @@ class ManualAbsen extends Component
                 $ke->id_absen=$abs->id;
                 $ke->id_anggota=$value->id;
                 $ke->valid=TRUE;
+                $ke->kondisi=$inisial_kondisi;
                 $ke->save();
             }
         }
@@ -209,6 +216,7 @@ class ManualAbsen extends Component
                 $ke->id_absen=$abs->id;
                 $ke->id_anggota=$value->id;
                 $ke->valid=TRUE;
+                $ke->kondisi=$inisial_kondisi;
                 $ke->save();
             }
         }
@@ -222,6 +230,7 @@ class ManualAbsen extends Component
                     $ke->id_absen=$abs->id;
                     $ke->id_anggota=$value->id;
                     $ke->valid=TRUE;
+                    $ke->kondisi=$inisial_kondisi;
                     $ke->save();
                 }
             }
@@ -234,6 +243,7 @@ class ManualAbsen extends Component
                 $ke->id_absen=$abs->id;
                 $ke->id_anggota=$value->id;
                 $ke->valid=TRUE;
+                $ke->kondisi=$inisial_kondisi;
                 $ke->save();
             }
         }

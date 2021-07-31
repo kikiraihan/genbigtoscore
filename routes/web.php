@@ -10,6 +10,7 @@ use App\Http\Livewire\Desktop\ManualTimkhu;
 use App\Http\Livewire\Desktop\ManualTimkhuAnggota;
 use App\Http\Livewire\PengaturanAkun;
 use App\Models\anggota;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,10 +24,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/coba/{id}', function ($id) 
+Route::get('/coba', function () 
 {   
-    $ang=anggota::find($id);
-    return $ang->getNilaiAkhir(15);
+    dd(Carbon::now()->locale('in'));
+
+    dd(anggota::all());
+
+    // $idSegment=$id;
+
+    // $ang=anggota::find($id);
+    // return $ang->getNilaiAkhir(15);
 });
 
 // $ini=anggota::whereHas('beasiswas', function($q){

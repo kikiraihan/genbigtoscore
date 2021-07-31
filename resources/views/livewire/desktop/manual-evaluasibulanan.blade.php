@@ -30,7 +30,7 @@
 
 
         {{-- form --}}
-        <form wire:submit.prevent="{{$metode}}">
+        {{-- <form wire:submit.prevent="{{$metode}}">
 
             <div class="container mx-auto md:grid md:grid-rows-2 md:grid-cols-2 md:grid-flow-col gap-2 px-2 mt-8">
 
@@ -85,7 +85,7 @@
                 @endif
             </div>
 
-        </form>
+        </form> --}}
 
 
 
@@ -93,8 +93,8 @@
         {{-- table --}}
         <div class="bg-white shadow-md rounded my-6 overflow-x-auto">
 
-            <div class="grid grid-cols-4 items-center">
-                <div class="p-2">
+            <div class="grid grid-cols-8 items-center">
+                <div class="p-2 col-span-3">
                     <x-kiki.select-standar wire:model="id_sb">
                         <option value="" hidden selected>...</option>
                         @foreach ($selectsegment as $item)
@@ -103,12 +103,24 @@
                     </x-kiki.select-standar>
                 </div>
 
-                <div class="flex p-2 space-x-1 col-span-3">
+                <div class="flex p-2 space-x-1 col-span-4">
                     <button class="w-auto flex justify-end items-center text-blue-500 p-2 hover:text-blue-400">
                         <i class="material-icons">search</i>
                     </button>
                     <x-kiki.input-standar placeholder="Search" type="text" wire:model.debounce.500="search" id="search"
                         class="w-full rounded p-2" />
+                </div>
+                <div class="p-2">
+                    <button wire:click="refreshEb" type="button"
+                    class="shadow px-2 py-2 rounded focus:outline-none focus:ring-2 w-full truncate
+                        items-center flex justify-center
+                        hover:bg-gray-200 focus:ring-blue-300 text-gray-600 bg-gray-100">
+                        <x-kiki.loading-spin wire:loading wire:target='refreshEb' class="text-blue-400"/>
+                        <span wire:loading.remove wire:target='refreshEb' class="material-icons-outlined md:hidden" style="font-size: 21px">
+                        sync
+                        </span>
+                        <span class="hidden md:inline text-sm">Sinkronkan</span>
+                    </button>
                 </div>
             </div>
 
@@ -130,7 +142,7 @@
                             <x-kiki.loading-spin wire:loading wire:target="ganti"  class="ml-2 text-blue-300"/>
                         </th>
                         <th class="py-3 px-6 text-center">Ganti</th>
-                        <th class="py-3 px-6 text-center">Actions</th>
+                        {{-- <th class="py-3 px-6 text-center">Actions</th> --}}
                     </tr>
                 </thead>
                 @else
@@ -203,13 +215,13 @@
                             </div>
                         </td>
 
-                        <td class="py-3 px-6 text-center">
+                        {{-- <td class="py-3 px-6 text-center">
                             <div class="flex item-center justify-center space-x-7">
                                 <div wire:click="$emit('swalToDeleted','evaluasiFixHapus',{{$item->pivot->id}})" class="w-4 transform hover:text-purple-500 hover:scale-110 cursor-pointer">
                                     <x-kiki.icon-trash/>
                                 </div>
                             </div>
-                        </td>
+                        </td> --}}
 
                     </tr>
                     @endforeach

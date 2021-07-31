@@ -144,4 +144,20 @@ class ManualEvaluasibulanan extends Component
         $this->emit('swalUpdated');
         $this->render();
     }
+
+    public function refreshEb()
+    {
+        foreach ( 
+            anggota::query()->HanyaYangAktif()->whereDoesntHave('nilaiEbs',function ($q){
+                $q->where('segmentbulanans.id',$this->id_sb);
+            })->get()
+            as $value) 
+            {
+                $n= new Nilaieb;
+                $n->id_sb=$this->id_sb;
+                $n->id_anggota=$value->id;
+                $n->save();
+        };
+    }
+
 }

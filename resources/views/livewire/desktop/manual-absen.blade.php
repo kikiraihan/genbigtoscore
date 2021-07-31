@@ -77,6 +77,16 @@
                 </div>
 
                 @if ($metode=="newAbsen")
+                {{-- <div>
+                    <label class="f-roboto ml-1 text-gray-500 text-sm">Kondisi awal</label>
+                    <x-kiki.select-standar wire:model="inisial_kondisi">
+                        <option value="" hidden selected>...</option>
+                        <option class="w-full" value="hadir">Hadir semua</option>
+                        <option class="w-full" value="tidakhadir">Tidak Hadir semua</option>
+                        <option class="w-full" value="izin">Izin</option>
+                    </x-kiki.select-standar>
+                    <x-kiki.error-input :kolom="'inisial_kondisi'" />
+                </div> --}}
                 <div>
                     <label class="f-roboto ml-1 text-gray-500 text-sm">Skope</label>
                     <x-kiki.select-standar wire:model="skope">
@@ -196,7 +206,7 @@
                             <span class="font-medium">{{$item->id}}</span>
                         </td>
                         <td class="py-3 px-6 text-left whitespace-nowrap">
-                            <div class="font-medium ">{{-- w-10 truncate --}}
+                            <div class="font-medium w-96 truncate">
                                 {{$item->title}}
                                 <sup>bobot : -{{$item->pengurangan}}</sup>
                             </div>

@@ -62,7 +62,7 @@ class Beasiswa extends Model
 
     public function segmentbulanan()
     {
-        return $this->hasMany(segmentbulanan::class,'id_beasiswa','id');
+        return $this->hasMany(Segmentbulanan::class,'id_beasiswa','id');
     }
 
 }

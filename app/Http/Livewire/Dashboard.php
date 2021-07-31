@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Beasiswa;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -9,20 +10,26 @@ use Livewire\Component;
 class Dashboard extends Component
 {
 
+    public $id_beasiswa;
+
+    public function mount()
+    {
+        $this->id_beasiswa=Beasiswa::idTerakhir();
+    }
+
 
     public function render()
     {
         $userlogin=User::find(Auth::user()->id)->load('anggota.kepengurusan.unit.badan');
-        
-        return view('livewire.dashboard',compact(['userlogin']));
-            // ->layout('layouts.app')// defaultnya bgtu jadi tida usah edit
+        $anggota=$userlogin->anggota;
+
+        return view('livewire.dashboard',[
+            'userlogin'=>$userlogin,
+            'selectBeasiswa'=>$anggota->beasiswas,
+            'beasiswa'=>Beasiswa::find($this->id_beasiswa),
+        ]);
+        // ->layout('layouts.app')// defaultnya bgtu jadi tida usah edit
     }
-
-
-
-
-
-
 
 
     public function renderAsAdmin($userlogin)
