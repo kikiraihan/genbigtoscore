@@ -78,7 +78,9 @@
                                 check
                                 {{-- close --}}
                             </span>
-                            <span>{{$userlogin->anggota->getNilaiAkhir($id_beasiswa)}}</span>
+                            <span>
+                                {{round($userlogin->anggota->getNilaiAkhir($id_beasiswa),2)}}
+                            </span>
                         </div>
 
                         <x-kiki.select-standar wire:model="id_beasiswa" class="py-0.5 bg-gray-200 opacity-60 text-gray-600 col-span-3 mt-3">

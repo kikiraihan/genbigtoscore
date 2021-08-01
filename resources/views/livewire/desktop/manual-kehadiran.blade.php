@@ -21,7 +21,7 @@
     
     <div class="container mx-auto bg-gray-100 mb-28">
         
-        <div class="flex justify-between items-center mt-6 capitalize">
+        <div class="flex justify-between items-center mt-6 capitalize space-x-4">
             <div class="f-playfair font-bold text-2xl">Kehadiran</div>
             <div>
                 <div><sup>Absen :</sup> {{$abs->title}}</div>
