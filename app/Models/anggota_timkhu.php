@@ -18,12 +18,19 @@ class anggota_timkhu extends Model
     ];
 
     protected $appends=[
-        'inivalue',
+        'totalNilai',
     ];
 
-    public function getInivalueAttribute()
-    {   return "jadi";
-        // kondisixbobotabsen;
+    public function getTotalNilaiAttribute()
+    {   
+        $tim=$this->timkhu;
+        $param=explode('/',$this->nilai);
+        
+        if($this->peran=="pengurus-inti")
+            return ( (($tim->bobot/2)*$param[0]) / $param[1] );//1/5 kali setengah bobot
+        
+        elseif($this->peran=="anggota" or $this->peran=="kepala" )
+            return ( ($tim->bobot*$param[0]) /$param[1] );
     }
 
     // public function segmentbulanan()

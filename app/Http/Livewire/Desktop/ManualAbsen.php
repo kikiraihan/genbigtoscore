@@ -293,6 +293,7 @@ class ManualAbsen extends Component
         $abs->date              =$this->date;
         $abs->deadline_absen    =$this->deadline_absen;
         $abs->pengurangan       =$this->pengurangan;
+        $abs->id_sb             =Segmentbulanan::idSegmentPadaBeasiswaTerkiniBulan($abs->date->month);
         $abs->save();
         
         $this->emit('swalUpdated');

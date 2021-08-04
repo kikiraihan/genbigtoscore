@@ -25,7 +25,7 @@ class Unit extends Model
     {
         return $this->belongsToMany(
             anggota::class,
-            'Kepengurusans',
+            'kepengurusans',
             'id_unit',
             'id_anggota'
             )
@@ -36,7 +36,7 @@ class Unit extends Model
     {
         return $this->belongsToMany(
             anggota::class,
-            'Kepengurusans',
+            'kepengurusans',
             'id_unit',
             'id_anggota'
             )

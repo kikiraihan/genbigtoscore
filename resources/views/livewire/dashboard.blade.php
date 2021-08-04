@@ -123,10 +123,10 @@
                                 {{substr($seg->namaBulan,0,3)}}
                             </div>
                             <div class=" text-center">
-                                {{$userlogin->anggota->getAtpSayaPadaSegment($seg->id)}}
+                                {{round($userlogin->anggota->getAtpSayaPadaSegment($seg->id)+30,2)}}
                             </div>
                             <div class=" text-center">
-                                {{$userlogin->anggota->getEbSayaPadaSegment($seg->id)}}
+                                {{round($userlogin->anggota->getEbSayaPadaSegment($seg->id),2)}}
                             </div>
                         </div>
                         @endforeach
@@ -136,19 +136,19 @@
                                 Total
                             </div>
                             <div class=" text-center f-robotomon">
-                                {{$userlogin->anggota->getAtpBeasiswaFull($id_beasiswa)}}
+                                {{round($userlogin->anggota->getAtpBeasiswaFull($id_beasiswa),2)}}
                             </div>
                             <div class=" text-center f-robotomon">
-                                {{$userlogin->anggota->getEbBeasiswaFull($id_beasiswa)}}
+                                {{round($userlogin->anggota->getEbBeasiswaFull($id_beasiswa),2)}}
                             </div>
                         </div>
 
-                        <a href="#" x-on:click="detail_nilai=!detail_nilai"
-                            class="py-0.5 p-2 rounded justify-between flex bg-blue-200 text-white bg-opacity-60 col-span-3 hover:shadow">
+                        <a href="{{ route('detailnilai', ['id'=>$userlogin->anggota->id]) }}" x-on:click="detail_nilai=!detail_nilai"
+                            class="py-0.5 p-2 rounded-b justify-between flex bg-gray-200 text-gray-500 bg-opacity-60 col-span-3 hover:shadow">
+                            <span>Selengkapnya </span>
                             <span class="material-icons-outlined text-base">
-                                info
+                                double_arrow
                             </span>
-                            <span>Detail </span>
                         </a>
 
                     </div>

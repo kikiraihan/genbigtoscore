@@ -78,6 +78,20 @@ class anggota extends Model
     }
 
 
+    // getter berparameter
+    public function getNilaiPadaTimkhu($idTim)
+    {
+        $tim=$this->timkhus()->where('id',$idTim)->first();
+        $param=explode('/',$tim->pivot->nilai);
+        
+        if($tim->pivot->peran=="pengurus-inti")
+            return ( (($tim->bobot/2)*$param[0]) / $param[1] );//1/5 kali setengah bobot
+        
+        elseif($tim->pivot->peran=="anggota" or $tim->pivot->peran=="kepala" )
+            return ( ($tim->bobot*$param[0]) /$param[1] );
+    }
+
+
 
     /* ----------------------------------------------------------------
     RELATION
@@ -318,6 +332,15 @@ class anggota extends Model
         ->latestOfMany();
     }
 
+    public function nilaiebsmodel()
+    {
+        return $this->hasMany(
+            nilaieb::class,
+            'id_anggota',
+            'id'
+        );
+    }
+
     
 
 
@@ -354,6 +377,79 @@ class anggota extends Model
 
 
 
+    /* ----------------------------------------------------------------
+    FUNGSI PENGAMBIL TABEL2 PENILAIAN
+    ---------------------------------------------------------------- */
+
+    public function getAbsenPadaBeasiswa($idBeasiswa)
+    {
+        $segments=Beasiswa::find($idBeasiswa)->segmentbulanan()->get('id');
+        foreach ($segments as $seg)
+            $ids[]=$seg->id;
+
+        return $this->kehadiranAbsensi()
+        ->with('segmentbulanan')
+        ->whereIn('id_sb', $ids)
+        ->get()
+        ;
+    }
+
+    public function getPiketPadaBeasiswa($idBeasiswa)
+    {
+        $segments=Beasiswa::find($idBeasiswa)->segmentbulanan()->get('id');
+        foreach ($segments as $seg)
+            $ids[]=$seg->id;
+
+        return $this->piket()
+        ->with('segmentbulanan')
+        ->whereIn('id_sb', $ids)
+        ->get()
+        ;
+    }
+
+    public function getNilaiTimkhuPadaBeasiswa($idBeasiswa)
+    {
+        $segments=Beasiswa::find($idBeasiswa)->segmentbulanan()->get('id');
+        foreach ($segments as $seg)
+            $ids[]=$seg->id;
+
+        return 
+        $this->anggotatimkhusmodel()->with('timkhu.segmentbulanan')
+        ->whereHas('timkhu',function ($query) use ($ids){
+            return $query->whereIn('id_sb', $ids);
+        }) 
+        ->get()
+        ;
+    }
+
+    public function getTambahanPadaBeasiswa($idBeasiswa)
+    {
+        $segments=Beasiswa::find($idBeasiswa)->segmentbulanan()->get('id');
+        foreach ($segments as $seg)
+            $ids[]=$seg->id;
+
+        return 
+        $this->nilaiTambahanSegments()
+        ->wherePivotIn('id_sb', $ids)
+        ->get()
+        ;
+    }
+
+    public function getEbPadaBeasiswa($idBeasiswa)
+    {
+        $segments=Beasiswa::find($idBeasiswa)->segmentbulanan()->get('id');
+        foreach ($segments as $seg)
+            $ids[]=$seg->id;
+
+        return 
+        $this->nilaiebsmodel()
+        ->with('segmentbulanan')
+        ->whereIn('id_sb',$ids)
+        ->get()
+        ;
+    }
+
+
 
     /* ----------------------------------------------------------------
     FUNGSI PENGAMBIL NILAI ATP DAN EB
@@ -366,7 +462,7 @@ class anggota extends Model
         foreach($this->tidakHadirAbsensi()->where('id_sb',$idSegment)->get() as $abs)
         {
             if($abs->pivot->kondisi=='tidakhadir')
-                $absen+=$abs->pengurangan;
+                $absen+=(-1*abs($abs->pengurangan));
             elseif($abs->pivot->kondisi=='izin')
                 $absen+=-1;
         };

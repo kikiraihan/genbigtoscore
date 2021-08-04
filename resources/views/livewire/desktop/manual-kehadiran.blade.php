@@ -22,7 +22,10 @@
     <div class="container mx-auto bg-gray-100 mb-28">
         
         <div class="flex justify-between items-center mt-6 capitalize space-x-4">
-            <div class="f-playfair font-bold text-2xl">Kehadiran</div>
+            <div class="f-playfair font-bold text-2xl">
+                Kehadiran
+                <x-kiki.loading-spin wire:loading  class="text-blue-500"/>
+            </div>
             <div>
                 <div><sup>Absen :</sup> {{$abs->title}}</div>
                 <div class="py-3 px-6  flex items-center justify-center space-x-2">

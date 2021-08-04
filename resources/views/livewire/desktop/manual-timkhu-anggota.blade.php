@@ -22,8 +22,17 @@
     <div class="container mx-auto bg-gray-100 mb-28">
         
         <div class="flex justify-between items-center mt-6 capitalize">
-            <div class="f-playfair font-bold text-2xl">Anggota Tim</div>
-            <div><sup>Tim :</sup> {{$tim->nama}}</div>
+            <div class="f-playfair font-bold text-2xl">
+                Anggota Tim
+                <x-kiki.loading-spin wire:loading  class="text-blue-500"/>
+            </div>
+            <div class="items-center flex space-x-2">
+                <sup>Tim :</sup>
+                <span>{{$tim->nama}}</span>
+                <span class="text-xs bg-gray-50 py-0.5 px-1.5 rounded-full text-blue-400 font-bold">
+                    {{explode('-',$tim->jenis)[1]}} : {{$tim->bobot}}
+                </span>
+            </div>
             <x-kiki.button-with-google-icon href="{{ route('manual.timkhu') }}" :icon="'arrow_back'" class="hover:text-blue-700">
                 Kembali
             </x-kiki.button-with-google-icon>

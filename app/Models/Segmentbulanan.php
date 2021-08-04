@@ -161,9 +161,9 @@ class Segmentbulanan extends Model
         return $this->belongsTo(Beasiswa::class,'id_beasiswa');
     }
 
-    public function kehadirans()
+    public function absensis()
     {
-        return $this->hasMany(Kehadiran::class,'id_sb','id');
+        return $this->hasMany(Absensi::class,'id_sb','id');
     }
 
     public function timkhus()

@@ -23,7 +23,10 @@
     <div id="atas" class="container mx-auto bg-gray-100 mb-28">
         
         <div class="flex justify-between items-center mt-6">
-            <div class="f-playfair font-bold text-2xl capitalize">Tim Khusus</div>
+            <div class="f-playfair font-bold text-2xl capitalize">
+                Tim Khusus
+                <x-kiki.loading-spin wire:loading  class="text-blue-500"/>
+            </div>
             <div>Semester {{$beasiswa->tahun.'/'.$beasiswa->semester}}</div>
         </div>
         

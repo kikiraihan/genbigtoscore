@@ -8,6 +8,8 @@ use App\Models\Kehadiran;
 use App\Models\Segmentbulanan;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
+// use Faker\Generator as Faker;
+use Faker\Factory as Faker;
 
 class AbsensiSeeder extends Seeder
 {
@@ -19,6 +21,7 @@ class AbsensiSeeder extends Seeder
     public function run()
     {
         //
+        $faker = Faker::create();
         
 
         for ($i=0; $i <10 ; $i++) 
@@ -30,8 +33,8 @@ class AbsensiSeeder extends Seeder
             $absen->skope               ='seluruh-genbi';
             $absen->absensiable_type    =null;
             $absen->absensiable_id      =null;
-            $absen->pengurangan         ='2';
-            $absen->id_sb               =Segmentbulanan::idTerkini();
+            $absen->pengurangan         ='-2';
+            $absen->id_sb               = $faker->randomElement([3,4, Segmentbulanan::idTerkini()]);
             $absen->save();
             $this->isiAnggota($absen);
         }

@@ -50,10 +50,10 @@ class Kehadiran extends Model
         $this->belongsTo(Absensi::class,'id_absen');
     }
 
-    public function segmentbulanan()
-    {
-        return $this->belongsTo(Segmentbulanan::class,'id_sb');
-    }
+    // public function segmentbulanan()
+    // {
+    //     return $this->belongsTo(Segmentbulanan::class,'id_sb');
+    // }
 
     public function validator()
     {

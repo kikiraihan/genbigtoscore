@@ -23,7 +23,10 @@
     <div id="atas" class="container mx-auto bg-gray-100 mb-28">
         
         <div class="flex justify-between items-center mt-6">
-            <div class="f-playfair font-bold text-2xl capitalize">Absensi</div>
+            <div class="f-playfair font-bold text-2xl capitalize">
+                Absensi
+                <x-kiki.loading-spin wire:loading  class="text-blue-500"/>
+            </div>
             <div>Semester {{$beasiswa->tahun.'/'.$beasiswa->semester}}</div>
         </div>
         
@@ -77,16 +80,16 @@
                 </div>
 
                 @if ($metode=="newAbsen")
-                {{-- <div>
+                <div>
                     <label class="f-roboto ml-1 text-gray-500 text-sm">Kondisi awal</label>
                     <x-kiki.select-standar wire:model="inisial_kondisi">
                         <option value="" hidden selected>...</option>
                         <option class="w-full" value="hadir">Hadir semua</option>
-                        <option class="w-full" value="tidakhadir">Tidak Hadir semua</option>
+                        {{-- <option class="w-full" value="tidakhadir">Tidak Hadir semua</option> --}}
                         <option class="w-full" value="izin">Izin</option>
                     </x-kiki.select-standar>
                     <x-kiki.error-input :kolom="'inisial_kondisi'" />
-                </div> --}}
+                </div>
                 <div>
                     <label class="f-roboto ml-1 text-gray-500 text-sm">Skope</label>
                     <x-kiki.select-standar wire:model="skope">
@@ -208,7 +211,7 @@
                         <td class="py-3 px-6 text-left whitespace-nowrap">
                             <div class="font-medium w-96 truncate">
                                 {{$item->title}}
-                                <sup>bobot : -{{$item->pengurangan}}</sup>
+                                <sup>bobot : {{$item->pengurangan}}</sup>
                             </div>
                         </td>
                         <td class="py-3 px-6 text-right">

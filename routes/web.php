@@ -8,7 +8,7 @@ use App\Http\Livewire\Desktop\ManualPiket;
 use App\Http\Livewire\Desktop\ManualTambahan;
 use App\Http\Livewire\Desktop\ManualTimkhu;
 use App\Http\Livewire\Desktop\ManualTimkhuAnggota;
-use App\Http\Livewire\PengaturanAkun;
+use App\Http\Livewire\DetailNilai;
 use App\Models\anggota;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
@@ -56,6 +56,8 @@ Route::get('/', function () {
 // dashboard
 Route::get('/dashboard', Dashboard::class)
 ->middleware(['auth'])->name('dashboard');
+Route::get('/detail-nilai/{id}', DetailNilai::class)
+->middleware(['auth'])->name('detailnilai');
 
 
 // Route::get('/setting', PengaturanAkun::class)

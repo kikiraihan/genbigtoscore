@@ -25,7 +25,7 @@ class Dashboard extends Component
 
         return view('livewire.dashboard',[
             'userlogin'=>$userlogin,
-            'selectBeasiswa'=>$anggota->beasiswas,
+            'selectBeasiswa'=>Beasiswa::whereBetween('id', [$anggota->beasiswas->first()->id, Beasiswa::idTerakhir()])->get(),
             'beasiswa'=>Beasiswa::find($this->id_beasiswa),
         ]);
         // ->layout('layouts.app')// defaultnya bgtu jadi tida usah edit

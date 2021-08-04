@@ -58,7 +58,14 @@ class Timkhu extends Model
     }
 
     // HAS MANY
-    // public function anggota
+    public function anggotatimkhusmodel()
+    {
+        return $this->hasMany(
+            anggota_timkhu::class,
+            'id_timkhu',
+            'id'
+        );
+    }
 
     // morph many
     public function absensi()
