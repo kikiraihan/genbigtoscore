@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\AturBeasiswa;
 use App\Http\Livewire\Dashboard;
 use App\Http\Livewire\Desktop\ManualAbsen;
 use App\Http\Livewire\Desktop\ManualEvaluasibulanan;
@@ -26,9 +27,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/coba', function () 
 {   
-    dd(Carbon::now()->locale('in'));
+    // dd(Carbon::now()->locale('in'));
 
-    dd(anggota::all());
+    $a=anggota::with(['kepengurusan','universitas'])->get();
+    foreach ($a as $key => $in) {
+        echo $in->unit->nama."<br>";
+    }
+
+    dd();
 
     // $idSegment=$id;
 
@@ -86,3 +92,8 @@ Route::get('manual/tambahan', ManualTambahan::class)
     ->middleware(['auth'])->name('manual.tambahan');
 Route::get('manual/evaluasi', ManualEvaluasibulanan::class)
     ->middleware(['auth'])->name('manual.evaluasi');
+
+
+// Tim
+Route::get('beasiswa/atur', AturBeasiswa::class)
+    ->middleware(['auth'])->name('beasiswa');

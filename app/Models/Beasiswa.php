@@ -15,7 +15,9 @@ class Beasiswa extends Model
         'semester',
     ];
 
-
+    protected $casts = [
+        'tanggal' => 'datetime:Y-m-d',
+    ];
 
 
 
@@ -30,6 +32,11 @@ class Beasiswa extends Model
         return (new static)::latest()->orderBy('id', 'desc')->first();
     }
 
+
+    public function getReleaseAttribute()
+    {
+        return $this->tanggal;
+    }
 
     // MANY TO MANY
     public function anggotas()

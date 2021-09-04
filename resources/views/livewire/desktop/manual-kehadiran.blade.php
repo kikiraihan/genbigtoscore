@@ -76,7 +76,7 @@
             </div>
 
             <x-kiki.loading-spin wire:loading wire:target="absenBanyak"  class="text-blue-300"/>
-            <div class="px-2 mt-3 w-1/2" wire:loading.remove wire:target="absenBanyak">
+            <div class="px-2 mt-3 md:w-1/2" wire:loading.remove wire:target="absenBanyak">
                 <div class="flex space-x-2">
 
                     

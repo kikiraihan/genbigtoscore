@@ -26,10 +26,17 @@ class Segmentbulanan extends Model
     // STATIC METHOD
     public static function idTerkini()
     {
-        return
+        $return=
             (new static)::where('bulan',Carbon::now()->month)
             ->where('id_beasiswa',Beasiswa::idTerakhir())
-            ->first()->id;
+            ->first();
+        if(!$return)
+        {
+            $return=(new static)::where('id_beasiswa',Beasiswa::idTerakhir())
+            ->latest()->first();
+        }
+            
+        return $return->id;
     }
     public static function yangTerkini()
     {

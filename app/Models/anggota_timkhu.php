@@ -23,6 +23,11 @@ class anggota_timkhu extends Model
 
     public function getTotalNilaiAttribute()
     {   
+        if($this->nilai==0)
+        {
+            return $this->nilai;
+        }
+        
         $tim=$this->timkhu;
         $param=explode('/',$this->nilai);
         

@@ -4,7 +4,7 @@
 
 <a 
     {!! $attributes->merge([
-        'class'=>"flex space-x-2 flex item-center"
+        'class'=>"flex space-x-2 item-center"
     ]) !!} >
     <span class="material-icons-outlined text-base">
         {{$icon}}

@@ -335,7 +335,7 @@ class anggota extends Model
     public function nilaiebsmodel()
     {
         return $this->hasMany(
-            nilaieb::class,
+            Nilaieb::class,
             'id_anggota',
             'id'
         );

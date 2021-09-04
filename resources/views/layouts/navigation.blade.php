@@ -79,6 +79,26 @@ absolute inset-y-0 left-0 transform -translate-x-full transition duration-200 ea
 
     <hr class="my-1">
 
+
+    <div class="hidden md:block">
+        <x-kiki.sublabel class="px-4">
+            Manajemen Anggota
+        </x-kiki.sublabel>
+        <a href="{{ route('manual.absen') }}" 
+            class="py-2.5 px-4 mx-1 hover:bg-blue-300 transition duration-200 rounded items-center flex space-x-1">
+            <span class="material-icons-outlined ">group</span>
+            <span>Anggota</span>
+        </a>
+
+        <a href="{{ route('beasiswa') }}" 
+            class="py-2.5 px-4 mx-1 hover:bg-blue-300 transition duration-200 rounded items-center flex space-x-1">
+            <span class="material-icons-outlined ">school</span>
+            <span>Beasiswa</span>
+        </a>
+    </div>
+
+    <hr class="my-1">
+
     <form method="POST" action="{{ route('logout') }}">
         @csrf
         <a href="#" class="py-2.5 px-4 mx-1 hover:bg-blue-300 transition duration-200 rounded items-center flex space-x-1"

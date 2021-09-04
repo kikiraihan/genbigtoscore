@@ -48,8 +48,8 @@
                 <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                     <th class="py-3 px-6 text-left">Tanggal</th>
                     <th class="py-3 px-6 text-left">Title</th>
-                    <th class="py-3 px-6 text-center">Kondisi</th>
-                    <th class="py-3 px-6 text-right">Skope</th>
+                    <th class="py-3 px-6 text-center">Skope</th>
+                    <th class="py-3 px-6 text-center">Pengurangan</th>
                 </tr>
             </thead>
             @else
@@ -72,7 +72,13 @@
                     <td></td>
                 </tr>
                 @foreach ($absen_sb as $item)
-                <tr class="border-b border-gray-200 hover:bg-gray-100">
+                <tr class="border-b border-gray-200 hover:bg-gray-100
+                @if ($item->pivot->kondisi=="tidakhadir")
+                bg-red-100
+                @elseif ($item->pivot->kondisi=="izin")
+                bg-yellow-100
+                @endif
+                ">
                     <td class="py-3 px-6 text-left">
                             {{$item->date->format('d M Y, h:i')}}
                     </td>
@@ -81,20 +87,7 @@
                             {{$item->title}}
                         </div>
                     </td>
-                    <td class="py-3 px-6 text-center capitalize font-semibold space-x-2">
-                        @if ($item->pivot->kondisi=="tidakhadir")
-                        <span class="bg-pink-200 text-pink-600 py-0.5 px-1 rounded text-xs">
-                            Tidak Hadir : {{$item->pengurangan}}
-                        </span>
-                        {{-- <sup class="font-medium bg-pink-100 px-1.5 py-0.5 rounded-full text-red-600">{{$item->pengurangan}}</sup>
-                        --}}
-                        @elseif ($item->pivot->kondisi=="hadir")
-                        <span class="bg-green-200 text-green-600 py-0.5 px-1.5 rounded text-xs">
-                            Hadir
-                        </span>
-                        @endif
-                    </td>
-                    <td class="py-3 px-6 text-right">
+                    <td class="py-3 px-6 text-center">
                         <span class="text-center capitalize font-semibold space-x-2">
                             @if ($item->skope=="badan")
                             <span class="bg-gray-200 text-gray-600 py-0.5 px-1.5 rounded text-xs">
@@ -115,7 +108,17 @@
                             </span>
                             @endif
                         </span>
-
+                    </td>
+                    <td class="py-3 px-6 text-center capitalize font-semibold space-x-2">
+                        @if ($item->pivot->kondisi=="tidakhadir")
+                        <span class="bg-pink-200 text-pink-600 py-0.5 px-1 rounded text-xs">
+                            {{$item->pengurangan}}
+                        </span>
+                        @elseif ($item->pivot->kondisi=="hadir")
+                        <span class="bg-gray-200 text-gray-600 py-0.5 px-1.5 rounded text-xs">
+                            0
+                        </span>
+                        @endif
                     </td>
                 </tr>
                 @endforeach
@@ -237,11 +240,11 @@
                         {{$item->totalNilai}}
                     </td>
                     <td class="py-3 px-6  flex items-center justify-center space-x-2">
-                        <div class="text-blue-500 diagonal-fractions text-xl">
+                        <div class="text-blue-500 diagonal-fractions">
                             {{$item->nilai}}
                         </div>
                         <sup>x</sup>
-                        <div class="text-gray-500 diagonal-fractions text-xl">
+                        <div class="text-gray-500 diagonal-fractions">
                             @if ($item->peran=='pengurus-inti')
                             {{$item->timkhu->bobot}}/2
                             @else
@@ -359,7 +362,7 @@
                         {{$item->segmentbulanan->namaBulan}}
                     </td>
                     <td class="py-3 px-6  flex items-center justify-center space-x-2">
-                        <div class="text-blue-500 diagonal-fractions text-xl">
+                        <div class="text-blue-500 diagonal-fractions">
                             {{$item->nilai}}
                         </div>
                     </td>
