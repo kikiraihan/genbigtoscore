@@ -95,6 +95,12 @@ absolute inset-y-0 left-0 transform -translate-x-full transition duration-200 ea
             <span class="material-icons-outlined ">school</span>
             <span>Beasiswa</span>
         </a>
+
+        <a href="{{ route('hasilnilai') }}" 
+            class="py-2.5 px-4 mx-1 hover:bg-blue-300 transition duration-200 rounded items-center flex space-x-1">
+            <span class="material-icons-outlined ">article</span>
+            <span>Hasil Penilaian</span>
+        </a>
     </div>
 
     <hr class="my-1">

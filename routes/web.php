@@ -10,6 +10,7 @@ use App\Http\Livewire\Desktop\ManualTambahan;
 use App\Http\Livewire\Desktop\ManualTimkhu;
 use App\Http\Livewire\Desktop\ManualTimkhuAnggota;
 use App\Http\Livewire\DetailNilai;
+use App\Http\Livewire\HasilPenilaian;
 use App\Models\anggota;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
@@ -97,3 +98,7 @@ Route::get('manual/evaluasi', ManualEvaluasibulanan::class)
 // Tim
 Route::get('beasiswa/atur', AturBeasiswa::class)
     ->middleware(['auth'])->name('beasiswa');
+Route::get('hasilnilai', HasilPenilaian::class)
+    ->middleware(['auth'])->name('hasilnilai');
+
+
