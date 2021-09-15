@@ -85,7 +85,7 @@
                     <x-kiki.select-standar wire:model="inisial_kondisi">
                         <option value="" hidden selected>...</option>
                         <option class="w-full" value="hadir">Hadir semua</option>
-                        {{-- <option class="w-full" value="tidakhadir">Tidak Hadir semua</option> --}}
+                        <option class="w-full" value="tidakhadir">Tidak Hadir semua</option>
                         <option class="w-full" value="izin">Izin</option>
                     </x-kiki.select-standar>
                     <x-kiki.error-input :kolom="'inisial_kondisi'" />
