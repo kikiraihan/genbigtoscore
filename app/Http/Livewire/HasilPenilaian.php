@@ -35,7 +35,7 @@ class HasilPenilaian extends Component
             with(['kepengurusan.unit.badan','universitas'])
             ->where('nama', 'like', '%'.$this->search.'%')
             ->whereHas('kepengurusan',function($q){
-                $q->where('tanggal_demisioner', '==', NULL);
+                $q->where('tanggal_demisioner', NULL);
             })
             ->orderBy('id_universitas')
             ->orderBy('nama')
