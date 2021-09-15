@@ -64,6 +64,7 @@
                         <th class="py-3 px-6 text-left">Nama</th>
                         <th class="py-3 px-6 text-left">Universitas</th>
                         <th class="py-3 px-6 text-center">Nilai</th>
+                        <th class="py-3 px-6 text-center">Lulus</th>
                         <th class="py-3 px-6 text-center">Penerima</th>
                         
                         <th class="py-3 px-6 text-center">Actions</th>
@@ -105,6 +106,16 @@
                         <td class="py-3 px-6 text-center whitespace-nowrap">
                             <div class="font-medium ">
                                 {{round($nilai,2)}}
+                            </div>
+                        </td>
+
+                        <td class="py-3 px-6 text-center whitespace-nowrap">
+                            <div class="font-medium ">
+                                @if ($nilai<70)
+                                Tidak Lulus
+                                @else
+                                Lulus
+                                @endif
                             </div>
                         </td>
 
