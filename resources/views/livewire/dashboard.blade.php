@@ -70,16 +70,24 @@
                             </span>
                         </x-kiki.sublabel>
 
+                        @php
+                            $nilai=$userlogin->anggota->getNilaiAkhir($id_beasiswa)
+                        @endphp
                         <div
                             class="text-4xl justify-center self-end font-medium text-gray-100 f-robotomon flex items-end col-span-3 mb-2">
-                            <span
-                                class="material-icons text-xs rounded-full px-1 font-bold bg-white text-green-400 mb-1">
-                                {{-- emoji_events --}}
-                                check
-                                {{-- close --}}
-                            </span>
+                            @if ($nilai<70)
+                                <span
+                                    class="material-icons text-xs rounded-full px-1 font-bold bg-white text-green-400 mb-1">
+                                    check
+                                </span>
+                            @else
+                                <span
+                                    class="material-icons text-xs rounded-full px-1 font-bold bg-white text-red-400 mb-1">
+                                    priority_high
+                                </span>
+                            @endif
                             <span>
-                                {{round($userlogin->anggota->getNilaiAkhir($id_beasiswa),2)}}
+                                {{round($nilai,2)}}
                             </span>
                         </div>
 
