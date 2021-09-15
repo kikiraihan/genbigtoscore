@@ -64,6 +64,8 @@
                         <th class="py-3 px-6 text-left">Nama</th>
                         <th class="py-3 px-6 text-left">Universitas</th>
                         <th class="py-3 px-6 text-center">Nilai</th>
+                        <th class="py-3 px-6 text-center">Penerima</th>
+                        
                         <th class="py-3 px-6 text-center">Actions</th>
                     </tr>
                 </thead>
@@ -95,6 +97,18 @@
                             <div class="font-medium ">
                                 {{round($item->getNilaiAkhir($id_beasiswa),2)}}
                             </div>
+                        </td>
+
+                        <td class="py-3 px-6 text-center whitespace-nowrap">
+                            @if ($item->menerima_beasiswa)
+                            <x-kiki.badge class="bg-green-200 text-gray-500">
+                                Penerima
+                            </x-kiki.badge>
+                            @else
+                            <x-kiki.badge class="bg-gray-200 text-gray-500">
+                                Tidak menerima
+                            </x-kiki.badge>
+                            @endif
                         </td>
 
                         <td class="py-3 px-6 text-center">

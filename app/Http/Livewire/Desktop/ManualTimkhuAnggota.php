@@ -60,7 +60,7 @@ class ManualTimkhuAnggota extends Component
 
         return view('livewire.desktop.manual-timkhu-anggota',[
             'tim'=>$tim,
-            'isiTabel'=>$anggota->paginate(10),
+            'isiTabel'=>$anggota->paginate(30),
             'selectAbar'=>$this->selectabar(),
         ]);
     }

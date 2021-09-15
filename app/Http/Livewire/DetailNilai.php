@@ -17,6 +17,9 @@ class DetailNilai extends Component
 
     public function mount($id,$kembali)
     {
+        if( !($kembali=='dashboard' or $kembali=="hasilnilai") )
+        abort(404);
+
         $this->kembali=$kembali;
         $this->idAnggota=$id;
         $this->idBeasiswa=Beasiswa::idTerakhir();
