@@ -27,7 +27,7 @@
                 <x-kiki.loading-spin wire:loading class="text-blue-500" />
             </div>
             {{-- <div>Semester {{$beasiswa->tahun.'/'.$beasiswa->semester}} </div> --}}
-        <x-kiki.button-with-google-icon href="{{ route('dashboard') }}" :icon="'arrow_back'"
+        <x-kiki.button-with-google-icon href="{{ route($kembali) }}" :icon="'arrow_back'"
             class="hover:text-blue-700">
             <span class="d-none d-md-inline">Kembali</span>
         </x-kiki.button-with-google-icon>

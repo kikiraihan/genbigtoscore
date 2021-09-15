@@ -99,7 +99,7 @@
 
                         <td class="py-3 px-6 text-center">
                             <div class="flex item-center justify-center space-x-7">
-                                <a href="{{ route('detailnilai', ['id'=>$item->id]) }}" class="w-4 transform hover:text-purple-500 hover:scale-110 cursor-pointer">
+                                <a href="{{ route('detailnilai', ['id'=>$item->id,'kembali'=>'hasilnilai']) }}" class="w-4 transform hover:text-purple-500 hover:scale-110 cursor-pointer">
                                     <x-kiki.icon-view/>
                                 </a>
 

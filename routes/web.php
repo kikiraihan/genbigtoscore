@@ -63,7 +63,7 @@ Route::get('/', function () {
 // dashboard
 Route::get('/dashboard', Dashboard::class)
 ->middleware(['auth'])->name('dashboard');
-Route::get('/detail-nilai/{id}', DetailNilai::class)
+Route::get('/detail-nilai/{id}/{kembali}', DetailNilai::class)
 ->middleware(['auth'])->name('detailnilai');
 
 

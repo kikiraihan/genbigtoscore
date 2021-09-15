@@ -10,12 +10,14 @@ use Livewire\Component;
 class DetailNilai extends Component
 {
     public 
+    $kembali,
     $idAnggota,
     $idBeasiswa
     ;
 
-    public function mount($id)
+    public function mount($id,$kembali)
     {
+        $this->kembali=$kembali;
         $this->idAnggota=$id;
         $this->idBeasiswa=Beasiswa::idTerakhir();
     }
