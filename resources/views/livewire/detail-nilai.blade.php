@@ -116,7 +116,9 @@
                         </span>
                         @elseif ($item->pivot->kondisi=="hadir")
                         <span class="bg-gray-200 text-gray-600 py-0.5 px-1.5 rounded text-xs">
-                            0
+                            <span class="material-icons text-xs font-bold text-green-400 mb-1">
+                                check
+                            </span>
                         </span>
                         @endif
                     </td>

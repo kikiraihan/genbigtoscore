@@ -77,13 +77,13 @@
                             class="text-4xl justify-center self-end font-medium text-gray-100 f-robotomon flex items-end col-span-3 mb-2">
                             @if ($nilai<70)
                                 <span
-                                    class="material-icons text-xs rounded-full px-1 font-bold bg-white text-green-400 mb-1">
-                                    check
+                                    class="material-icons text-xs rounded-full px-1 font-bold bg-white text-red-400 mb-1">
+                                    priority_high
                                 </span>
                             @else
                                 <span
-                                    class="material-icons text-xs rounded-full px-1 font-bold bg-white text-red-400 mb-1">
-                                    priority_high
+                                    class="material-icons text-xs rounded-full px-1 font-bold bg-white text-green-400 mb-1">
+                                    check
                                 </span>
                             @endif
                             <span>
@@ -216,6 +216,13 @@
                     <x-kiki.molecul.data-dash :label="'Angkatan GenBI'">
                         {{$userlogin->anggota->awalmasukgenbi}}
                     </x-kiki.molecul.data-dash>
+
+                    <x-kiki.molecul.data-dash :label="'Role'">
+                        <span class="f-robotomon text-xs bg-gray-50 rounded px-1 ml-2 py-0.5 text-gray-500 shadow-sm">
+                            {{json_encode($userlogin->getRoleNames())}}
+                        </span>
+                    </x-kiki.molecul.data-dash>
+
                 </div>
             </div>
             {{-- endgrid2 --}}
