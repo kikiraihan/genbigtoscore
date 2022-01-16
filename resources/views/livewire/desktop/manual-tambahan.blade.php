@@ -25,9 +25,22 @@
         <div class="flex justify-between items-center mt-6">
             <div class="f-playfair font-bold text-2xl capitalize">
                 Tambahan
+                <span class="f-robotomon text-xs font-light">
+                    (Prestasi/ Kehadiran Pengganti/ Tugas Lain)
+                </span>
                 <x-kiki.loading-spin wire:loading  class="text-blue-500"/>
             </div>
-            <div>Semester {{$beasiswa->tahun.'/'.$beasiswa->semester}}</div>
+            <div>
+                <div class="flex items-center space-x-2">
+                    <div class="text-xs">Beasiswa Semester</div>                
+                    <x-kiki.select-standar wire:model="idBea" class="bg-gray-100 shadow-none text-lg">
+                        <option value="" hidden selected>...</option>
+                        @foreach ($selectBeasiswa as $item)
+                            <option class="w-full" value='{{$item->id}}'>{{$item->tahun."/".$item->semester}}</option>
+                        @endforeach
+                    </x-kiki.select-standar>
+                </div>
+            </div>
         </div>
 
 
@@ -50,7 +63,7 @@
                         <x-kiki.select-standar wire:model="id_sb_ToInput">
                             <option value="" hidden selected>...</option>
                             @foreach ($selectsegment as $item)
-                            <option class="w-full" value='{{$item->id}}'>{{$beasiswa->tahun.", ".$item->namaBulan}}
+                            <option class="w-full" value='{{$item->id}}'>{{$item->segtahun.", ".$item->namaBulan}}
                             </option>
                             @endforeach
                         </x-kiki.select-standar>
@@ -69,7 +82,7 @@
                     <label class="f-roboto ml-1 mr-2 text-gray-500 text-sm capitalize">Pilih Anggota</label>
                     <x-kiki.loading-spin wire:loading wire:target="setAnggota"  class="text-blue-300"/>
                     <x-kiki.molecul.select-search-lite :terpilih="$terpilihSelectAnggota"
-                        wire:model="searchSelectAnggota">
+                        wire:model.debounce.500ms="searchSelectAnggota">
 
                         @foreach ($selectAnggota as $item)
                         <li>
@@ -119,7 +132,7 @@
                     <x-kiki.select-standar wire:model="id_sb">
                         <option value="" hidden selected>...</option>
                         @foreach ($selectsegment as $item)
-                        <option class="w-full" value='{{$item->id}}'>{{$beasiswa->tahun.", ".$item->namaBulan}}</option>
+                        <option class="w-full" value='{{$item->id}}'>{{$item->segtahun.", ".$item->namaBulan}}</option>
                         @endforeach
                     </x-kiki.select-standar>
                 </div>
@@ -128,13 +141,9 @@
                     <button class="w-auto flex justify-end items-center text-blue-500 p-2 hover:text-blue-400">
                         <i class="material-icons">search</i>
                     </button>
-                    <x-kiki.input-standar placeholder="Search" type="text" wire:model.debounce.500="search" id="search"
+                    <x-kiki.input-standar placeholder="Search" type="text" wire:model.debounce.500ms="search" id="search"
                         class="w-full rounded p-2" />
                 </div>
-            </div>
-
-            <div class="px-3 py-2">
-                {{ $isiTabel->links() }}
             </div>
 
 
@@ -143,7 +152,7 @@
                 @if ($isiTabel->isNotEmpty())
                 <thead>
                     <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                        <th class="py-3 px-6 text-left">Id</th>
+                        <th class="py-3 px-6 text-left">No</th>
                         <th class="py-3 px-6 text-left">Nama</th>
                         <th class="py-3 px-6 text-left">Judul</th>
                         <th class="py-3 px-6 text-center">Nilai</th>
@@ -161,7 +170,9 @@
                     @foreach ($isiTabel as $item)
                     <tr class="border-b border-gray-200 hover:bg-gray-100">
                         <td class="py-3 px-6 text-left whitespace-nowrap">
-                            <span class="font-medium">{{$item->id}}</span>
+                            <span class="font-medium">
+                                {{ $loop->iteration + $isiTabel->firstItem() - 1 }}
+                            </span>
                         </td>
                         <td class="py-3 px-6 text-left whitespace-nowrap">
                             <div class="font-medium ">
@@ -194,6 +205,10 @@
 
                 </tbody>
             </table>
+
+            <div class="px-3 py-2">
+                {{ $isiTabel->links() }}
+            </div>
 
         </div>
 

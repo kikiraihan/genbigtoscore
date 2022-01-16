@@ -13,6 +13,7 @@ class Segmentbulanan extends Model
     protected $fillable=[
         'bulan',
         'id_beasiswa',
+        'segtahun'
     ];
 
     // protected $casts = [
@@ -24,7 +25,7 @@ class Segmentbulanan extends Model
     ];
 
     // STATIC METHOD
-    public static function idTerkini()
+    public static function idTerkini()//cuma jaga terpakai di penilaian manual
     {
         $return=
             (new static)::where('bulan',Carbon::now()->month)
@@ -32,8 +33,11 @@ class Segmentbulanan extends Model
             ->first();
         if(!$return)
         {
+            // kalau tidak dapat yang terkini kembalikan yang terakhir
             $return=(new static)::where('id_beasiswa',Beasiswa::idTerakhir())
-            ->latest()->first();
+            ->orderBy('segtahun','desc')
+            ->orderBy('bulan','desc')
+            ->first();
         }
             
         return $return->id;
@@ -53,14 +57,28 @@ class Segmentbulanan extends Model
             ->where('id_beasiswa',Beasiswa::idTerakhir())
             ->first()->id;
     }
+    public static function idSegmentPadaBeasiswaIdDanBulan($idBea,$bulan)
+    {
+        // Carbon::now()->month
+        return
+            (new static)::where('bulan',$bulan)
+            ->where('id_beasiswa',$idBea)
+            ->first()->id;
+    }
 
     public static function segmentAwalBeasiswa(Beasiswa $b)
     {
-        return (new static)::where('id_beasiswa',$b->id)->oldest('id')->first();
+        return (new static)::where('id_beasiswa',$b->id)
+            ->orderBy('segtahun','asc')
+            ->orderBy('bulan','asc')
+            ->first();
     }
     public static function segmentAkhirBeasiswa(Beasiswa $b)
     {
-        return (new static)::where('id_beasiswa',$b->id)->latest('id')->first();
+        return (new static)::where('id_beasiswa',$b->id)
+            ->orderBy('segtahun','desc')
+            ->orderBy('bulan','desc')
+            ->first();
     }
     public static function tanggalPertamaBeasiswaIni(Beasiswa $b)
     {
@@ -75,6 +93,11 @@ class Segmentbulanan extends Model
         return Carbon::createFromDate($seg->beasiswa->tahun,$seg->bulan,1)->endOfMonth();
     }
 
+    
+    
+    
+    
+    
     // SCOPE
 
     // scope
@@ -94,13 +117,18 @@ class Segmentbulanan extends Model
 
 
 
+
+
+
+    // attribute getter
+
     public function getTahunAttribute()
     {
         return $this->beasiswa->tahun;
     }
     public function getNamaBulanAttribute()
     {
-        return $this->dateCarbon->monthName;
+        return $this->DateCarbonKhususBulan->monthName;
     }
     public function getDateCarbonAttribute()
     {
@@ -109,7 +137,23 @@ class Segmentbulanan extends Model
             $this->bulan,
             1)->locale('id');
     }
+    public function getDateCarbonKhususBulanAttribute()
+    {
+        return Carbon::createFromDate(
+            2000, 
+            $this->bulan,
+            1)->locale('id');
+    }
 
+
+
+
+
+
+
+
+    
+    // RELATION
 
     public function nilaiEbsPerAnggota()
     {

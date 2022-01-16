@@ -41,6 +41,14 @@
 
     {{-- <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script> --}}
 
+    {{-- Untuk Blured Background SweetAlert --}}
+    <style>
+        body.swal2-shown > [aria-hidden="true"] {
+            transition: 0.1s filter;
+            filter: blur(2px);
+        }
+    </style>
+
     {{$stylehalaman}}
 
 </head>

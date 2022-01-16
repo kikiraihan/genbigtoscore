@@ -29,10 +29,12 @@ class anggota extends Model
         'tgl_lahir' => 'datetime:Y-m-d',
     ];
 
+    // appends dibutuhkan hanya ketika kita ingin otomatis menambahkan ketika mengkonversi ke array
     protected $appends=[
-        'menerima_beasiswa',
-        'awalmasukgenbi',
+        // 'menerima_beasiswa',
+        // 'awalmasukgenbi',
     ];
+    
 
 
     /* ----------------------------------------------------------------
@@ -57,16 +59,17 @@ class anggota extends Model
 
     public function getMenerimaBeasiswaAttribute()
     {
-        $beasiswaKini=Beasiswa::idTerakhir();
         $saya=$this->beasiswas()->latest()->orderBy('id', 'desc')->first();
         if(!$saya)
             return false;
+
+        $beasiswaTerakhir=Beasiswa::idTerakhir();
         
-        return ($beasiswaKini==$saya->id);
+        return ($beasiswaTerakhir==$saya->id);
     }
 
     public function getNamaUnitSingkatAttribute(){
-        return $this->unit->singkat;    
+        return $this->unit->singkat; 
     }
 
     public function getNamaUnitAttribute(){
@@ -75,6 +78,14 @@ class anggota extends Model
 
     public function getNamaBadanAttribute(){
         return $this->badan->nama;    
+    }
+
+    public function getMenerima4KaliAttribute()
+    {
+        if($this->beasiswas()->count()==4)
+        return true;
+        else
+        return false;
     }
 
 
@@ -370,9 +381,51 @@ class anggota extends Model
         });
     }
 
+    public function scopeHanyaYangDemisioner($query)
+    {
+        return $query->whereHas('kepengurusan',function ($query){
+            $query->where('tanggal_demisioner','<>', null);
+        });
+    }
+
+    public function scopeHanyaPengurusIni($query,$id_badan)
+    {
+        return $query->whereHas('kepengurusan',function ($query) use ($id_badan){
+                $query->whereHas('unit', function ($query) use ($id_badan){
+                    $query->whereHas('badan', function ($query) use ($id_badan){
+                        $query->where('id', $id_badan);
+                    });
+                });
+        });
+    }
+
+    public function scopeHanyaYangPunyaUnitIni($query,$id_unit)
+    {
+        return $query->whereHas('kepengurusan',function ($query) use ($id_unit){
+            $query->where('id_unit', $id_unit); 
+        });
+    }
+
+    public function scopeHanyaYangPunyaRoleIni($query,$arrayRole)//["Kepala Unit","Kekom","Korwil"]
+    {
+        $query->whereHas('user',function ($qu) use ($arrayRole){
+            return $qu->whereHas('roles', function ($q) use ($arrayRole){
+                return $q->whereIn('name', $arrayRole);
+            });
+        });
+    }
+
     public function scopeBernama($query,$search)
     {
         return $query->where('nama', 'like', '%'.$search.'%');
+    }
+
+    public function scopeHanyaPenerimaBeasiswaIni($query,$id_beasiswa)
+    {
+        
+        return $query->whereHas('beasiswas',function($q) use($id_beasiswa){
+            $q->where('id',$id_beasiswa);
+        });
     }
 
 
@@ -560,5 +613,17 @@ class anggota extends Model
             return true;
         else
             return false;
+    }
+
+
+
+    /* ----------------------------------------------------------------
+    FUNGSI BUATAN LAINNYA
+    ---------------------------------------------------------------- */
+
+
+    public function isKorwil()
+    {
+        return $this->user->hasRole('Ketua') and $this->badan->nama=="Wilayah";
     }
 }

@@ -30,7 +30,8 @@ class ManualTimkhu extends Component
     $terpilihSelectKetupat;
 
     // bukan untuk form, tidak digunakan untuk input
-    public $id_sb;
+    // public $id_sb;
+    public $idBea;
 
     // untuk edit
     public 
@@ -54,30 +55,40 @@ class ManualTimkhu extends Component
     public function mount()
     {
         $this->metode='newTimkhu';
-        $this->id_sb=Segmentbulanan::idTerkini();
+        // $this->id_sb=Segmentbulanan::idTerkini();
+        $this->idBea=Beasiswa::idTerakhir();
     }
 
     public function render()
     {
         $timkhu=Timkhu::
-            with(['anggotas','kepala'])
-            ->where('id_sb', $this->id_sb)
-            ->where('nama', 'like', '%'.$this->search.'%');
+            with(['anggotas','kepala','segmentbulanan'])
+            // ->where('id_sb', $this->id_sb)
+            ->YangPunyaSegmentPadaBeasiswaIni($this->idBea)
+            ->where('nama', 'like', '%'.$this->search.'%')
+            ->orderBy('id_sb','desc')
+            // ->orderBy('created_at','desc')
+            ;
 
         return view('livewire.desktop.manual-timkhu',[
-            'isiTabel' => $timkhu->orderBy('created_at','desc')->paginate(10),
+            'isiTabel' => $timkhu->orderBy('created_at','desc')->paginate(30),
             'selectsegment'=>$this->selectsegment(),
             'selectKetupat'=>$this->selectketupat(),
-            'beasiswa'=>Beasiswa::yangTerakhir(),
+            'selectBeasiswa'=>$this->selectBeasiswa(),
+            'beasiswa'=>Beasiswa::find($this->idBea),
         ]);
+    }
+
+    public function selectBeasiswa()
+    {
+        return Beasiswa::whereHas('segmentbulanan')->get();
     }
 
     public function selectsegment()
     {
-        $idBeasiswaKini=Beasiswa::idTerakhir();
         return Segmentbulanan::
-                HanyaSemesterIni($idBeasiswaKini)
-                ->get();
+            HanyaSemesterIni($this->idBea)
+            ->get();
     }
 
     public function selectketupat()
@@ -111,7 +122,7 @@ class ManualTimkhu extends Component
             'bobot'               =>'required|integer',
             'jenis'               =>'required|in:panitia-besar,panitia-kecil',
             'kegiatan_nama'       =>'required|string',
-            'keterangan'          =>'required|string',
+            'keterangan'          =>'nullable|string',
             'tanggal_pelaksanaan' =>'required|string',
         ], $this->CustomMessages);
 
@@ -130,7 +141,7 @@ class ManualTimkhu extends Component
         $tim->jenis         =$this->jenis;
         $tim->save();
         
-        $this->id_sb        =$this->id_sb_ToInput;
+        // $this->id_sb        =$this->id_sb_ToInput;
         $this->emit('swalAdded');
         $this->reset([
             'kegiatan_nama',
@@ -150,7 +161,7 @@ class ManualTimkhu extends Component
     {
         $toDelete=Timkhu::find($id);
         $toDelete->delete();
-        $this->mount();
+        // $this->mount();
     }
 
     public function tampilEdit($id)
@@ -184,7 +195,7 @@ class ManualTimkhu extends Component
             'bobot'               =>'required|integer',
             'jenis'               =>'required|in:panitia-besar,panitia-kecil',
             'kegiatan_nama'       =>'required|string',
-            'keterangan'          =>'required|string',
+            'keterangan'          =>'nullable|string',
             'tanggal_pelaksanaan' =>'required|string',
         ], $this->CustomMessages);
 

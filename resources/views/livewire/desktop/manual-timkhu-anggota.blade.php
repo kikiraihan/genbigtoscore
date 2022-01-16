@@ -121,15 +121,10 @@
                 <button class="w-auto flex justify-end items-center text-blue-500 p-2 hover:text-blue-400">
                     <i class="material-icons">search</i>
                 </button>
-                <x-kiki.input-standar placeholder="Search" type="text" wire:model.debounce.500="search" id="search" class="w-full rounded p-2" />
-            </div>
-            
-            
-            <div class="px-3 py-2">
-                {{ $isiTabel->links() }}
+                <x-kiki.input-standar placeholder="Search" type="text" wire:model.debounce.500ms="search" id="search" class="w-full rounded p-2" />
             </div>
 
-            
+
 
             <table class="min-w-max w-full table-auto">
                 
@@ -245,6 +240,10 @@
 
                 </tbody>
             </table>
+
+            <div class="px-3 py-2">
+                {{ $isiTabel->links() }}
+            </div>
 
         </div>
 

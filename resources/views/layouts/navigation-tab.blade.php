@@ -6,7 +6,8 @@
         </a>
         <a href="{{ route('manual.timkhu') }}" class="space-x-2 flex-1 flex justify-center py-2 border-b-2 focus:border-blue-400 focus:outline-none hover:text-blue-500 f-roboto">
             {{-- <span class="material-icons-outlined text-base">group</span> --}}
-            <span>Tim Khusus</span>
+            <span class="xl:hidden inline">Tim Khus</span>
+            <span class="hidden xl:inline">Tim Khusus</span>
         </a>
         <a href="{{ route('manual.piket') }}" class="space-x-2 flex-1 flex justify-center py-2 border-b-2 focus:border-blue-400 focus:outline-none hover:text-blue-500 f-roboto">
             {{-- <span class="material-icons-outlined text-base">playlist_add_check_circle</span> --}}
@@ -18,7 +19,8 @@
         </a>
         <a href="{{ route('manual.evaluasi') }}" class="space-x-2 flex-1 flex justify-center py-2 border-b-2 focus:border-blue-400 focus:outline-none hover:text-blue-500 f-roboto">
             {{-- <span class="material-icons-outlined text-base">playlist_add_check_circle</span> --}}
-            <span>Evaluasi Bulanan</span>
+            <span class="xl:hidden inline">Eval Bul</span>
+            <span class="hidden xl:inline">Evaluasi Bulanan</span>
         </a>
     </div>
 

@@ -5,6 +5,9 @@ namespace App\Http\Livewire;
 use App\Models\anggota;
 use App\Models\Beasiswa;
 use App\Models\Segmentbulanan;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -29,6 +32,8 @@ class AturBeasiswa extends Component
     protected $listeners=[
         'fixHapusAnggota'=>'detachAnggota',
         'fixHapusSegment'=>'detachSegment',
+        'fixHapusBeasiswa'=>'hapusBeasiswa',
+        'terkonfirmasiMulaiBeasiswaBaru'=>'storeMulaiBeasiswaBaru',
     ];
     protected $CustomMessages = [
         'string' => 'Kolom :attribute, harus berupa teks',
@@ -84,15 +89,15 @@ class AturBeasiswa extends Component
     public function isiAnggotaBanyak()
     {
         $dup=[];
-        $namas=explode(";", $this->namabanyak);
+        $namas=explode(PHP_EOL, $this->namabanyak);
         $bea=Beasiswa::find($this->idTo);
-        foreach ($namas as $key=>$na) 
+        foreach ($namas as $key=>$na) //dengan begini maka key $dariInput akan sama dengan namaModel
             $anggota[$key]=anggota::where('nama', $na)->first();
 
         foreach ($anggota as $key => $ang) 
         {
-            if($ang and !($bea->anggotas()->where('id',$ang->id)->first()))
-            $bea->anggotas()->attach($ang->id);
+            if($ang and !($bea->anggotas()->where('id',$ang->id)->first()))//jika ditemukan, dan belum masuk beasiswa
+                $bea->anggotas()->attach($ang->id);//masukan ke penerima
             elseif($ang)
             $dup[]=$ang->nama;
             elseif(!$ang)
@@ -121,7 +126,7 @@ class AturBeasiswa extends Component
             if( $i == 0)
                 $kata.=$value;
             else
-                $kata.=';'.$value;
+                $kata.=PHP_EOL.$value;
             
             $i++;
         }
@@ -139,11 +144,23 @@ class AturBeasiswa extends Component
     public function tambahSegment()
     {
         $bea=Beasiswa::find($this->idTo);
-        $bulanAkhir=$bea->segmentbulanan()->orderBy('bulan','desc')->first()->bulan;
+        $segment=$bea->segmentbulanan()->orderBy('segtahun','desc')->orderBy('bulan','desc')->first();
+        $bulanAkhir=$segment->bulan;
+        $tahunAkhir=$segment->segtahun;
+        // dd($tahunAkhir);
 
         $seg=new Segmentbulanan;
         $seg->id_beasiswa=$this->idTo;
-        $seg->bulan=$bulanAkhir+1;
+        if($bulanAkhir==12)
+        {
+            $seg->bulan=1;
+            $seg->segtahun = $tahunAkhir!=null?$tahunAkhir+1:Carbon::now()->year;
+        }
+        else
+        {
+            $seg->bulan=$bulanAkhir+1;
+            $seg->segtahun = $tahunAkhir!=null?$tahunAkhir:Carbon::now()->year;
+        }
         $seg->save();
 
         $this->emit('swalUpdated');
@@ -155,6 +172,47 @@ class AturBeasiswa extends Component
         Segmentbulanan::find($id)->delete();
         // Beasiswa::find($this->idTo)->segmentbulanan()->detach($id);
         $this->render();
+    }
+
+
+
+    public function hapusBeasiswa($id)
+    {
+        Beasiswa::find($id)->delete();
+        // $this->mount();
+    }
+
+
+
+
+    public function mulaiBeasiswaBaru()
+    {
+        // $m=ModelsMahasiswa::find($idMahasiswa);
+        // dd(Carbon::now()->month);
+
+        $isi = view('swalForm.mulaiBeasiswaBaru', [
+            'sekarang'=>Carbon::now(),
+            'beaTerakhir'=>Beasiswa::yangTerakhir()->tahun,
+            // 'idMahasiswa'=>$idMahasiswa,
+            ])->render();
+        
+        $this->emit('swalMulaiBeasiswaBaru','Beasiswa : Semester Baru',$isi);
+    }
+
+    public function storeMulaiBeasiswaBaru($value)
+    {
+        $b=new Beasiswa;
+        $b->tahun=$value['tahun'];
+        $b->semester=$value['semester'];
+        $b->save();
+
+        $seg= new Segmentbulanan;
+        $seg->id_beasiswa=$b->id;
+        $seg->bulan=$value['bulan_awal'];
+        $seg->segtahun=$value['tahun'];
+        $seg->save();
+
+        $this->emit('swalAdded',1);
     }
 
 }

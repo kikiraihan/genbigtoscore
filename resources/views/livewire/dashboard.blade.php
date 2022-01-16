@@ -95,8 +95,8 @@
                             <option value="" hidden selected>...</option>
                             @foreach ($selectBeasiswa as $item)
                                 <option class="w-full" value="{{$item->id}}"> {{$item->tahun}}/{{$item->semester}}
-                        </option>
-                        @endforeach
+                            </option>
+                            @endforeach
                         </x-kiki.select-standar>
 
                         <a href="#" x-on:click="detail_nilai=!detail_nilai"
@@ -177,51 +177,53 @@
                             {{-- group --}}
                         </span>
                     </x-kiki.sublabel>
-                    <x-kiki.molecul.data-dash :label="'Badan'">
-                        {{$userlogin->anggota->namaBadan}}
-                    </x-kiki.molecul.data-dash>
-                    <x-kiki.molecul.data-dash :label="'Unit'">
-                        {{$userlogin->anggota->namaUnit}}
-                    </x-kiki.molecul.data-dash>
-                    <x-kiki.molecul.data-dash :label="'Jabatan'">
-                        {{$userlogin->anggota->Kepengurusan->jabatan}}
-                    </x-kiki.molecul.data-dash>
-                    {{-- <x-kiki.molecul.data-dash :label="'Periode'">
-                        {{$userlogin->anggota->Kepengurusan->periode}}
-                    </x-kiki.molecul.data-dash> --}}
-                    <x-kiki.molecul.data-dash :label="'Status Beasiswa'">
-                        @if ($userlogin->anggota->menerima_beasiswa)
-                        <x-kiki.badge class="bg-green-200 text-gray-500">
-                            Penerima
-                        </x-kiki.badge>
-                        @else
-                        <x-kiki.badge class="bg-gray-200 text-gray-500">
-                            Tidak menerima
-                        </x-kiki.badge>
-                        @endif
-                    </x-kiki.molecul.data-dash>
 
-                    <x-kiki.molecul.data-dash :label="'Status Keanggotaan'">
-                        @if ($userlogin->anggota->kepengurusan->tanggal_demisioner==NULL)
-                        <x-kiki.badge class="bg-green-200 text-gray-500">
-                            Pengurus Aktif
-                        </x-kiki.badge>
-                        @else
-                        <x-kiki.badge class="bg-gray-200 text-gray-500">
-                            Demisioner pada tanggal
-                            {{$userlogin->anggota->kepengurusan->tanggal_demisioner->format('Y m d')}}
-                        </x-kiki.badge>
-                        @endif
-                    </x-kiki.molecul.data-dash>
-                    <x-kiki.molecul.data-dash :label="'Angkatan GenBI'">
-                        {{$userlogin->anggota->awalmasukgenbi}}
-                    </x-kiki.molecul.data-dash>
+                    <div class="md:grid-cols-2 md:grid space-y-1">
+                        <x-kiki.molecul.data-dash :label="'Badan'">
+                            {{$userlogin->anggota->namaBadan}}
+                        </x-kiki.molecul.data-dash>
+                        <x-kiki.molecul.data-dash :label="'Unit'">
+                            {{$userlogin->anggota->namaUnit}}
+                        </x-kiki.molecul.data-dash>
+                        {{-- <x-kiki.molecul.data-dash :label="'Jabatan'">
+                            {{$userlogin->anggota->Kepengurusan->jabatan}}
+                        </x-kiki.molecul.data-dash> --}}
+                        <x-kiki.molecul.data-dash :label="'Role'">
+                            <span class="f-robotomon text-xs bg-gray-50 rounded px-1 ml-2 py-0.5 text-gray-500 shadow-sm">
+                                {{json_encode($userlogin->getRoleNames())}}
+                            </span>
+                        </x-kiki.molecul.data-dash>
+                        {{-- <x-kiki.molecul.data-dash :label="'Periode'">
+                            {{$userlogin->anggota->Kepengurusan->periode}}
+                        </x-kiki.molecul.data-dash> --}}
+                        <x-kiki.molecul.data-dash :label="'Status Beasiswa'">
+                            @if ($userlogin->anggota->menerima_beasiswa)
+                            <x-kiki.badge class="bg-green-200 text-gray-500">
+                                Penerima
+                            </x-kiki.badge>
+                            @else
+                            <x-kiki.badge class="bg-gray-200 text-gray-500">
+                                Tidak menerima
+                            </x-kiki.badge>
+                            @endif
+                        </x-kiki.molecul.data-dash>
 
-                    <x-kiki.molecul.data-dash :label="'Role'">
-                        <span class="f-robotomon text-xs bg-gray-50 rounded px-1 ml-2 py-0.5 text-gray-500 shadow-sm">
-                            {{json_encode($userlogin->getRoleNames())}}
-                        </span>
-                    </x-kiki.molecul.data-dash>
+                        <x-kiki.molecul.data-dash :label="'Status Keanggotaan'">
+                            @if ($userlogin->anggota->kepengurusan->tanggal_demisioner==NULL)
+                            <x-kiki.badge class="bg-green-200 text-gray-500">
+                                Pengurus Aktif
+                            </x-kiki.badge>
+                            @else
+                            <x-kiki.badge class="bg-gray-200 text-gray-500">
+                                Demisioner
+                                {{$userlogin->anggota->kepengurusan->tanggal_demisioner->format('d M y')}}
+                            </x-kiki.badge>
+                            @endif
+                        </x-kiki.molecul.data-dash>
+                        <x-kiki.molecul.data-dash :label="'Angkatan GenBI'">
+                            {{$userlogin->anggota->awalmasukgenbi}}
+                        </x-kiki.molecul.data-dash>
+                    </div>
 
                 </div>
             </div>

@@ -49,7 +49,7 @@
                     <th class="py-3 px-6 text-left">Tanggal</th>
                     <th class="py-3 px-6 text-left">Title</th>
                     <th class="py-3 px-6 text-center">Skope</th>
-                    <th class="py-3 px-6 text-center">Pengurangan</th>
+                    <th class="py-3 px-6 text-center bg-red-100">Pengurangan</th>
                 </tr>
             </thead>
             @else
@@ -74,7 +74,7 @@
                 @foreach ($absen_sb as $item)
                 <tr class="border-b border-gray-200 hover:bg-gray-100
                 @if ($item->pivot->kondisi=="tidakhadir")
-                bg-red-100
+                bg-red-50
                 @elseif ($item->pivot->kondisi=="izin")
                 bg-yellow-100
                 @endif
@@ -90,9 +90,14 @@
                     <td class="py-3 px-6 text-center">
                         <span class="text-center capitalize font-semibold space-x-2">
                             @if ($item->skope=="badan")
-                            <span class="bg-gray-200 text-gray-600 py-0.5 px-1.5 rounded text-xs">
-                                {{$item->absensiable->nama}}
-                            </span>
+                            <div class="inline-flex items-center space-x-1 bg-gray-200 text-gray-600 rounded">
+                                <span class="material-icons-outlined text-sm rounded-l p-0.5 text-white @if ($item->absensiable->id==1) bg-blue-500 @elseif ($item->absensiable->id==2) bg-red-400 @elseif ($item->absensiable->id==3) bg-green-400 @elseif ($item->absensiable->id==4) bg-yellow-400 @endif">
+                                    people
+                                </span>
+                                <span class="text-xs py-0.5 px-1.5">
+                                    All {{$item->absensiable->nama}}
+                                </span>
+                            </div>
                             @elseif ($item->skope=="unit")
                             <span
                                 class="bg-gray-100 text-gray-500 border border-gray-200 py-0.5 px-1.5 rounded text-xs">
@@ -149,7 +154,7 @@
                     {{-- <th class="py-3 px-6 text-left">Id</th> --}}
                     <th class="py-3 px-6 text-left">Bulan</th>
                     <th class="py-3 px-6 text-center">Kehadiran</th>
-                    <th class="py-3 px-6 text-center">Total</th>
+                    <th class="py-3 px-6 text-center bg-red-100">Total</th>
                 </tr>
             </thead>
             @else
@@ -186,7 +191,7 @@
                             </span>
                         </div>
                     </td>
-                    <td class="py-3 px-6 text-center bg-pink-100">
+                    <td class="py-3 px-6 text-center ">
                         {{$item->total}}
                     </td>
                 </tr>
@@ -215,7 +220,7 @@
                 <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                     <th class="py-3 px-6 text-left">Bulan</th>
                     <th class="py-3 px-6 text-left">Judul</th>
-                    <th class="py-3 px-6 text-center">Total</th>
+                    <th class="py-3 px-6 text-center bg-green-100">Total</th>
                     <th class="py-3 px-6 text-center">Nilai x Bobot</th>
                     <th class="py-3 px-6 text-center">Peran</th>
                 </tr>
@@ -238,7 +243,7 @@
                             {{$item->timkhu->nama}}
                         </div>
                     </td>
-                    <td class="py-3 px-6 text-center bg-green-100">
+                    <td class="py-3 px-6 text-center ">
                         {{$item->totalNilai}}
                     </td>
                     <td class="py-3 px-6  flex items-center justify-center space-x-2">
@@ -296,7 +301,7 @@
                 <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                     <th class="py-3 px-6 text-left">Bulan</th>
                     <th class="py-3 px-6 text-left">Judul</th>
-                    <th class="py-3 px-6 text-center">Nilai</th>
+                    <th class="py-3 px-6 text-center bg-green-100">Nilai</th>
                 </tr>
             </thead>
             @else
@@ -317,7 +322,7 @@
                             {{$item->pivot->judul}}
                         </div>
                     </td>
-                    <td class="py-3 px-6 text-center bg-green-100">
+                    <td class="py-3 px-6 text-center ">
                         {{$item->pivot->nilai}}
                     </td>
                 </tr>
@@ -347,7 +352,7 @@
                 <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                     <th class="py-3 px-6 text-left">Bulan</th>
                     <th class="py-3 px-6 text-center">Nilai</th>
-                    <th class="py-3 px-6 text-center">Total</th>
+                    <th class="py-3 px-6 text-center bg-green-100">Total</th>
                 </tr>
             </thead>
             @else
@@ -368,7 +373,7 @@
                             {{$item->nilai}}
                         </div>
                     </td>
-                    <td class="py-3 px-6 text-center bg-green-100">
+                    <td class="py-3 px-6 text-center ">
                         {{$item->totalNilai}}
                     </td>
                 </tr>

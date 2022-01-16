@@ -10,6 +10,29 @@
 <x-slot name="scripthalaman">
     @livewireScripts
     @include('layouts.scriptsweetalert')
+
+    <script>
+        window.livewire.on('swalMulaiBeasiswaBaru', (judul,isi) => {
+            
+            const { value: formValues } = Swal.fire({
+                title: judul,
+                html: '<div class="px-1 pb-2">'+isi+'</div>',
+                focusConfirm: false,
+                showCancelButton: true,
+                preConfirm: () => {
+                    const tahun = Swal.getPopup().querySelector('#tahun').value
+                    const semester = Swal.getPopup().querySelector('#semester').value
+                    const bulan_awal = Swal.getPopup().querySelector('#bulan_awal').value
+                    return { tahun: tahun, semester: semester, bulan_awal: bulan_awal  }
+                }
+            }).then((result)=>{
+                if(result.isConfirmed)
+                    window.livewire.emit('terkonfirmasiMulaiBeasiswaBaru',result.value);
+                    resolve()
+            })
+            
+        })
+    </script>
 </x-slot>
 
 {{--------------------------------------------------------------------------------}}
@@ -37,7 +60,7 @@
                     {{ $isiTabel->links() }}
                 </div>
                 <div class="px-3">
-                    <button type="button" class="shadow p-2 w-full rounded focus:outline-none 
+                    <button wire:click="mulaiBeasiswaBaru" type="button" class="shadow p-2 w-full rounded focus:outline-none 
                                 focus:ring-2 focus:ring-green-300  text-gray-600 bg-gray-200
                                 hover:bg-green-300
                                 ">
@@ -54,7 +77,7 @@
                 <thead>
                     <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                         <th class="py-3 px-6 text-left">Id</th>
-                        <th class="py-3 px-6 text-left">Release</th>
+                        <th class="py-3 px-6 text-left">Dibuat Pada</th>
                         <th class="py-3 px-6 text-left">Tahun/Semester</th>
                         <th class="py-3 px-6 text-center">Penerima</th>
                         <th class="py-3 px-6 text-center">Segment</th>
@@ -75,7 +98,7 @@
                             <span class="font-medium">{{$item->id}}</span>
                         </td>
                         <td class="py-3 px-6 text-left">
-                            {{$item->release}}
+                            {{$item->created_at->diffForHumans()}}
                         </td>
                         <td class="py-3 px-6 text-left">
                             Beasiswa {{$item->tahun}}/{{$item->semester}}
@@ -112,7 +135,7 @@
                                         playlist_add
                                     </span>
                                 </a>
-                                <div wire:click="$emit('swalToDeleted','absenFixHapus',{{$item->id}})"
+                                <div wire:click="$emit('swalToDeleted','fixHapusBeasiswa',{{$item->id}})"
                                     class="w-4 transform hover:text-purple-500 hover:scale-110 cursor-pointer">
                                     <x-kiki.icon-trash />
                                 </div>
@@ -168,6 +191,27 @@
                     <x-kiki.textarea-standar wire:model.lazy="namabanyak" id="namabanyak"
                         placeholder="A. Rehan Fajrul Islam;Abd. Wahid Ibrahim;Adinda Pratiwi Musa;" />
                     <x-kiki.error-input :kolom="'namabanyak'" />
+                </div>
+
+                {{-- Keterangan --}}
+                <div class="bg-blue-100 p-2 rounded shadow-sm">
+                    <div class="font-bold">Keterangan</div>
+                    <div class="text-justify py-2 px-4">
+                        <span class="text-sm">Mohon perhatikan ketentuan berikut :</span>
+                        <ul class="list-disc list-inside text-sm">
+                            <li>
+                                Pada bagian ini adalah nama-nama penerima beasiswa pada beasiswa semester yang dipilih.
+                            </li>
+                            <li>
+                                Setiap data penerima terhubung dengan nilai bulanan, nilai absen, dll. <b>Harap jangan sembarang melakukan penghapusan anggota penerima langsung, tanpa konfirmasi terlebih dahulu.</b>
+                            </li>
+                            <li>
+                                Kecuali jika masih pada masa pengisian data penerima atau inisiasi semester, tidak apa-apa untuk menghapus. 
+                                Misal sedang mengisi nama-nama penerima semester A, kemudian ada anggota penerima yang salah atau dibatalkan menerima maka bisa dihapus.
+                                Yang tidak boleh adalah jika sudah sementara berjalan penilain, dan menghapus nama anggota dari penerima.
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </x-slot>
 
@@ -241,7 +285,25 @@
                 </button>
             </x-slot>
 
-            <x-slot name="inputan"></x-slot>
+            <x-slot name="inputan">
+                {{-- isi disini inputan --}}
+
+                {{-- Keterangan --}}
+                <div class="bg-blue-100 p-2 rounded shadow-sm">
+                    <div class="font-bold">Keterangan</div>
+                    <div class="text-justify py-2 px-4">
+                        <span class="text-sm">Mohon perhatikan ketentuan berikut :</span>
+                        <ul class="list-disc list-inside text-sm">
+                            <li>
+                                Pada bagian ini adalah segment atau bulan-bulan yang ada dalam sebuah semester penerimaan beasiswa.
+                            </li>
+                            <li>
+                                Setiap segment terhubung dengan nilai bulanan, nilai absen, dll. <b>harap jangan sembarang melakukan penghapusan segment langsung tanpa konfirmasi terlebih dahulu.</b>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </x-slot>
 
             <x-slot name="buttonInputan">
                 <x-kiki.loading-spin wire:loading wire:target="tambahSegment" class="text-blue-300" />
@@ -275,9 +337,9 @@
                     <div class="text-center col-span-1 md:col-span-3">kosong..</div>
                 @endforelse
             </div>
-
-
         </x-kiki.organism.formBawahWithTabel>
+
+
         @endif
 
 

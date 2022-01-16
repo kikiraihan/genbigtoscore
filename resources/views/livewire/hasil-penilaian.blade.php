@@ -25,7 +25,18 @@
                 Hasil Penilaian
                 <x-kiki.loading-spin wire:loading  class="text-blue-500"/>
             </div>
-            <div>Semester {{$beasiswa->tahun.'/'.$beasiswa->semester}}</div>
+            <div>
+                {{-- <div>Semester {{$beasiswa->tahun.'/'.$beasiswa->semester}}</div> --}}
+                <span class="flex items-center">
+                    <span class="material-icons-outlined" style="font-size: 20px">
+                        group
+                    </span>
+                    <span>
+                        all
+                        {{-- {{$isiTabel->count()}} --}}
+                    </span>
+                </span>
+            </div>
         </div>
 
         {{-- table --}}
@@ -33,10 +44,10 @@
 
             <div class="grid grid-cols-4 items-center">
                 <div class="p-2">
-                    <x-kiki.select-standar wire:model="id_sb">
+                    <x-kiki.select-standar wire:model="id_beasiswa">
                         <option value="" hidden selected>...</option>
-                        @foreach ($selectsegment as $item)
-                        <option class="w-full" value='{{$item->id}}'>{{$beasiswa->tahun.", ".$item->namaBulan}}</option>
+                        @foreach ($selectBeasiswa as $item)
+                        <option class="w-full" value='{{$item->id}}'>Semester {{$item->tahun." / ".$item->semester}}</option>
                         @endforeach
                     </x-kiki.select-standar>
                 </div>
@@ -45,7 +56,7 @@
                     <button class="w-auto flex justify-end items-center text-blue-500 p-2 hover:text-blue-400">
                         <i class="material-icons">search</i>
                     </button>
-                    <x-kiki.input-standar placeholder="Search" type="text" wire:model.debounce.500="search" id="search"
+                    <x-kiki.input-standar placeholder="Search" type="text" wire:model.debounce.500ms="search" id="search"
                         class="w-full rounded p-2" />
                 </div>
             </div>
@@ -60,12 +71,12 @@
                 @if ($isiTabel->isNotEmpty())
                 <thead>
                     <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                        <th class="py-3 px-6 text-left">Id</th>
+                        <th class="py-3 px-6 text-left">No</th>
                         <th class="py-3 px-6 text-left">Nama</th>
                         <th class="py-3 px-6 text-left">Universitas</th>
                         <th class="py-3 px-6 text-center">Nilai</th>
-                        <th class="py-3 px-6 text-center">Lulus</th>
-                        <th class="py-3 px-6 text-center">Penerima</th>
+                        <th class="py-3 px-6 text-center">Beasiswa Lama</th>
+                        <th class="py-3 px-6 text-center">Status Kelulusan</th>
                         
                         <th class="py-3 px-6 text-center">Actions</th>
                     </tr>
@@ -90,11 +101,13 @@
                     @endif
                     ">
                         <td class="py-3 px-6 text-left whitespace-nowrap">
-                            <span class="font-medium">{{$item->id}}</span>
+                            <span class="font-medium">
+                                {{ $loop->iteration + $isiTabel->firstItem() - 1 }}
+                            </span>
                         </td>
                         <td class="py-3 px-6 text-left whitespace-nowrap">
                             <div class="font-medium ">
-                                {{$item->nama}}
+                                {{$item->nama}} <sup>id: {{$item->id}}</sup>
                             </div>
                         </td>
                         <td class="py-3 px-6 text-left whitespace-nowrap">
@@ -110,16 +123,6 @@
                         </td>
 
                         <td class="py-3 px-6 text-center whitespace-nowrap">
-                            <div class="font-medium ">
-                                @if ($nilai<70)
-                                Tidak Lulus
-                                @else
-                                Lulus
-                                @endif
-                            </div>
-                        </td>
-
-                        <td class="py-3 px-6 text-center whitespace-nowrap">
                             @if ($item->menerima_beasiswa)
                             <x-kiki.badge class="bg-green-200 text-gray-500">
                                 Penerima
@@ -129,6 +132,18 @@
                                 Tidak menerima
                             </x-kiki.badge>
                             @endif
+                        </td>
+
+                        <td class="py-3 px-6 text-center whitespace-nowrap">
+                            <div class="font-medium ">
+                                @if ($nilai<70)
+                                Tidak Lulus
+                                @elseif ($item->Menerima4Kali)
+                                Menerima 4 kali
+                                @else
+                                Lulus
+                                @endif
+                            </div>
                         </td>
 
                         <td class="py-3 px-6 text-center">

@@ -19,4 +19,17 @@ class Universitas extends Model
     {
         return $this->hasMany(anggota::class, 'id_universitas','id');
     }
+
+    
+    // STATIC METHOD
+    public static function semuaId()
+    {
+        $ar=(new static)::select(['id'])->get()->toArray();
+        $return=[];
+        foreach ($ar as $key => $value) {
+            $return[]=$value['id'];
+        }
+
+        return $return;
+    }
 }

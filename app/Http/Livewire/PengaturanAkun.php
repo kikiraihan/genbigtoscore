@@ -52,7 +52,7 @@ class PengaturanAkun extends Component
     {
         $user=User::find(Auth::user()->id);
         
-        if(!$user->hasRole('Admin'))
+        if(!$user->hasExactRoles('Admin'))
         {
             
             $anggota=$user->anggota;
@@ -78,7 +78,7 @@ class PengaturanAkun extends Component
         $this->username=$user->username;
         $this->password=null;
 
-        $this->isAdmin=$user->hasRole('Admin');
+        $this->isAdmin=$user->hasExactRoles('Admin');//hanya punya admin saja.
     }
 
     public function render()

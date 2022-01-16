@@ -51,7 +51,7 @@ class ManualKehadiran extends Component
 
     public function absenBanyak($kondisi)
     {
-        $namas=explode(";", $this->namabanyak);
+        $namas=explode(PHP_EOL, $this->namabanyak);
         $abs=Absensi::findOrFail($this->idAbsen)->load('kehadiran','absensiable','absenanggota');
         foreach ($namas as $key=>$na) 
         {

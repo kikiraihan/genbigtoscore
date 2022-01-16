@@ -11,13 +11,32 @@ class Unit extends Model
     
     protected $fillable=[
         'id_badan',
-        'id_ketua',
         'singkat',
         'logo',
         'nama',
         'status',
     ];
 
+
+    // STATIC METHOD
+    public static function semuaId()
+    {
+        $ar=(new static)::select(['id'])->get()->toArray();
+        $return=[];
+        foreach ($ar as $key => $value) {
+            $return[]=$value['id'];
+        }
+
+        return $return;
+    }
+
+
+    //SCOPE
+    public function scopeHanyaYangAktif($query)
+    {
+        return 
+            $query->where('status', 'aktif');
+    }
 
 
     // MANY TO MANY
@@ -45,9 +64,15 @@ class Unit extends Model
 
 
     // BELONGS TO
-    public function ketua()
+    public function RelasiKetua()
     {
-        return $this->belongsTo(anggota::class,'id_ketua');
+        return $this->anggotaAktif()
+            ->HanyaYangPunyaRoleIni(["Kepala Unit","Kekom","Korwil"]);
+    }
+    //dpe getter
+    public function getKetuaAttribute()
+    {
+        return $this->RelasiKetua->first();
     }
 
     public function badan()

@@ -13,7 +13,6 @@ class Absensi extends Model
         'title',
         'date',
         'deadline_absen',
-        // 'id_kegiatan',
         'skope',
         'absensiable_type',
         'absensiable_id',
@@ -27,7 +26,7 @@ class Absensi extends Model
     ];
 
 
-    public function absensiable()
+    public function absensiable()//berelasi dengan scope ->badan, unit, timkhusus, allgenbi (null)
     {
         return $this->morphTo();
     }
@@ -62,8 +61,15 @@ class Absensi extends Model
         return $this->belongsTo(Segmentbulanan::class,'id_sb');
     }
 
-    // public function kegiatan()
-    // {
-    //     return $this->belongsTo(Kegiatan::class,'id_kegiatan','id');
-    // }
+
+    /* ----------------------------------------------------------------
+    SCOPE
+    ---------------------------------------------------------------- */
+
+    public function scopeYangPunyaSegmentPadaBeasiswaIni($query,$idBeasiswa)
+    {
+        return $query->whereHas('segmentbulanan',function ($query) use($idBeasiswa){
+            $query->where('id_beasiswa', $idBeasiswa);
+        });
+    }
 }

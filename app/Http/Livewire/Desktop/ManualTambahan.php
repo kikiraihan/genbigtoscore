@@ -25,6 +25,7 @@ class ManualTambahan extends Component
 
     // bukan untuk form, tidak digunakan untuk input
     public $id_sb;
+    public $idBea;
 
     // untuk edit
     public 
@@ -49,11 +50,16 @@ class ManualTambahan extends Component
     {
         $this->metode='newTambahan';
         $this->nilai=0;
-        $this->id_sb=Segmentbulanan::idTerkini();
+
+        $bea=Beasiswa::yangTerakhir();
+        $this->idBea=$bea->id;
+        $this->id_sb=$bea->segmentbulanan->first()->id;
     }
 
     public function render()
     {
+
+        // ganti
         $tambahan=Segmentbulanan::
             with(['TambahanNilaiAnggotas'])->findOrFail($this->id_sb)
             ->TambahanNilaiAnggotas()
@@ -61,22 +67,28 @@ class ManualTambahan extends Component
             ->where('nama', 'like', '%'.$this->search.'%')
             ;
 
+        // dd($tambahan->get());
+
         return view('livewire.desktop.manual-tambahan',[
-            'isiTabel'=>$tambahan->paginate(10),
+            'isiTabel'=>$tambahan->paginate(30),
             'selectsegment'=>$this->selectsegment(),
             'selectAnggota'=>$this->selectanggota(),
+            'selectBeasiswa'=>$this->selectBeasiswa(),
             'beasiswa'=>Beasiswa::yangTerakhir(),
         ]);
     }
 
+    // mulai dari sini kebawah, sama dengan evaluasi
+    public function selectBeasiswa()
+    {
+        return Beasiswa::whereHas('segmentbulanan')->get();
+    }
 
-    // sama dengan evaluasi
     public function selectsegment()
     {
-        $idBeasiswaKini=Beasiswa::idTerakhir();
         return Segmentbulanan::
-                HanyaSemesterIni($idBeasiswaKini)
-                ->get();
+            HanyaSemesterIni($this->idBea)
+            ->get();
     }
 
     public function selectanggota()
@@ -98,7 +110,19 @@ class ManualTambahan extends Component
     {
         $this->resetPage();
     }
+
+    public function updatedIdBea()
+    {
+        $bea=Beasiswa::find($this->idBea);
+        $this->id_sb=$bea->segmentbulanan->first()->id;
+    }
     //batas sama dengan evaluasi
+
+
+
+
+
+
 
     public function newTambahan()
     {
@@ -129,9 +153,8 @@ class ManualTambahan extends Component
 
     public function delete($id)
     {
-        $toDelete=Tambahan::find($id);
-        $toDelete->delete();
-        $this->mount();
+        Tambahan::find($id)->delete();
+        // $this->mount();
     }
 
 }

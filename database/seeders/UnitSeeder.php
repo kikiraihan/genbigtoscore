@@ -17,7 +17,7 @@ class UnitSeeder extends Seeder
         // wilayah
         $sub = new Unit;
         $sub->id_badan  = 1;
-        $sub->id_ketua  = NULL;
+        // $sub->id_ketua  = NULL;
         $sub->singkat   = "PIw";
         $sub->logo      = NULL;
         $sub->nama      ="Pengurus Inti Wilayah"; 
@@ -26,7 +26,7 @@ class UnitSeeder extends Seeder
 
         $sub = new Unit;
         $sub->id_badan  = 1;
-        $sub->id_ketua  = NULL;
+        // $sub->id_ketua  = NULL;
         $sub->singkat   = "OKE";
         $sub->logo      = NULL;
         $sub->nama      ="Departemen Organisasi dan Keanggotaan"; 
@@ -35,7 +35,7 @@ class UnitSeeder extends Seeder
 
         $sub = new Unit;
         $sub->id_badan  = 1;
-        $sub->id_ketua  = NULL;
+        // $sub->id_ketua  = NULL;
         $sub->singkat   = "KK";
         $sub->logo      = NULL;
         $sub->nama      ="Departemen Kerjasama dan Kemitraan"; 
@@ -44,7 +44,7 @@ class UnitSeeder extends Seeder
 
         $sub = new Unit;
         $sub->id_badan  = 1;
-        $sub->id_ketua  = NULL;
+        // $sub->id_ketua  = NULL;
         $sub->singkat   = "KWUw";
         $sub->logo      = NULL;
         $sub->nama      ="Departemen Kewirausahaan"; 
@@ -53,7 +53,7 @@ class UnitSeeder extends Seeder
 
         $sub = new Unit;
         $sub->id_badan  = 1;
-        $sub->id_ketua  = NULL;
+        // $sub->id_ketua  = NULL;
         $sub->singkat   = "APw";
         $sub->logo      = NULL;
         $sub->nama      ="Departemen Agama dan Pendidikan"; 
@@ -62,7 +62,7 @@ class UnitSeeder extends Seeder
 
         $sub = new Unit;
         $sub->id_badan  = 1;
-        $sub->id_ketua  = NULL;
+        // $sub->id_ketua  = NULL;
         $sub->singkat   = "KMSw";
         $sub->logo      = NULL;
         $sub->nama      ="Departemen Kesehatan Masyarakat"; 
@@ -71,7 +71,7 @@ class UnitSeeder extends Seeder
 
         $sub = new Unit;
         $sub->id_badan  = 1;
-        $sub->id_ketua  = NULL;
+        // $sub->id_ketua  = NULL;
         $sub->singkat   = "LHw";
         $sub->logo      = NULL;
         $sub->nama      ="Departemen Lingkungan Hidup"; 
@@ -83,7 +83,7 @@ class UnitSeeder extends Seeder
         // UNG
         $sub = new Unit;
         $sub->id_badan  = 2;
-        $sub->id_ketua  = NULL;
+        // $sub->id_ketua  = NULL;
         $sub->singkat   = "PI-UNG";
         $sub->logo      = NULL;
         $sub->nama      ="Pengurus Inti Komisariat UNG"; 
@@ -92,7 +92,7 @@ class UnitSeeder extends Seeder
 
         $sub = new Unit;
         $sub->id_badan  = 2;
-        $sub->id_ketua  = NULL;
+        // $sub->id_ketua  = NULL;
         $sub->singkat   = "POT-UNG";
         $sub->logo      = NULL;
         $sub->nama      ="Divisi Potensi Diri Komisariat UNG"; 
@@ -101,7 +101,7 @@ class UnitSeeder extends Seeder
 
         $sub = new Unit;
         $sub->id_badan  = 2;
-        $sub->id_ketua  = NULL;
+        // $sub->id_ketua  = NULL;
         $sub->singkat   = "KMF-UNG";
         $sub->logo      = NULL;
         $sub->nama      ="Divisi Komunikasi dan Informasi Komisariat UNG"; 
@@ -110,7 +110,7 @@ class UnitSeeder extends Seeder
 
         $sub = new Unit;
         $sub->id_badan  = 2;
-        $sub->id_ketua  = NULL;
+        // $sub->id_ketua  = NULL;
         $sub->singkat   = "KWU-UNG";
         $sub->logo      = NULL;
         $sub->nama      ="Divisi Kewirausahaan Komisariat UNG"; 
@@ -119,7 +119,7 @@ class UnitSeeder extends Seeder
 
         $sub = new Unit;
         $sub->id_badan  = 2;
-        $sub->id_ketua  = NULL;
+        // $sub->id_ketua  = NULL;
         $sub->singkat   = "PDK-UNG";
         $sub->logo      = NULL;
         $sub->nama      ="Divisi Pendidikan Komisariat UNG"; 
@@ -128,7 +128,7 @@ class UnitSeeder extends Seeder
 
         $sub = new Unit;
         $sub->id_badan  = 2;
-        $sub->id_ketua  = NULL;
+        // $sub->id_ketua  = NULL;
         $sub->singkat   = "KMS-UNG";
         $sub->logo      = NULL;
         $sub->nama      ="Divisi Kesehatan Masyarakat Komisariat UNG"; 
@@ -137,7 +137,7 @@ class UnitSeeder extends Seeder
 
         $sub = new Unit;
         $sub->id_badan  = 2;
-        $sub->id_ketua  = NULL;
+        // $sub->id_ketua  = NULL;
         $sub->singkat   = "LH-UNG";
         $sub->logo      = NULL;
         $sub->nama      ="Divisi Lingkungan Hidup Komisariat UNG"; 
@@ -147,7 +147,7 @@ class UnitSeeder extends Seeder
         // IAIN
         $sub = new Unit;
         $sub->id_badan  = 3;
-        $sub->id_ketua  = NULL;
+        // $sub->id_ketua  = NULL;
         $sub->singkat   = "PI-IAIN";
         $sub->logo      = NULL;
         $sub->nama      ="Pengurus Inti Komisariat IAIN"; 
@@ -156,7 +156,7 @@ class UnitSeeder extends Seeder
 
         $sub = new Unit;
         $sub->id_badan  = 3;
-        $sub->id_ketua  = NULL;
+        // $sub->id_ketua  = NULL;
         $sub->singkat   = "POT-IAIN";
         $sub->logo      = NULL;
         $sub->nama      ="Divisi Potensi Diri Komisariat IAIN"; 
@@ -165,7 +165,7 @@ class UnitSeeder extends Seeder
 
         $sub = new Unit;
         $sub->id_badan  = 3;
-        $sub->id_ketua  = NULL;
+        // $sub->id_ketua  = NULL;
         $sub->singkat   = "KMF-IAIN";
         $sub->logo      = NULL;
         $sub->nama      ="Divisi Komunikasi dan Informasi Komisariat IAIN"; 
@@ -174,7 +174,7 @@ class UnitSeeder extends Seeder
 
         $sub = new Unit;
         $sub->id_badan  = 3;
-        $sub->id_ketua  = NULL;
+        // $sub->id_ketua  = NULL;
         $sub->singkat   = "KWU-IAIN";
         $sub->logo      = NULL;
         $sub->nama      ="Divisi Kewirausahaan Komisariat IAIN"; 
@@ -183,7 +183,7 @@ class UnitSeeder extends Seeder
 
         $sub = new Unit;
         $sub->id_badan  = 3;
-        $sub->id_ketua  = NULL;
+        // $sub->id_ketua  = NULL;
         $sub->singkat   = "PDK-IAIN";
         $sub->logo      = NULL;
         $sub->nama      ="Divisi Pendidikan Komisariat IAIN"; 
@@ -192,7 +192,7 @@ class UnitSeeder extends Seeder
 
         $sub = new Unit;
         $sub->id_badan  = 3;
-        $sub->id_ketua  = NULL;
+        // $sub->id_ketua  = NULL;
         $sub->singkat   = "KMS-IAIN";
         $sub->logo      = NULL;
         $sub->nama      ="Divisi Kesehatan Masyarakat Komisariat IAIN"; 
@@ -201,7 +201,7 @@ class UnitSeeder extends Seeder
 
         $sub = new Unit;
         $sub->id_badan  = 3;
-        $sub->id_ketua  = NULL;
+        // $sub->id_ketua  = NULL;
         $sub->singkat   = "LH-IAIN";
         $sub->logo      = NULL;
         $sub->nama      ="Divisi Lingkungan Hidup Komisariat IAIN"; 
@@ -214,7 +214,7 @@ class UnitSeeder extends Seeder
         // UG
         $sub = new Unit;
         $sub->id_badan  = 4;
-        $sub->id_ketua  = NULL;
+        // $sub->id_ketua  = NULL;
         $sub->singkat   = "PI-UG";
         $sub->logo      = NULL;
         $sub->nama      ="Pengurus Inti Komisariat UG"; 
@@ -223,7 +223,7 @@ class UnitSeeder extends Seeder
 
         $sub = new Unit;
         $sub->id_badan  = 4;
-        $sub->id_ketua  = NULL;
+        // $sub->id_ketua  = NULL;
         $sub->singkat   = "KSN-UG";
         $sub->logo      = NULL;
         $sub->nama      ="Divisi Kesenian Komisariat UG"; 
@@ -232,7 +232,7 @@ class UnitSeeder extends Seeder
 
         $sub = new Unit;
         $sub->id_badan  = 4;
-        $sub->id_ketua  = NULL;
+        // $sub->id_ketua  = NULL;
         $sub->singkat   = "AGM-UG";
         $sub->logo      = NULL;
         $sub->nama      ="Divisi Keagamaan Komisariat UG"; 
@@ -241,7 +241,7 @@ class UnitSeeder extends Seeder
 
         $sub = new Unit;
         $sub->id_badan  = 4;
-        $sub->id_ketua  = NULL;
+        // $sub->id_ketua  = NULL;
         $sub->singkat   = "KWU-UG";
         $sub->logo      = NULL;
         $sub->nama      ="Divisi Kewirausahaan Komisariat UG"; 
@@ -250,7 +250,7 @@ class UnitSeeder extends Seeder
 
         $sub = new Unit;
         $sub->id_badan  = 4;
-        $sub->id_ketua  = NULL;
+        // $sub->id_ketua  = NULL;
         $sub->singkat   = "PDK-UG";
         $sub->logo      = NULL;
         $sub->nama      ="Divisi Pendidikan Komisariat UG"; 
@@ -259,7 +259,7 @@ class UnitSeeder extends Seeder
 
         $sub = new Unit;
         $sub->id_badan  = 4;
-        $sub->id_ketua  = NULL;
+        // $sub->id_ketua  = NULL;
         $sub->singkat   = "KMS-UG";
         $sub->logo      = NULL;
         $sub->nama      ="Divisi Kesehatan Masyarakat Komisariat UG"; 
@@ -268,7 +268,7 @@ class UnitSeeder extends Seeder
 
         $sub = new Unit;
         $sub->id_badan  = 4;
-        $sub->id_ketua  = NULL;
+        // $sub->id_ketua  = NULL;
         $sub->singkat   = "LH-UG";
         $sub->logo      = NULL;
         $sub->nama      ="Divisi Lingkungan Hidup Komisariat UG"; 

@@ -16,7 +16,8 @@ class CreateSegmentbulanansTable extends Migration
         Schema::create('segmentbulanans', function (Blueprint $table) {
             $table->id();
             
-            $table->enum('bulan', [1,2,3,4,5,6,7,8,9,10,11,12]);            
+            $table->enum('bulan', [1,2,3,4,5,6,7,8,9,10,11,12]);
+            // $table->char('tahun',10)->nullable();//so beken di migrasi baru
             $table->foreignId('id_beasiswa')->constrained('beasiswas')->onDelete('cascade');//FK
 
             $table->timestamps();

@@ -25,6 +25,7 @@ class ManualEvaluasibulanan extends Component
 
     // bukan untuk form, tidak digunakan untuk input
     public $id_sb;
+    public $idBea;
 
     // untuk edit
     public 
@@ -48,12 +49,15 @@ class ManualEvaluasibulanan extends Component
     public function mount()
     {
         $this->metode='newEvaluasi';
-        $this->id_sb=Segmentbulanan::idTerkini();
+        
+        $bea=Beasiswa::yangTerakhir();
+        $this->idBea=$bea->id;
+        $this->id_sb=$bea->segmentbulanan->first()->id;
     }
 
     public function render()
     {
-        $evaluasi=Segmentbulanan::
+        $ang=Segmentbulanan::
             with(['nilaiEbsPerAnggota'])->findOrFail($this->id_sb)
             ->nilaiEbsPerAnggota()
             ->hanyaYangAktif()
@@ -61,21 +65,26 @@ class ManualEvaluasibulanan extends Component
             ;
 
         return view('livewire.desktop.manual-evaluasibulanan',[
-            'isiTabel'=>$evaluasi->paginate(30),
+            'isiTabel'=>$ang->paginate(30),
             'selectsegment'=>$this->selectsegment(),
+            'selectBeasiswa'=>$this->selectBeasiswa(),
             'selectAnggota'=>$this->selectanggota(),
             'beasiswa'=>Beasiswa::yangTerakhir(),
         ]);
     }
 
 
-    // sama dengan tambahan
+    // mulai dari sini kebawah, sama dengan manual tambahan
+    public function selectBeasiswa()
+    {
+        return Beasiswa::whereHas('segmentbulanan')->get();
+    }
+
     public function selectsegment()
     {
-        $idBeasiswaKini=Beasiswa::idTerakhir();
         return Segmentbulanan::
-                HanyaSemesterIni($idBeasiswaKini)
-                ->get();
+            HanyaSemesterIni($this->idBea)
+            ->get();
     }
 
     public function selectanggota()
@@ -97,7 +106,13 @@ class ManualEvaluasibulanan extends Component
     {
         $this->resetPage();
     }
-    // batas sama dengan evaluasi
+
+    public function updatedIdBea()
+    {
+        $bea=Beasiswa::find($this->idBea);
+        $this->id_sb=$bea->segmentbulanan->first()->id;
+    }
+    // batas sama dengan manual tambahan
 
 
 
@@ -128,11 +143,19 @@ class ManualEvaluasibulanan extends Component
 
     }
 
+
+
+    
+
+
+
+
+    // kemungkinan yang terpakai hanya ini
     public function delete($id)
     {
         $toDelete=Nilaieb::find($id);
         $toDelete->delete();
-        $this->mount();
+        // $this->mount();
     }
 
 
@@ -142,22 +165,25 @@ class ManualEvaluasibulanan extends Component
         $ke->nilai=$param[1];
         $ke->save();
         $this->emit('swalUpdated');
-        $this->render();
+        // $this->render();
     }
 
     public function refreshEb()
     {
-        foreach ( 
-            anggota::query()->HanyaYangAktif()->whereDoesntHave('nilaiEbs',function ($q){
-                $q->where('segmentbulanans.id',$this->id_sb);
-            })->get()
-            as $value) 
-            {
-                $n= new Nilaieb;
-                $n->id_sb=$this->id_sb;
-                $n->id_anggota=$value->id;
-                $n->save();
+        $ini=anggota::query()->HanyaYangAktif()->whereDoesntHave('nilaiEbs',function ($q){
+            $q->where('segmentbulanans.id',$this->id_sb);
+        })->get();
+        if($ini->isEmpty())
+            return $this->emit('swalMessageError','Sudah up to date!');
+
+        foreach ( $ini as $value) 
+        {
+            $n= new Nilaieb;
+            $n->id_sb=$this->id_sb;
+            $n->id_anggota=$value->id;
+            $n->save();
         };
     }
+    // batas--- kemungkinan yang terpakai hanya ini
 
 }

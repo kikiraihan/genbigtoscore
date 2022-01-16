@@ -69,7 +69,11 @@
                 <div>
                     <label class="f-roboto ml-1 text-gray-500 text-sm">Absen Nama Banyak</label>
                     <x-kiki.textarea-standar wire:model.lazy="namabanyak" id="namabanyak" 
-                    placeholder="A. Rehan Fajrul Islam;Abd. Wahid Ibrahim;Adinda Pratiwi Musa;"/>
+                    placeholder="A. Rehan Fajrul Islam
+Abd. Wahid Ibrahim
+Adinda Pratiwi Musa
+...
+(setiap baris untuk satu nama)"/>
                     <x-kiki.error-input :kolom="'namabanyak'"/>
                 </div>
     
@@ -134,14 +138,10 @@
                 <button class="w-auto flex justify-end items-center text-blue-500 p-2 hover:text-blue-400">
                     <i class="material-icons">search</i>
                 </button>
-                <x-kiki.input-standar placeholder="Search" type="text" wire:model.debounce.500="search" id="search" class="w-full rounded p-2" />
+                <x-kiki.input-standar placeholder="Search" type="text" wire:model.debounce.500ms="search" id="search" class="w-full rounded p-2" />
             </div>
             
             
-            <div class="px-3 py-2">
-                {{ $isiTabel->links() }}
-            </div>
-
             
 
             <table class="min-w-max w-full table-auto">
@@ -219,6 +219,10 @@
 
                 </tbody>
             </table>
+
+            <div class="px-3 py-2">
+                {{ $isiTabel->links() }}
+            </div>
 
         </div>
 

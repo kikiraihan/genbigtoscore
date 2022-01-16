@@ -90,5 +90,17 @@ class Timkhu extends Model
         return $this->belongsTo(Segmentbulanan::class,'id_sb');
     }
     
+
+
+    /* ----------------------------------------------------------------
+    SCOPE
+    ---------------------------------------------------------------- */
+
+    public function scopeYangPunyaSegmentPadaBeasiswaIni($query,$idBeasiswa)
+    {
+        return $query->whereHas('segmentbulanan',function ($query) use($idBeasiswa){
+            $query->where('id_beasiswa', $idBeasiswa);
+        });
+    }
     
 }

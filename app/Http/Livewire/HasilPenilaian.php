@@ -14,10 +14,6 @@ class HasilPenilaian extends Component
 
     public $id_beasiswa;
 
-
-    // bukan untuk form, tidak digunakan untuk input
-    public $id_sb;
-
     // untuk index
     public
     $search;
@@ -25,7 +21,6 @@ class HasilPenilaian extends Component
 
     public function mount()
     {
-        $this->id_sb=Segmentbulanan::idTerkini();
         $this->id_beasiswa=Beasiswa::idTerakhir();
     }
 
@@ -34,27 +29,23 @@ class HasilPenilaian extends Component
         $ang=anggota::
             with(['kepengurusan.unit.badan','universitas'])
             ->where('nama', 'like', '%'.$this->search.'%')
-            ->whereHas('kepengurusan',function($q){
-                $q->where('tanggal_demisioner', NULL);
-            })
+            // ->HanyaPenerimaBeasiswaIni($this->id_beasiswa)
+            ->hanyaYangAktif()
             ->orderBy('id_universitas')
             ->orderBy('nama')
             ;
 
         return view('livewire.hasil-penilaian',[
             'isiTabel'=>$ang->paginate(300),
-            'selectsegment'=>$this->selectsegment(),
+            'selectBeasiswa'=>$this->selectBeasiswa(),
             'beasiswa'=>Beasiswa::yangTerakhir()
         ]);
     }
 
     // sama dengan evaluasi
-    public function selectsegment()
+    public function selectBeasiswa()
     {
-        $idBeasiswaKini=Beasiswa::idTerakhir();
-        return Segmentbulanan::
-                HanyaSemesterIni($idBeasiswaKini)
-                ->get();
+        return Beasiswa::all();
     }
 
     public function updatingSearch()

@@ -122,7 +122,7 @@ class AnggotaSeeder extends Seeder
             ["Fitri Ramadani Laadjim", "911417001",1, $a20lanjut, 11, "Anggota"],
             ["Harwin Dj. Latada", "331318009",1, $a20lanjut, 11, "Anggota"],
             ["Kartika F. Pausther", "921417027",1, $a20lanjut, 11, "Kepala Divisi"],
-            ["Lutfiah Husain ", "821318048",1, $a21, 11, "Anggota"],
+            ["Lutfiah Husain", "821318048",1, $a21, 11, "Anggota"],
             ["M. Gusmaryanto Sumaga", "614418028",1, $a20p2lanjut, 11, "Anggota"],
             ["Maya Wulandari Iskandar", "921418035",1, $a20lanjut, 11, "Anggota"],
             ["Muhamad Yahya Muchtar", "821319062",1, $a21, 11, "Anggota"],
@@ -330,14 +330,20 @@ class AnggotaSeeder extends Seeder
             $user->email     ='anggota'.$i.'@gmail.com';
             $user->password  ='password';
 
-            if($per[5]=="Ketua Umum" OR $per[5]=="Ketua Komisariat")
-            $user->assignRole('Ketua');
-            elseif($per[5]=="Sekretaris Umum" OR $per[5]=="Sekretaris Komisariat")
-            $user->assignRole('Sekretaris');
-            elseif($per[5]=="Bendahara Umum" OR $per[5]=="Bendahara Komisariat")
-            $user->assignRole('Bendahara');
+            if($per[5]=="Ketua Umum")
+            $user->assignRole('Korwil');
+            elseif($per[5]=="Sekretaris Umum")
+            $user->assignRole('Sekwil');
+            elseif($per[5]=="Bendahara Umum")
+            $user->assignRole('Benwil');
             elseif($per[5]=="Kepala Departemen" OR $per[5]=="Kepala Divisi")
             $user->assignRole('Kepala Unit');
+            elseif($per[5]=="Ketua Komisariat")
+            $user->assignRole('Kekom');
+            elseif($per[5]=="Sekretaris Komisariat")
+            $user->assignRole('Sekom');
+            elseif($per[5]=="Bendahara Komisariat")
+            $user->assignRole('Benkom');
             else
             $user->assignRole('Anggota');
 
@@ -362,7 +368,7 @@ class AnggotaSeeder extends Seeder
                 $per[5]=="Ketua Komisariat")
             {
                 $un=Unit::find($per[4]);
-                $un->id_ketua=$ang->id;
+                // $un->id_ketua=$ang->id;
                 $un->save();
             }
 

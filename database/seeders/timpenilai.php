@@ -14,14 +14,7 @@ class timpenilai extends Seeder
      */
     public function run()
     {
-        $ini=[4,];
-        foreach ($ini as $id) {
-            $user=User::find($id);
-            $user->assignRole('Tim Penilai');
-        }
-
-        $user=User::find(1);
-        $user->assignRole('Admin');
+       
 
     }
 }

@@ -21,6 +21,10 @@ class Badan extends Model
         );
     }
 
+    public function kepengurusans()
+    {
+        return $this->hasManyThrough(Kepengurusan::class, Unit::class,'id_badan','id_unit');
+    }
 
     public function units()
     {

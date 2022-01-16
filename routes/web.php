@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\CobaController;
+use App\Http\Controllers\ImportAnggotaController;
 use App\Http\Livewire\AturBeasiswa;
 use App\Http\Livewire\Dashboard;
+use App\Http\Livewire\Desktop\DesktopAnggota;
 use App\Http\Livewire\Desktop\ManualAbsen;
 use App\Http\Livewire\Desktop\ManualEvaluasibulanan;
 use App\Http\Livewire\Desktop\ManualKehadiran;
@@ -10,7 +13,12 @@ use App\Http\Livewire\Desktop\ManualTambahan;
 use App\Http\Livewire\Desktop\ManualTimkhu;
 use App\Http\Livewire\Desktop\ManualTimkhuAnggota;
 use App\Http\Livewire\DetailNilai;
+use App\Http\Livewire\Form\DesktopTambahanggota;
+use App\Http\Livewire\Form\EditAnggotaUnit;
 use App\Http\Livewire\HasilPenilaian;
+use App\Http\Livewire\Master\StrukturBadan;
+use App\Http\Livewire\Master\StrukturUnit;
+use App\Http\Livewire\Mobfirst\KepalaEvaluasibulanan;
 use App\Models\anggota;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
@@ -32,7 +40,7 @@ Route::get('/coba', function ()
 
     $a=anggota::with(['kepengurusan','universitas'])->get();
     foreach ($a as $key => $in) {
-        echo $in->unit->nama."<br>";
+        echo $in->nama."<br>";
     }
 
     dd();
@@ -78,27 +86,58 @@ require __DIR__.'/auth.php';
 
 
 
+/*------------------------------------------------------------------------
+DESKTOP
+------------------------------------------------------------------------*/
 
+//PENILAIAN MANUAL
 Route::get('manual/absen', ManualAbsen::class)
-    ->middleware(['auth'])->name('manual.absen');
+    ->middleware(['auth','role:Tim Penilai|Admin'])->name('manual.absen');
 Route::get('manual/absen/kehadiran/{id}', ManualKehadiran::class)
-    ->middleware(['auth'])->name('manual.absen.kehadiran');
+    ->middleware(['auth','role:Tim Penilai|Admin'])->name('manual.absen.kehadiran');
 Route::get('manual/timkhu', ManualTimkhu::class)
-    ->middleware(['auth'])->name('manual.timkhu');
+    ->middleware(['auth','role:Tim Penilai|Admin'])->name('manual.timkhu');
 Route::get('manual/timkhu/{id}/anggota', ManualTimkhuAnggota::class)
-    ->middleware(['auth'])->name('manual.timkhu.anggota');
+    ->middleware(['auth','role:Tim Penilai|Admin'])->name('manual.timkhu.anggota');
 Route::get('manual/piket', ManualPiket::class)
-    ->middleware(['auth'])->name('manual.piket');
+    ->middleware(['auth','role:Tim Penilai|Admin'])->name('manual.piket');
 Route::get('manual/tambahan', ManualTambahan::class)
-    ->middleware(['auth'])->name('manual.tambahan');
+    ->middleware(['auth','role:Tim Penilai|Admin'])->name('manual.tambahan');
 Route::get('manual/evaluasi', ManualEvaluasibulanan::class)
-    ->middleware(['auth'])->name('manual.evaluasi');
+    ->middleware(['auth','role:Tim Penilai|Admin'])->name('manual.evaluasi');
+
+//ANGGOTA
+Route::get('desktop/anggota', DesktopAnggota::class)
+    ->middleware(['auth','role:Admin|Korwil'])->name('desktop.anggota');
+Route::get('desktop/tambahanggota', DesktopTambahanggota::class)
+    ->middleware(['auth','role:Admin|Korwil'])->name('form.tambahanggota');
+Route::post('desktop/tambahanggota', [ImportAnggotaController::class,'store'])
+    ->middleware(['auth','role:Admin|Korwil'])->name('form.tambahanggota.store');
+
+//MASTER STRUKTUR
+Route::get('desktop/master/struktur/badan', StrukturBadan::class)
+    ->middleware(['auth','role:Admin|Korwil'])->name('master.badan');
+Route::get('desktop/master/struktur/unit', StrukturUnit::class)
+    ->middleware(['auth','role:Admin|Korwil|Kekom'])->name('master.unit');
+Route::get('desktop/master/struktur/unit/{id}/edit-anggota', EditAnggotaUnit::class)
+    ->middleware(['auth','role:Admin|Korwil|Kekom'])->name('master.unit.edit-anggota');
 
 
 // Tim
 Route::get('beasiswa/atur', AturBeasiswa::class)
-    ->middleware(['auth'])->name('beasiswa');
+    ->middleware(['auth','role:Admin'])->name('beasiswa');
 Route::get('hasilnilai', HasilPenilaian::class)
-    ->middleware(['auth'])->name('hasilnilai');
+    ->middleware(['auth','role:Admin|Korwil'])->name('hasilnilai');
 
+
+
+
+
+/*------------------------------------------------------------------------
+MOBILE FIRST
+------------------------------------------------------------------------*/
+//PENILAIAAN EVALUASI BULANAN
+
+Route::get('/evaluasi', KepalaEvaluasibulanan::class)
+    ->middleware(['auth','role:Korwil|Kekom|Kepala Unit'])->name('kepala.evaluasi');
 

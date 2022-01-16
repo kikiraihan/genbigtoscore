@@ -27,7 +27,17 @@
                 Absensi
                 <x-kiki.loading-spin wire:loading  class="text-blue-500"/>
             </div>
-            <div>Semester {{$beasiswa->tahun.'/'.$beasiswa->semester}}</div>
+            <div>
+                <div class="flex items-center space-x-2">
+                    <div class="text-xs">Beasiswa Semester</div>                
+                    <x-kiki.select-standar wire:model="idBea" class="bg-gray-100 shadow-none text-lg">
+                        <option value="" hidden selected>...</option>
+                        @foreach ($selectBeasiswa as $item)
+                            <option class="w-full" value='{{$item->id}}'>{{$beasiswa->tahun."/".$item->semester}}</option>
+                        @endforeach
+                    </x-kiki.select-standar>
+                </div>
+            </div>
         </div>
         
 
@@ -40,7 +50,7 @@
             <div class="container mx-auto grid grid-rows-3 grid-cols-2 grid-flow-col gap-2 px-2 mt-8">
 
                 <div>
-                    <label class="f-roboto ml-1 text-gray-500 text-sm">Title</label>
+                    <label class="f-roboto ml-1 text-gray-500 text-sm">Judul</label>
                     <x-kiki.input-standar wire:model.lazy="title" id="title" type="text" placeholder="..." />
                     <x-kiki.error-input :kolom="'title'" />
                 </div>
@@ -91,7 +101,7 @@
                     <x-kiki.error-input :kolom="'inisial_kondisi'" />
                 </div>
                 <div>
-                    <label class="f-roboto ml-1 text-gray-500 text-sm">Skope</label>
+                    <label class="f-roboto ml-1 text-gray-500 text-sm">Lingkup</label>
                     <x-kiki.select-standar wire:model="skope">
                         <option value="" hidden selected>...</option>
                         <option class="w-full" value='seluruh-genbi'> Seluruh Genbi</option>
@@ -160,25 +170,14 @@
         <div class="bg-white shadow-md rounded my-6 overflow-x-auto">
 
             <div class="grid grid-cols-4 items-center">
-                <div class="p-2">
-                    <x-kiki.select-standar wire:model="id_sb">
-                        <option value="" hidden selected>...</option>
-                        @foreach ($selectsegment as $item)
-                            <option class="w-full" value='{{$item->id}}'>{{$beasiswa->tahun.", ".$item->namaBulan}}</option>
-                        @endforeach
-                    </x-kiki.select-standar>
-                </div>
 
+                
                 <div class="flex p-2 space-x-1 col-span-3">
                     <button class="w-auto flex justify-end items-center text-blue-500 p-2 hover:text-blue-400">
                         <i class="material-icons">search</i>
                     </button>
-                    <x-kiki.input-standar placeholder="Search" type="text" wire:model.debounce.500="search" id="search" class="w-full rounded p-2" />
+                    <x-kiki.input-standar placeholder="Search" type="text" wire:model.debounce.500ms="search" id="search" class="w-full rounded p-2" />
                 </div>
-            </div>
-            
-            <div class="px-3 py-2">
-                {{ $isiTabel->links() }}
             </div>
             
 
@@ -187,10 +186,9 @@
                 @if ($isiTabel->isNotEmpty())
                 <thead>
                     <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                        <th class="py-3 px-6 text-left">Id</th>
-                        <th class="py-3 px-6 text-left">Title</th>
-                        <th class="py-3 px-6 text-right">Date</th>
-                        <th class="py-3 px-6 text-center">Skope</th>
+                        <th class="py-3 px-6 text-left">Date</th>
+                        <th class="py-3 px-6 text-left">Judul Absen</th>
+                        <th class="py-3 px-6 text-center">Lingkup</th>
                         <th class="py-3 px-6 text-center">Peserta</th>
                         <th class="py-3 px-6 text-center">Actions</th>
                     </tr>
@@ -205,30 +203,48 @@
 
                     @foreach ($isiTabel as $item)
                     <tr class="border-b border-gray-200 hover:bg-gray-100">
-                        <td class="py-3 px-6 text-left whitespace-nowrap">
-                            <span class="font-medium">{{$item->id}}</span>
-                        </td>
-                        <td class="py-3 px-6 text-left whitespace-nowrap">
-                            <div class="font-medium w-96 truncate">
-                                {{$item->title}}
-                                <sup>bobot : {{$item->pengurangan}}</sup>
-                            </div>
-                        </td>
-                        <td class="py-3 px-6 text-right">
-                            <div>
-                                <sup>Waktu :</sup> {{$item->date->format('d M Y, h:i')}}
+                        <td class="py-3 px-6 text-left">
+                            <div class="flex items-center space-x-2">
+                                <span class="material-icons-outlined text-sm">
+                                    insert_invitation
+                                </span>
+                                <span>
+                                    {{$item->date->format('d M Y, h:i')}}
+                                </span> 
                             </div>
                             <div class="text-red-400">
                                 @if ($item->deadline_absen!=null)
-                                <sup>Deadline :</sup> {{$item->deadline_absen->format('d M Y, h:i')}}
+                                <div class="flex items-center space-x-2">
+                                    <span class="material-icons-outlined text-sm">
+                                        event_busy
+                                    </span>
+                                    <span>
+                                        {{$item->deadline_absen->format('d M Y, h:i')}}
+                                    </span> 
+                                </div>
                                 @endif
+                            </div>
+                        </td>
+                        <td class="py-3 px-6 text-left whitespace-nowrap">
+                            <div class="flex space-x-2">
+                                <x-kiki.badge class="bg-blue-100 text-gray-500 text-xs">
+                                    {{$item->pengurangan}}
+                                </x-kiki.badge>
+                                <span class="font-medium w-96 truncate">
+                                    {{$item->title}}
+                                </span>
                             </div>
                         </td>
                         <td class="py-3 px-6 text-center capitalize font-semibold">
                             @if ($item->skope=="badan")
-                            <span class="bg-gray-200 text-gray-600 py-0.5 px-1.5 rounded text-xs">
-                                {{$item->absensiable->nama}}
-                            </span>
+                            <div class="inline-flex items-center space-x-1 bg-gray-200 text-gray-600 rounded">
+                                <span class="material-icons-outlined text-sm rounded-l p-0.5 text-white @if ($item->absensiable->id==1) bg-blue-500 @elseif ($item->absensiable->id==2) bg-red-400 @elseif ($item->absensiable->id==3) bg-green-400 @elseif ($item->absensiable->id==4) bg-yellow-400 @endif">
+                                    people
+                                </span>
+                                <span class="text-xs py-0.5 px-1.5">
+                                    All {{$item->absensiable->nama}}
+                                </span>
+                            </div>
                             @elseif ($item->skope=="unit")
                             <span class="bg-gray-100 text-gray-500 border border-gray-200 py-0.5 px-1.5 rounded text-xs">
                                 {{$item->absensiable->singkat}}
@@ -294,6 +310,10 @@
 
                 </tbody>
             </table>
+
+            <div class="px-3 py-2">
+                {{ $isiTabel->links() }}
+            </div>
 
         </div>
 

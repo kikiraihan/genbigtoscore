@@ -24,10 +24,23 @@
         
         <div class="flex justify-between items-center mt-6">
             <div class="f-playfair font-bold text-2xl capitalize">
-                Tim Khusus
+                Tim Khusus 
+                <span class="f-robotomon text-xs font-light">
+                    (Panitia Besar/ Tim Kecil)
+                </span>
                 <x-kiki.loading-spin wire:loading  class="text-blue-500"/>
             </div>
-            <div>Semester {{$beasiswa->tahun.'/'.$beasiswa->semester}}</div>
+            <div>
+                <div class="flex items-center space-x-2">
+                    <div class="text-xs">Beasiswa Semester</div>                
+                    <x-kiki.select-standar wire:model="idBea" class="bg-gray-100 shadow-none text-lg">
+                        <option value="" hidden selected>...</option>
+                        @foreach ($selectBeasiswa as $item)
+                            <option class="w-full" value='{{$item->id}}'>{{$item->tahun."/".$item->semester}}</option>
+                        @endforeach
+                    </x-kiki.select-standar>
+                </div>
+            </div>
         </div>
         
 
@@ -54,8 +67,8 @@
 
                 {{-- $tanggal_pelaksanaan; text --}}
                 <div>
-                    <label class="f-roboto ml-1 text-gray-500 text-sm">Waktu/Metode Pelaksanaan</label>
-                    <x-kiki.input-standar wire:model.lazy="tanggal_pelaksanaan" id="tanggal_pelaksanaan" type="text" placeholder="..." />
+                    <label class="f-roboto ml-1 text-gray-500 text-sm">Keterangan Waktu/Metode Pelaksanaan</label>
+                    <x-kiki.input-standar wire:model.lazy="tanggal_pelaksanaan" id="tanggal_pelaksanaan" type="text" placeholder="setiap bulan.. 2 minggu.. 20 september 2021.." />
                     <x-kiki.error-input :kolom="'tanggal_pelaksanaan'" />
                 </div>
 
@@ -83,7 +96,7 @@
                         <x-kiki.select-standar wire:model="id_sb_ToInput">
                             <option value="" hidden selected>...</option>
                             @foreach ($selectsegment as $item)
-                                <option class="w-full" value='{{$item->id}}'>{{$beasiswa->tahun.", ".$item->namaBulan}}</option>
+                                <option class="w-full" value='{{$item->id}}'>{{$item->segtahun.", ".$item->namaBulan}}</option>
                             @endforeach
                         </x-kiki.select-standar>
                         <x-kiki.error-input :kolom="'id_sb_ToInput'" />
@@ -106,7 +119,7 @@
                 <div>
                     <label class="f-roboto ml-1 mr-2 text-gray-500 text-sm capitalize">Pilih Kepala/Ketupat</label>
                     <x-kiki.loading-spin wire:loading wire:target="setKetupat"  class="text-blue-300"/>
-                    <x-kiki.molecul.select-search-lite :terpilih="$terpilihSelectKetupat" wire:model="searchSelectKetupat">
+                    <x-kiki.molecul.select-search-lite :terpilih="$terpilihSelectKetupat" wire:model.debounce.500ms="searchSelectKetupat">
                         
                         @foreach ($selectKetupat as $item)
                             <li>
@@ -153,34 +166,23 @@
         <div class="bg-white shadow-md rounded my-6 overflow-x-auto">
 
             <div class="grid grid-cols-4 items-center">
-                <div class="p-2">
-                    <x-kiki.select-standar wire:model="id_sb">
-                        <option value="" hidden selected>...</option>
-                        @foreach ($selectsegment as $item)
-                            <option class="w-full" value='{{$item->id}}'>{{$beasiswa->tahun.", ".$item->namaBulan}}</option>
-                        @endforeach
-                    </x-kiki.select-standar>
-                </div>
 
                 <div class="flex p-2 space-x-1 col-span-3">
                     <button class="w-auto flex justify-end items-center text-blue-500 p-2 hover:text-blue-400">
                         <i class="material-icons">search</i>
                     </button>
-                    <x-kiki.input-standar placeholder="Search" type="text" wire:model.debounce.500="search" id="search" class="w-full rounded p-2" />
+                    <x-kiki.input-standar placeholder="Search" type="text" wire:model.debounce.500ms="search" id="search" class="w-full rounded p-2" />
                 </div>
             </div>
-            
-            <div class="px-3 py-2">
-                {{ $isiTabel->links() }}
-            </div>
-            
+
+
 
             <table class="min-w-max w-full table-auto">
                 
                 @if ($isiTabel->isNotEmpty())
                 <thead>
                     <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                        <th class="py-3 px-6 text-left">Id</th>
+                        <th class="py-3 px-6 text-left">Segment Bulan</th>
                         <th class="py-3 px-6 text-left">Nama</th>
                         <th class="py-3 px-6 text-left">Bobot</th>
                         <th class="py-3 px-6 text-left">Kepala Tim</th>
@@ -199,7 +201,10 @@
                     @foreach ($isiTabel as $item)
                     <tr class="border-b border-gray-200 hover:bg-gray-100">
                         <td class="py-3 px-6 text-left whitespace-nowrap">
-                            <span class="font-medium">{{$item->id}}</span>
+                            <span class="font-medium">
+                                {{$item->segmentbulanan->segtahun}}, 
+                                {{$item->segmentbulanan->namabulan}}
+                            </span>
                         </td>
                         <td class="py-3 px-6 text-left whitespace-nowrap">
                             <div class="font-medium ">{{-- w-10 truncate --}}
@@ -246,6 +251,10 @@
 
                 </tbody>
             </table>
+
+            <div class="px-3 py-2">
+                {{ $isiTabel->links() }}
+            </div>
 
         </div>
 

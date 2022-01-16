@@ -25,11 +25,13 @@ class Beasiswa extends Model
     // STATIC METHOD
     public static function idTerakhir()
     {
-        return (new static)::latest()->orderBy('id', 'desc')->first()->id;
+        return (new static)::orderBy('tahun','desc')->orderBy('semester','desc')->first()->id;
+        // return (new static)::latest()->orderBy('id', 'desc')->first()->id;
     }
     public static function yangTerakhir()
     {
-        return (new static)::latest()->orderBy('id', 'desc')->first();
+        return (new static)::orderBy('tahun','desc')->orderBy('semester','desc')->first();
+        // return (new static)::latest()->orderBy('id', 'desc')->first();
     }
 
 
