@@ -117,7 +117,7 @@
 
                 {{-- $id_kepala, selectsearch --}}
                 <div>
-                    <label class="f-roboto ml-1 mr-2 text-gray-500 text-sm capitalize">Pilih Kepala/Ketupat</label>
+                    <label class="f-roboto ml-1 mr-2 text-gray-500 text-sm capitalize">Pilih Ketupat/PJ</label>
                     <x-kiki.loading-spin wire:loading wire:target="setKetupat"  class="text-blue-300"/>
                     <x-kiki.molecul.select-search-lite :terpilih="$terpilihSelectKetupat" wire:model.debounce.500ms="searchSelectKetupat">
                         

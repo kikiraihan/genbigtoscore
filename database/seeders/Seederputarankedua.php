@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\anggota;
 use App\Models\Beasiswa;
 use App\Models\Segmentbulanan;
 use App\Models\User;
@@ -35,7 +36,7 @@ class Seederputarankedua extends Seeder
             $value->save();
         }
 
-        $ganti=User::where('nama','Lutfiah Husain')->first();
+        $ganti=anggota::where('nama','Lutfiah Husain')->first();
         $ganti->nama='Lutfiah Husain';
         $ganti->save();
 

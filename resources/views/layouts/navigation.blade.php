@@ -82,7 +82,7 @@
         Edit Bio
     </x-kiki.sidebar-link>
 
-    @hasanyrole('Tim Penilai|Admin')
+    @hasanyrole('Tim Penilai|Korwil')
         <div class="hidden md:block">
             
             <hr class="mt-1 mb-4">

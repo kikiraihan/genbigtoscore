@@ -57,7 +57,7 @@
                     </x-kiki.select-standar>
                 </div>
 
-                <div class="flex p-2 space-x-1 col-span-4">
+                <div class="flex p-2 space-x-1 col-span-4 order-first md:order-2">
                     <button class="w-auto flex justify-end items-center text-blue-500 p-2 hover:text-blue-400">
                         <i class="material-icons">search</i>
                     </button>
@@ -69,7 +69,7 @@
                     class="shadow px-2 py-2 rounded focus:outline-none focus:ring-2 w-full truncate
                         items-center flex justify-center
                         hover:bg-gray-200 focus:ring-blue-300 text-gray-600 bg-gray-100">
-                        <x-kiki.loading-spin wire:loading wire:target='refreshEb' class="text-blue-400"/>
+                        <x-kiki.loading-spin-inline wire:loading wire:target='refreshEb' class="text-blue-400"/>
                         <span wire:loading.remove wire:target='refreshEb' class="material-icons-outlined md:hidden" style="font-size: 21px">
                         sync
                         </span>
@@ -86,7 +86,7 @@
                     <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                         <th class="py-3 px-6 text-left">No</th>
                         <th class="py-3 px-6 text-left">Nama</th>
-                        <th class="py-3 px-6 text-left">Unit</th>
+                        <th class="py-3 px-6 text-left md:table-cell hidden">Unit</th>
                         {{-- <th class="py-3 px-6 text-center">
                             Nilai
                         </th> --}}
@@ -117,7 +117,7 @@
                                 {{$item->nama}} <sup>#{{$item->id}}</sup>
                             </div>
                         </td>
-                        <td class="py-3 px-6 text-left whitespace-nowrap">
+                        <td class="py-3 px-6 text-left whitespace-nowrap md:table-cell hidden">
                             <div class="font-medium ">
                                 {{$item->unit->nama}}
                             </div>

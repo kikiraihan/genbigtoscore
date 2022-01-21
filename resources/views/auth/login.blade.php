@@ -82,7 +82,12 @@
                 <span class="material-icons self-center" style="font-size: 6px;">
                     fiber_manual_record
                 </span>
-                <span>Generasi Baru Indonesia Gorontalo</span>
+                <span class="hidden lg:inline">Generasi Baru Indonesia Gorontalo</span>
+                <span class="lg:hidden inline">GenBI GTO</span>
+                <span class="material-icons self-center" style="font-size: 6px;">
+                    fiber_manual_record
+                </span>
+                <span>Coded <a href="https://linktr.ee/kikiraihann" class="hover:text-blue-300 font-bold">©Katili.dev</a></span>
             </div>
 
         </div>

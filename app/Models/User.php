@@ -82,4 +82,12 @@ class User extends Authenticatable
 
 
 
+    // SCOPE
+    public function scopeUserYangPunyaRoleIni($query,$arrayRole)//["Kepala Unit","Kekom","Korwil"]
+    {
+        $query->whereHas('roles', function ($q) use ($arrayRole){
+            return $q->whereIn('name', $arrayRole);
+        });
+    }
+
 }

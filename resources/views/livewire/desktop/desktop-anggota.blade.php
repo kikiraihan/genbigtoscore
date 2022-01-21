@@ -88,7 +88,7 @@
         {{-- table --}}
         <div class="bg-white shadow-md rounded my-6 overflow-x-auto">
 
-            <div class="grid grid-cols-4 items-center">
+            <div class="grid grid-cols-5 items-center">
                 <div class="flex p-2 space-x-1 col-span-3">
                     <button class="w-auto flex justify-end items-center text-blue-500 p-2 hover:text-blue-400">
                         <i class="material-icons">search</i>
@@ -96,24 +96,33 @@
                     <x-kiki.input-standar placeholder="Search" type="text" wire:model.debounce.500ms="search" id="search"
                         class="w-full rounded p-2" />
                 </div>
-
-                {{-- <div class="p-2">
-                    <x-kiki.select-standar wire:model="angkatan">
-                        <option value="" hidden selected>...</option>
-                        <option value="1">1</option>
-                        @foreach ($selectsegment as $item)
-                        <option class="w-full" value='{{$item->id}}'>{{$beasiswa->tahun.", ".$item->namaBulan}}</option>
-                        @endforeach
-                    </x-kiki.select-standar>
-                </div> --}}
+                
                 <div class="text-center">
-                    <label for="toggle" class="text-xs text-gray-700 mr-2">
+                    <label for="toggle" class="text-xs text-gray-700 mr-2 hidden lg:inline">
                         Hanya Demisioner
                     </label>
                     <x-kiki.toggle :label="'Hanya aktif'">
                         <input wire:model="statusAktif" type="checkbox" name="toggle" id="toggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
                     </x-kiki.toggle>
                 </div>
+
+                <div class="p-2 text-right">
+                    <x-kiki.button-with-google-icon :icon="'file_download'" class="bg-green-400 shadow-sm text-gray-100  inline-flex p-2 rounded cursor-pointer hover:shadow-md hover:bg-green-600"
+                        wire:click="export">
+                        <span wire:loading wire:target="export">
+                            Processing
+                        </span>
+                        <span wire:loading.remove wire:target="export">
+                            <span class="hidden lg:inline">
+                                Export Excell
+                            </span>
+                            <span class="lg:hidden inline">
+                                Exp
+                            </span>
+                        </span>
+                    </x-kiki.button-with-google-icon>
+                </div>
+                
             </div>
 
 
@@ -179,7 +188,7 @@
                         <td class="py-3 px-6 text-right whitespace-nowrap space-x-1">
                             @if ($item->tahunmasukkuliah)
                             <x-kiki.badge class="border-gray-200 border text-gray-500">
-                                <sup>Univ : </sup> {{$item->tahunmasukkuliah}}
+                                <sup>{{$item->universitas->singkatan}} : </sup> {{$item->tahunmasukkuliah}}
                             </x-kiki.badge>
                             @else
                             <x-kiki.badge class="border-gray-200 border text-gray-500">

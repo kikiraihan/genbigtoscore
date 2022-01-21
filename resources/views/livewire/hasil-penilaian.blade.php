@@ -42,7 +42,7 @@
         {{-- table --}}
         <div class="bg-white shadow-md rounded my-6 overflow-x-auto">
 
-            <div class="grid grid-cols-4 items-center">
+            <div class="grid grid-cols-5 items-center">
                 <div class="p-2">
                     <x-kiki.select-standar wire:model="id_beasiswa">
                         <option value="" hidden selected>...</option>
@@ -58,6 +58,18 @@
                     </button>
                     <x-kiki.input-standar placeholder="Search" type="text" wire:model.debounce.500ms="search" id="search"
                         class="w-full rounded p-2" />
+                </div>
+
+                <div class="p-2 text-right">
+                    <x-kiki.button-with-google-icon :icon="'file_download'" class="bg-green-400 shadow-sm text-gray-100  inline-flex p-2 rounded cursor-pointer hover:shadow-md hover:bg-green-600"
+                        wire:click="export">
+                        <span wire:loading wire:target="export">
+                            Processing
+                        </span>
+                        <span wire:loading.remove wire:target="export">
+                            Export Excell
+                        </span>
+                    </x-kiki.button-with-google-icon>
                 </div>
             </div>
 
@@ -112,7 +124,7 @@
                         </td>
                         <td class="py-3 px-6 text-left whitespace-nowrap">
                             <div class="font-medium ">
-                                {{$item->universitas->nama}}
+                                {{$item->universitas->singkatan}}
                             </div>
                         </td>
 

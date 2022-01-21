@@ -197,6 +197,11 @@
                 <div class="bg-blue-100 p-2 rounded shadow-sm">
                     <div class="font-bold">Keterangan</div>
                     <div class="text-justify py-2 px-4">
+                        <div>
+                            <x-kiki.button-with-google-icon class="hover:text-blue-500 text-blue-400 inline-flex italic" href="https://beautifytools.com/excel-to-csv-converter.php" :icon="'link'">
+                                <span>Link web konversi excell ke text</span>
+                            </x-kiki.button-with-google-icon>
+                        </div>
                         <span class="text-sm">Mohon perhatikan ketentuan berikut :</span>
                         <ul class="list-disc list-inside text-sm">
                             <li>

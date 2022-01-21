@@ -21,7 +21,7 @@
                 toast.addEventListener('mouseleave', Swal.resumeTimer)
             },
             icon: 'warning',
-            title: 'Terjadi kesalahan',
+            title: 'Pesan error',
             text: info,
         });
         //$('#modalInput').modal('hide');
@@ -39,7 +39,7 @@
                 toast.addEventListener('mouseleave', Swal.resumeTimer)
             },
             icon: 'warning',
-            title: 'Terjadi kesalahan',
+            title: 'Pesan error',
             text: info,
         });
         //$('#modalInput').modal('hide');
@@ -213,23 +213,28 @@
         
     })
     
-    window.livewire.on('swalCheckboxPilihRole', (currentRole, idAnggota) => {
+    window.livewire.on('swalCheckboxPilihRole', (html, idAnggota) => {
         
         const { value: formValues } = Swal.fire({
             title: 'Pilih Role',
-            html: '<div class="text-left px-2">'+currentRole+'</div>',
+            html: '<div class="text-left px-2">'+html+'</div>',
             showCancelButton: true,
             focusConfirm: false,
             preConfirm: () => {}
         }).then((result)=>{
             if (result.value) {
-                
-                hasil=[];
-                Array.prototype.forEach.call(document.getElementsByClassName('divCheckboxRole'), function(el) {
-                    if(el.childNodes['0'].checked)hasil.push(el.childNodes['1'].textContent)
+
+                var hasilsatu;
+                Array.prototype.forEach.call(document.getElementsByName('satu'), function(el) {
+                    if(el.checked) hasilsatu=el.value
                 })
-                // console.log(result)
-                window.livewire.emit('terkonfirmasiEditRole',hasil, idAnggota)
+                
+                hasildua=[];
+                Array.prototype.forEach.call(document.getElementsByClassName('divCheckboxRole'), function(el) {
+                    if(el.childNodes['0'].checked) hasildua.push(el.childNodes['0'].value)
+                })
+                
+                window.livewire.emit('terkonfirmasiEditRole',hasilsatu,hasildua, idAnggota)
 
             }
         })

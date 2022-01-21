@@ -2,43 +2,38 @@
 
 namespace App\Http\Livewire\Desktop;
 
+use App\Exports\PiketTemplate;
 use App\Models\anggota;
 use App\Models\Beasiswa;
 use App\Models\Piket;
 use App\Models\Segmentbulanan;
+use Carbon\Carbon;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ManualPiket extends Component
 {
-    use WithPagination;
+    use WithPagination, WithFileUploads;
     
     // untuk form
     public 
-    $id_anggota,
-    $id_sb_ToInput,
-    $bobot,
-    $jumlah_tidak_hadir,
-    $jumlah_izin,
-    
-    $searchSelectAnggota,
-    $terpilihSelectAnggota;
+    $filepiket,
+    $id_sb,
+    $bobot;
 
     // bukan untuk form, tidak digunakan untuk input
-    public $id_sb;
     public $idBea;
-
-    // untuk edit
-    public 
-    $metode,
-    $idToUpdate;
 
     // untuk index
     public
     $search;
 
     protected $listeners=[
-        'piketFixHapus'=>'delete'
+        'piketFixHapus'=>'delete',
+        'fixBersihkanYangHadir'=>'bersihkanYangHadir',
+        'fixHapusSemua'=>'hapusSemua',
     ];
 
     protected $CustomMessages = [
@@ -49,9 +44,6 @@ class ManualPiket extends Component
 
     public function mount()
     {
-        $this->metode='newPiket';
-        $this->jumlah_izin=0;
-        $this->jumlah_tidak_hadir=0;
         $this->bobot=-2;
         $bea=Beasiswa::yangTerakhir();
         $this->idBea=$bea->id;
@@ -62,20 +54,36 @@ class ManualPiket extends Component
     public function render()
     {
         $piketAnggota=Segmentbulanan::
-            with(['PiketAnggotas.piket'])
+            with(['PiketAnggotas.piket','PiketAnggotas.kepengurusan.unit.badan'])
             ->findOrFail($this->id_sb)
             ->piketAnggotas()
             ->hanyaYangAktif()
+            ->orderBy('nama')
             ->where('nama', 'like', '%'.$this->search.'%')
             ;
 
         return view('livewire.desktop.manual-piket',[
-            'isiTabel'=>$piketAnggota->paginate(30),
+            'isiTabel'=>$piketAnggota->paginate(100),
             'selectsegment'=>$this->selectsegment(),
             'selectBeasiswa'=>$this->selectBeasiswa(),
-            'selectAnggota'=>$this->selectanggota(),
             'beasiswa'=>Beasiswa::yangTerakhir(),
         ]);
+    }
+
+    public function bersihkanYangHadir()
+    {
+        Piket::where('id_sb',$this->id_sb)
+            ->where('jumlah_tidak_hadir',0)
+            ->where('jumlah_izin',0)
+            ->delete();
+        $this->emit('swalUpdated');
+    }
+
+    public function hapusSemua()
+    {
+        Piket::where('id_sb',$this->id_sb)
+            ->delete();
+        $this->emit('swalUpdated');
     }
 
 
@@ -91,21 +99,7 @@ class ManualPiket extends Component
             ->get();
     }
 
-    public function selectanggota()
-    {
-        return 
-        anggota::query()
-        ->HanyaYangAktif()
-        ->Bernama($this->searchSelectAnggota)
-        ->get()->take(7);
-    }
-
-    public function setAnggota($param)
-    {
-        $this->id_anggota=$param[0];
-        $this->terpilihSelectAnggota=$param[1];
-    }
-
+    
     public function updatingSearch()
     {
         $this->resetPage();
@@ -117,45 +111,6 @@ class ManualPiket extends Component
         $this->id_sb=$bea->segmentbulanan->first()->id;
     }
 
-    public function newPiket()
-    {
-        $this->validate([
-            'id_anggota'          =>'required|integer',
-            'id_sb_ToInput'       =>'required|integer',
-            'bobot'               =>'required|in:-5,-3,-2',
-            'jumlah_tidak_hadir'  =>'required|integer',  
-            'jumlah_izin'         =>'required|integer',  
-        ], $this->CustomMessages);
-
-
-        if(Piket::where('id_anggota',$this->id_anggota)->where('id_sb',$this->id_sb_ToInput)->first())
-            $this->emit('swalMessageError','Kombinasi piket anggota dan segment bulan tersebut sudah ada');//, alias Piket anggota pada segment bulan tersebut sudah ada
-        else
-        {
-            $pik=new Piket;
-            $pik->id_anggota         =$this->id_anggota;
-            $pik->id_sb              =$this->id_sb_ToInput;
-            $pik->bobot              =$this->bobot;
-            $pik->jumlah_tidak_hadir =$this->jumlah_tidak_hadir;
-            $pik->jumlah_izin        =$this->jumlah_izin;
-            $pik->save();
-
-            $this->emit('swalAdded');
-            $this->reset([
-                'id_anggota',
-                // 'jumlah_tidak_hadir',
-                // 'jumlah_izin',
-                'searchSelectAnggota',
-                'terpilihSelectAnggota',
-            ]);
-            $this->id_sb=$this->id_sb_ToInput;
-            $this->jumlah_tidak_hadir=0;
-            $this->jumlah_izin=0;
-        }
-
-        
-    }
-
     public function delete($id)
     {
         $toDelete=Piket::find($id);
@@ -164,6 +119,10 @@ class ManualPiket extends Component
     }
 
 
+    public function downloadTemplate() 
+    {
+        $waktu=Carbon::now();
 
-
+        return Excel::download(new PiketTemplate(), 'template_piket_'.$waktu->format('Y_M_d').'.xlsx');
+    }
 }

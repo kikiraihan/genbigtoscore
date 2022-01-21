@@ -82,9 +82,9 @@
                     <label class="f-roboto ml-1 text-gray-500 text-sm">Bobot Pengurangan</label>
                     <x-kiki.select-standar wire:model="pengurangan">
                         <option value="" hidden selected>...</option>
-                        <option class="w-full" value='-2'>2</option>
-                        {{-- <option class="w-full" value='-3'>3</option> --}}
-                        <option class="w-full" value='-5'>5</option>
+                        <option class="w-full" value='-2'> - 2</option>
+                        {{-- <option class="w-full" value='-3'> - 3</option> --}}
+                        <option class="w-full" value='-5'> - 5</option>
                     </x-kiki.select-standar>
                     <x-kiki.error-input :kolom="'pengurangan'" />
                 </div>
@@ -144,10 +144,7 @@
             <x-kiki.loading-spin wire:loading wire:target="{{$metode}}"  class="text-blue-300"/>
             <div class="px-2 mt-3 w-1/2" wire:loading.remove wire:target="{{$metode}}">
                 @if ($metode=="newAbsen")
-                <input class="shadow p-2 w-full rounded focus:outline-none focus:ring-2             
-                focus:ring-green-300  text-white bg-green-500
-                cursor-pointer" type="submit" name="submitPass"
-                id="submitPass" value="Tambah">
+                <input class="shadow p-2 w-full rounded focus:outline-none focus:ring-2 focus:ring-green-300 text-white bg-green-500 cursor-pointer" type="submit" name="submitPass" id="submitPass" value="Tambah">
                 @else
                 <div class="flex space-x-2">
                     <button wire:click="resetAbisUpdate" type="button" class="shadow p-2 w-full rounded focus:outline-none focus:ring-2             

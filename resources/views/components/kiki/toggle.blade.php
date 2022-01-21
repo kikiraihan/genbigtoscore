@@ -17,6 +17,6 @@
   {{$slot}}
   <label for="toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
 </div>
-<label for="toggle" class="text-xs text-gray-700">
+<label for="toggle" class="text-xs text-gray-700 hidden sm:inline">
   {{$label}}
 </label>

@@ -59,6 +59,7 @@ class ManualAbsen extends Component
     public function mount()
     {
         $this->inisial_kondisi='hadir';
+        $this->pengurangan='-2';
         $this->metode='newAbsen';
         // $this->id_sb=Segmentbulanan::idTerkini();
         $this->idBea=Beasiswa::idTerakhir();

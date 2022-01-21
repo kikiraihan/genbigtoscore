@@ -53,21 +53,50 @@ class ManualKehadiran extends Component
     {
         $namas=explode(PHP_EOL, $this->namabanyak);
         $abs=Absensi::findOrFail($this->idAbsen)->load('kehadiran','absensiable','absenanggota');
+        $error=[];
         foreach ($namas as $key=>$na) 
         {
-            $anggota[$key]=$abs->absenanggota()
-            ->HanyaYangAktif()
-            ->where('nama', $na)
-            ->first();
+            $ag=$abs->absenanggota()
+                ->HanyaYangAktif()
+                ->where('nama', $na)
+                ->first();
+            
+            if($ag)//jika tidak null
+                $ag->kehadiranAbsensi()->updateExistingPivot($this->idAbsen, [
+                    'kondisi' => $kondisi,
+                ]);
+            else// jika tidak ditemukan
+                $error[]=$na;
         }
-        foreach ($anggota as $key => $ang) 
+
+        //jika ada error
+        if($error)
         {
-            if($ang)//jika tidak null
-            $ang->kehadiranAbsensi()->updateExistingPivot($this->idAbsen, [
-                'kondisi' => $kondisi,
-            ]);
+            $this->emit('swalMessageError','Terdapat error pada '.json_encode($error));
+            $this->namabanyak=$this->susunKembaliKata($error);
         }
-        $this->emit('swalUpdated');
+        else
+        {
+            $this->emit('swalUpdated');
+            $this->namabanyak=null;
+        }
+        
         $this->render();
+    }
+
+    public function susunKembaliKata($dup)
+    {
+        $kata='';
+        $i=0;
+        foreach ($dup as $value) 
+        {
+            if( $i == 0)
+                $kata.=$value;
+            else
+                $kata.=PHP_EOL.$value;
+            
+            $i++;
+        }
+        return $kata;
     }
 }

@@ -59,7 +59,7 @@ trait demisionerkan
             $this->emit('swalMessageError','Korwil/Kekom tidak dapat didemisionerkan sebelum korwil atau kekom baru dipilih. Silahkan tentukan calon pengganti dahulu, kemudian edit rolenya menjadi Korwil/Kekom di menu anggota');
             return false;
         }
-        elseif($us->hasRole(['Korwil']))
+        elseif($us->hasRole(['Korwil','Admin']))
             $us->syncRoles(['Anggota','Admin']);
         else
             $us->syncRoles(['Anggota']);

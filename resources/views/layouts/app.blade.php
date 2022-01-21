@@ -88,7 +88,7 @@
     $(function () {
         // $('#navbarSupportedContent a[href~="' + location.href + '"]').parents('li').addClass('active');
         $('#navbarMobile a[href~="' + location.href + '"]').css("color", "#3B82F6"); //#E5E5E5
-        $('#tabTask a[href~="' + location.href + '"]').addClass('border-b-2 border-blue-400 text-blue-500'); //#E5E5E5
+        // $('#tabTask a[href~="' + location.href + '"]').addClass('border-b-2 border-blue-400 text-blue-500'); //#E5E5E5
     });
 </script>
 

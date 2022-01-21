@@ -2,7 +2,9 @@
 
 namespace App\Http\Livewire\Desktop;
 
+use App\Exports\AnggotaExport;
 use App\Models\anggota;
+use App\Models\Badan;
 use App\Models\Unit;
 use App\Models\User;
 use App\Traits\demisionerkan;
@@ -10,6 +12,7 @@ use App\Traits\pindahUnit;
 use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
 use Spatie\Permission\Models\Role;
 
 class DesktopAnggota extends Component
@@ -83,39 +86,108 @@ class DesktopAnggota extends Component
         $user = User::whereHas('anggota', function ($q) use ($id){
             $q->where('id', $id);
         })
-        // ->with()
         ->first();
         
-        $checkRole='';
-        $ro=Role::whereNotIn('id',[7,8])->get();
-        foreach ($ro as $key => $r) 
-        {
-            if ($user->hasRole($r->name)) 
-                $checkRole.='<div class="form-check divCheckboxRole"><input checked class="form-check-input checkboxRole" type="checkbox" value="TRUE" id="checkbox'.$r->id.'" name="roleInput['.$r->id.']"><label class="form-check-label" for="checkbox'.$r->id.'">'.$r->name.'</label></div>';
-            else 
-                $checkRole.='<div class="form-check divCheckboxRole"><input class="form-check-input checkboxRole" type="checkbox" value="TRUE" id="checkbox'.$r->id.'" name="roleInput['.$r->id.']"><label class="form-check-label" for="checkbox'.$r->id.'">'.$r->name.'</label></div>';
-            
-        }
-
-        $this->emit('swalCheckboxPilihRole',$checkRole,$id);
+        $radio=Role::whereNotIn('id',[7,8])->whereNotIn('name',['Tim Penilai','Admin'])->get();
+        $check=Role::whereNotIn('id',[7,8])->whereIn('name',['Tim Penilai','Admin'])->get();
+        $this->emit(
+            'swalCheckboxPilihRole',
+        view('swalForm.editRoleAnggota',[
+                        'radio'=>$radio,
+                        'check'=>$check,
+                        'user'=>$user,
+                    ])->render(),
+        $id);
     }
 
-    public function fixEditRole($hasil,$idAnggota)
+    public function fixEditRole($satu,$dua,$idAnggota)
     {
         $user = User::whereHas('anggota', function ($q) use ($idAnggota){
             $q->where('id', $idAnggota);
         })
         ->first();
-        $user->syncRoles($hasil);
+        $badanUser=$user->anggota->badan;
+        $unitUser=$user->anggota->unit;
+
+        if($user->hasRole(['Korwil','Kekom']) and ($satu!="Korwil" and $satu!="Kekom"))
+            return $this->emit('swalMessageError','Untuk mengganti Korwil/Kekom adalah calon pengganti yang diganti rolenya, kemudian yang lama akan direset otomatis');
+        elseif($badanUser->id==1 and ($satu=="Kekom" OR $satu=="Sekom" OR $satu=="Benkom"))
+            return $this->emit('swalMessageError','Dari wilayah ke role komsat tidak boleh, pindahkan dulu unitnya');
+        elseif($badanUser->id!=1 and ($satu=="Korwil" OR $satu=="Sekwil" OR $satu=="Benwil"))
+            return $this->emit('swalMessageError','Dari Komsat ke role wilayah tidak boleh, pindahkan dulu unitnya');
+
+        //jika form memilih -> korwil/kekom
+        if($satu=="Korwil" OR $satu=="Kekom")
+        {
+            if(!auth()->user()->hasRole(['Admin','Korwil']))
+            {
+                return $this->emit('swalMessageError','yang bisa mengganti korwil hanya admin/korwil');
+            }
+
+            if($satu=="Korwil")
+            {
+                //reset korwil lama
+                $korseb=User::UserYangPunyaRoleIni(["Korwil"])->first();
+                if($korseb)
+                    $korseb->syncRoles(['Anggota','Admin']);
+                
+                // pindah ke unit inti
+                $user->anggota->kepengurusan->id_unit=1;//$korseb->anggota->unit->id;
+                $user->anggota->kepengurusan->save();
+            }
+            elseif($satu=="Kekom")
+            {
+                //reset kekom lama, yang punya badan sama
+                $keseb=User::UserYangPunyaRoleIni(["Kekom"])->whereHas('anggota',function($q)use($badanUser){
+                    $q->HanyaPengurusIni($badanUser->id);
+                })->first();
+                if($keseb)
+                {
+                    $keseb->syncRoles(['Anggota']);
+                }
+
+                // hardcoding
+                // pindah ke unit inti
+                if($badanUser->id==2)
+                    $user->anggota->kepengurusan->id_unit=8;//$korseb->anggota->unit->id;
+                elseif($badanUser->id==3)
+                    $user->anggota->kepengurusan->id_unit=15;//$korseb->anggota->unit->id;
+                elseif($badanUser->id==4)
+                    $user->anggota->kepengurusan->id_unit=22;//$korseb->anggota->unit->id;
+
+                $user->anggota->kepengurusan->save();
+            }
+        }
+        elseif($satu=="Kepala Unit")
+        {
+            // reset kepala unit lama, pada unitnya
+            $petahana=User::UserYangPunyaRoleIni(["Kepala Unit"])->whereHas('anggota',function($q)use($unitUser){
+                $q->HanyaYangPunyaUnitIni($unitUser->id);
+            })->first();
+            if($petahana){
+                $petahana->removeRole('Kepala Unit');
+                $petahana->assignRole('Anggota');
+            }
+        }
+
+        $user->syncRoles($dua);
+        $user->assignRole($satu);
 
         $this->emit('swalUpdated');
     }
 
+
+
+
+
+
+
+
+
     public function kepengurusanBaru($namaAktif)
     {
-        $namaAktif=explode(PHP_EOL,$namaAktif); 
-        sort($namaAktif);
-
+        $namaAktif=explode(PHP_EOL,$namaAktif);
+        
         //cek jika ada error, tidak akan dilanjut
         $galat=$this->cekError($namaAktif);
         if(count($galat))
@@ -152,6 +224,7 @@ class DesktopAnggota extends Component
 
     public function cekError($dariInput)
     {
+        sort($dariInput);
         $galat=[];
         $imodel=0;
         $iinput=0;
@@ -179,5 +252,12 @@ class DesktopAnggota extends Component
         }
         // dd($galat);
         return $galat;
+    }
+
+    public function export() 
+    {
+        $waktu=Carbon::now();
+
+        return Excel::download(new AnggotaExport($this->statusAktif), 'anggota_export_'.$waktu->format('Y_M_d').'.xlsx');
     }
 }

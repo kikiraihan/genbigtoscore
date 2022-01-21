@@ -33,9 +33,11 @@ class DetailNilai extends Component
         return view('livewire.detail-nilai',[
             'absen'=>$anggota->getAbsenPadaBeasiswa($this->idBeasiswa)->groupBy('id_sb'),
             'piket'=>$anggota->getPiketPadaBeasiswa($this->idBeasiswa)->sortBy('id_sb'),
-            'anggotaTimkhu'=>$anggota->getNilaiTimkhuPadaBeasiswa($this->idBeasiswa)->sortBy('id_sb'),
+            'anggotaTimkhu'=>$anggota->getNilaiTimkhuPadaBeasiswa($this->idBeasiswa)->sortByDesc(function($query){
+                return $query->timkhu->id;
+             }),
             'tambahan'=>$anggota->getTambahanPadaBeasiswa($this->idBeasiswa)->sortBy('id'),
-            'nilaieb'=>$anggota->getEbPadaBeasiswa($this->idBeasiswa)->sortBy('id_sb'),
+            'nilaieb'=>$anggota->getEbPadaBeasiswa($this->idBeasiswa),
             'beasiswa'=>Beasiswa::find($this->idBeasiswa),
         ]);
     }

@@ -2,9 +2,12 @@
 
 namespace App\Http\Livewire;
 
+use App\Exports\HasilPenilaianExport;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Models\anggota;
 use App\Models\Beasiswa;
 use App\Models\Segmentbulanan;
+use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -53,5 +56,12 @@ class HasilPenilaian extends Component
         $this->resetPage();
     }
     //batas sama dengan evaluasi
+
+    public function export() 
+    {
+        $waktu=Carbon::now();
+
+        return Excel::download(new HasilPenilaianExport($this->id_beasiswa), 'hasil_penilaian_'.$waktu->format('Y_M_d').'.xlsx');
+    }
 
 }

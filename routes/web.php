@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CobaController;
 use App\Http\Controllers\ImportAnggotaController;
+use App\Http\Controllers\ImportPiketController;
 use App\Http\Livewire\AturBeasiswa;
 use App\Http\Livewire\Dashboard;
 use App\Http\Livewire\Desktop\DesktopAnggota;
@@ -38,15 +39,11 @@ Route::get('/coba', function ()
 {   
     // dd(Carbon::now()->locale('in'));
 
-    $a=anggota::with(['kepengurusan','universitas'])->get();
+    $a=anggota::with(['kepengurusan','universitas','user'])->hanyaYangAktif()->get();
     foreach ($a as $key => $in) {
-        echo $in->nama."<br>";
+        echo $in->nama." | ".$in->user->username."<br>";
     }
-
-    dd();
-
     // $idSegment=$id;
-
     // $ang=anggota::find($id);
     // return $ang->getNilaiAkhir(15);
 });
@@ -62,6 +59,13 @@ Route::get('/coba', function ()
 // foreach ($ini as $key => $value) {
 //     echo $value->nama."<br>";
 // }
+
+Route::get('/pasmulai',function(){
+    $a=anggota::with(['kepengurusan','universitas','user'])->hanyaYangAktif()->orderBy('nama')->get();
+    foreach ($a as $key => $in) {
+        echo "<b>".$in->nama."</b> | Username : ".$in->user->username."<br>";
+    }
+});
 
 Route::get('/', function () {
     // return view('welcome');
@@ -92,19 +96,21 @@ DESKTOP
 
 //PENILAIAN MANUAL
 Route::get('manual/absen', ManualAbsen::class)
-    ->middleware(['auth','role:Tim Penilai|Admin'])->name('manual.absen');
+    ->middleware(['auth','role:Tim Penilai|Korwil'])->name('manual.absen');
 Route::get('manual/absen/kehadiran/{id}', ManualKehadiran::class)
-    ->middleware(['auth','role:Tim Penilai|Admin'])->name('manual.absen.kehadiran');
+    ->middleware(['auth','role:Tim Penilai|Korwil'])->name('manual.absen.kehadiran');
 Route::get('manual/timkhu', ManualTimkhu::class)
-    ->middleware(['auth','role:Tim Penilai|Admin'])->name('manual.timkhu');
+    ->middleware(['auth','role:Tim Penilai|Korwil'])->name('manual.timkhu');
 Route::get('manual/timkhu/{id}/anggota', ManualTimkhuAnggota::class)
-    ->middleware(['auth','role:Tim Penilai|Admin'])->name('manual.timkhu.anggota');
+    ->middleware(['auth','role:Tim Penilai|Korwil'])->name('manual.timkhu.anggota');
 Route::get('manual/piket', ManualPiket::class)
-    ->middleware(['auth','role:Tim Penilai|Admin'])->name('manual.piket');
+    ->middleware(['auth','role:Tim Penilai|Korwil'])->name('manual.piket');
+Route::post('manual/piket/store', [ImportPiketController::class,'store'])
+    ->middleware(['auth','role:Tim Penilai|Korwil'])->name('manual.piket.store');
 Route::get('manual/tambahan', ManualTambahan::class)
-    ->middleware(['auth','role:Tim Penilai|Admin'])->name('manual.tambahan');
+    ->middleware(['auth','role:Tim Penilai|Korwil'])->name('manual.tambahan');
 Route::get('manual/evaluasi', ManualEvaluasibulanan::class)
-    ->middleware(['auth','role:Tim Penilai|Admin'])->name('manual.evaluasi');
+    ->middleware(['auth','role:Tim Penilai|Korwil'])->name('manual.evaluasi');
 
 //ANGGOTA
 Route::get('desktop/anggota', DesktopAnggota::class)

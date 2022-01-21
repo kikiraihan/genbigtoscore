@@ -4,7 +4,7 @@
 
 <button 
     {!! $attributes->merge([
-        'class'=>"px-1.5 py-0.5 rounded transform hover:scale-105 hover:shadow-md f-roboto",
+        'class'=>"rounded transform hover:scale-105 hover:shadow-md f-roboto",
         'type'=>$tipe
     ]) !!} >
     {{$slot}}

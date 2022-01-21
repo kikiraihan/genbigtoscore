@@ -128,7 +128,7 @@
                     class="shadow px-2 py-2 rounded focus:outline-none focus:ring-2 w-full truncate
                         items-center flex justify-center
                         hover:bg-gray-200 focus:ring-blue-300 text-gray-600 bg-gray-100">
-                        <x-kiki.loading-spin wire:loading wire:target='refreshEb' class="text-blue-400"/>
+                        <x-kiki.loading-spin-inline wire:loading wire:target='refreshEb' class="text-blue-400"/>
                         <span wire:loading.remove wire:target='refreshEb' class="material-icons-outlined md:hidden" style="font-size: 21px">
                         sync
                         </span>

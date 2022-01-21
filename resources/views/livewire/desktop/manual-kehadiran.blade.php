@@ -76,6 +76,17 @@ Adinda Pratiwi Musa
 (setiap baris untuk satu nama)"/>
                     <x-kiki.error-input :kolom="'namabanyak'"/>
                 </div>
+                {{-- Keterangan --}}
+                <div class="p-2">
+                    <div class="mb-2">Keterangan</div>
+                    <div class="text-justify py-2 px-4 bg-gray-50  rounded shadow-sm">
+                        <div>
+                            <x-kiki.button-with-google-icon class="hover:text-blue-500 text-blue-400 inline-flex italic" href="https://beautifytools.com/excel-to-csv-converter.php" :icon="'link'">
+                                <span>Link web konversi excell ke text</span>
+                            </x-kiki.button-with-google-icon>
+                        </div>
+                    </div>
+                </div>
     
             </div>
 

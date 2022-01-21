@@ -443,6 +443,8 @@ class anggota extends Model
         return $this->kehadiranAbsensi()
         ->with('segmentbulanan')
         ->whereIn('id_sb', $ids)
+        ->orderBy('id_sb','desc')
+        ->orderBy('date','desc')
         ->get()
         ;
     }
@@ -473,6 +475,12 @@ class anggota extends Model
         }) 
         ->get()
         ;
+
+        // return 
+        // $this->timkhus()->with('segmentbulanan','anggotatimkhusmodel')
+        // ->whereIn('id_sb', $ids)
+        // ->get()
+        // ;
     }
 
     public function getTambahanPadaBeasiswa($idBeasiswa)
@@ -498,6 +506,7 @@ class anggota extends Model
         $this->nilaiebsmodel()
         ->with('segmentbulanan')
         ->whereIn('id_sb',$ids)
+        ->orderBy('id_sb','desc')
         ->get()
         ;
     }
