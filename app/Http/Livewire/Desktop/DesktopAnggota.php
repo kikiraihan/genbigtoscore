@@ -7,8 +7,8 @@ use App\Models\anggota;
 use App\Models\Badan;
 use App\Models\Unit;
 use App\Models\User;
-use App\Traits\demisionerkan;
-use App\Traits\pindahUnit;
+use App\Traits\Demisionerkan;
+use App\Traits\PindahUnit;
 use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -17,7 +17,7 @@ use Spatie\Permission\Models\Role;
 
 class DesktopAnggota extends Component
 {
-    use WithPagination,pindahUnit,demisionerkan;
+    use WithPagination,PindahUnit,Demisionerkan;
 
     protected $listeners=[
         'terkonfirmasiDemisioner'=>'demisionerkan',
