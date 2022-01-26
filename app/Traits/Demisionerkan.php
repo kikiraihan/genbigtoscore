@@ -7,7 +7,7 @@ use App\Models\User;
 use Carbon\Carbon;
 
 // tidak terpakai ini skrg, soalnya so pake laravel excel
-trait demisionerkan 
+trait Demisionerkan 
 {
     public function demisionerkan($id)
     {

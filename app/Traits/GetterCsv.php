@@ -4,7 +4,7 @@ namespace App\Traits;
 
 
 // tidak terpakai ini skrg, soalnya so pake laravel excel
-trait getterCsv 
+trait GetterCsv 
 {
 
     function csvToArray($filename = '', $delimiter = ',')

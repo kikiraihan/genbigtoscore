@@ -98,7 +98,7 @@ class PengaturanAkun extends Component
         $userToUpdate=User::find($this->idUser);
 
         $this->validate([
-            'avatar' => 'image|nullable', // |max:1024, 1MB Max
+            'avatar' => 'image|nullable|max:4096',//, 1MB Max
             'nama'              => "required|string",
             'nim'               => "required|string",
             'id_jurusan'        => "required|integer",

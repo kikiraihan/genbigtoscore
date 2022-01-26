@@ -6,7 +6,7 @@ use App\Models\anggota;
 use App\Models\Unit;
 
 // tidak terpakai ini skrg, soalnya so pake laravel excel
-trait pindahUnit 
+trait PindahUnit 
 {
     public function pindahUnit($id)
     {
