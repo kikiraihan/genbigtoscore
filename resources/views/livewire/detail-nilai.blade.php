@@ -49,7 +49,7 @@
                     <th class="py-3 px-6 text-left">Tanggal</th>
                     <th class="py-3 px-6 text-left">Title</th>
                     <th class="py-3 px-6 text-center">Skope</th>
-                    <th class="py-3 px-6 text-center bg-red-100">Pengurangan</th>
+                    <th class="py-3 px-6 text-center bg-red-100">Nilai</th>
                 </tr>
             </thead>
             @else
@@ -154,7 +154,7 @@
                     {{-- <th class="py-3 px-6 text-left">Id</th> --}}
                     <th class="py-3 px-6 text-left">Bulan</th>
                     <th class="py-3 px-6 text-center">Kehadiran</th>
-                    <th class="py-3 px-6 text-center bg-red-100">Total</th>
+                    <th class="py-3 px-6 text-center bg-red-100">Nilai</th>
                 </tr>
             </thead>
             @else
@@ -220,9 +220,9 @@
                 <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                     <th class="py-3 px-6 text-left">Bulan</th>
                     <th class="py-3 px-6 text-left">Judul</th>
-                    <th class="py-3 px-6 text-center bg-green-100">Total</th>
-                    <th class="py-3 px-6 text-center">Nilai x Bobot</th>
-                    <th class="py-3 px-6 text-center">Peran</th>
+                    <th class="py-3 px-6 text-left">Peran</th>
+                    <th class="py-3 px-6 text-center">Penilaian x Bobot</th>
+                    <th class="py-3 px-6 text-center bg-green-100">Nilai</th>
                 </tr>
             </thead>
             @else
@@ -243,23 +243,7 @@
                             {{$item->timkhu->nama}}
                         </div>
                     </td>
-                    <td class="py-3 px-6 text-center ">
-                        {{$item->totalNilai}}
-                    </td>
-                    <td class="py-3 px-6  flex items-center justify-center space-x-2">
-                        <div class="text-blue-500 diagonal-fractions">
-                            {{$item->nilai}}
-                        </div>
-                        <sup>x</sup>
-                        <div class="text-gray-500 diagonal-fractions">
-                            @if ($item->peran=='pengurus-inti')
-                            {{$item->timkhu->bobot}}/2
-                            @else
-                            {{$item->timkhu->bobot}}
-                            @endif
-                        </div>
-                    </td>
-                    <td class="py-3 px-6 text-center whitespace-nowrap capitalize select-none">
+                    <td class="py-3 px-6 text-left whitespace-nowrap capitalize select-none">
                         @if ($item->peran=='kepala')
                         <span class="bg-blue-200 text-blue-600 py-0.5 px-1.5 rounded text-xs">
                             Kepala Tim
@@ -274,6 +258,22 @@
                             Pengurus Inti
                         </span>
                         @endif
+                    </td>
+                    <td class="py-3 px-6  flex items-center justify-center space-x-2">
+                        <div class="text-blue-500 diagonal-fractions">
+                            {{$item->nilai}}
+                        </div>
+                        <sup>x</sup>
+                        <div class="text-gray-500 diagonal-fractions">
+                            @if ($item->peran=='pengurus-inti')
+                            {{$item->timkhu->bobot}}/2
+                            @else
+                            {{$item->timkhu->bobot}}
+                            @endif
+                        </div>
+                    </td>
+                    <td class="py-3 px-6 text-center ">
+                        {{$item->totalNilai}}
                     </td>
                 </tr>
                 @endforeach
@@ -351,8 +351,8 @@
             <thead>
                 <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                     <th class="py-3 px-6 text-left">Bulan</th>
-                    <th class="py-3 px-6 text-center">Nilai</th>
-                    <th class="py-3 px-6 text-center bg-green-100">Total</th>
+                    <th class="py-3 px-6 text-center">Penilaian</th>
+                    <th class="py-3 px-6 text-center bg-green-100">Nilai</th>
                 </tr>
             </thead>
             @else

@@ -164,7 +164,7 @@ class KepalaEvaluasibulanan extends Component
             return $this->emit('swalMessageError','Batas pengisian evaluasi sudah berakhir');
         
         $ke=Nilaieb::find($param[0]);
-        if( $ke->id != auth()->user()->anggota->id )
+        if( $ke->id_anggota == auth()->user()->anggota->id )
                 return $this->emit('swalMessageError','Hmmm tidak bisa menilai diri sendiri :v');
 
         $ke->nilai=$param[1];

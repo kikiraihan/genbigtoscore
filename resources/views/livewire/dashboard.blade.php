@@ -153,7 +153,7 @@
 
                         <a href="{{ route('detailnilai', ['id'=>$userlogin->anggota->id,'kembali'=>'dashboard']) }}" x-on:click="detail_nilai=!detail_nilai"
                             class="py-0.5 p-2 rounded-b justify-between flex bg-gray-200 text-gray-500 bg-opacity-60 col-span-3 hover:shadow">
-                            <span>Selengkapnya </span>
+                            <span class="font-bold f-roboto">Selengkapnya </span>
                             <span class="material-icons-outlined text-base">
                                 double_arrow
                             </span>
