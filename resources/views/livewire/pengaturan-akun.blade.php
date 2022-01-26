@@ -92,7 +92,7 @@
                 <label class="f-roboto ml-1 text-gray-500 text-sm">Gender</label>
                 <x-kiki.select-standar wire:model="jenis_kelamin">
                     <option value="" hidden selected>...</option>
-                    <option class="w-full" value='Laki-Laki'>Lelaki seutuhnya</option>
+                    <option class="w-full" value='Laki-Laki'>Lelaki</option>
                     <option class="w-full" value='Perempuan'>Perempuan</option>
                 </x-kiki.select-standar>
                 <x-kiki.error-input :kolom="'jenis_kelamin'"/>
