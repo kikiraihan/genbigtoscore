@@ -23,6 +23,7 @@ class AnggotaExport implements FromQuery, WithMapping, WithHeadings
     {
         return [
             // '#',
+            'Username',
             'Nama',
             'Universitas',
             'Angkatan Kampus',
@@ -52,6 +53,7 @@ class AnggotaExport implements FromQuery, WithMapping, WithHeadings
     public function map($ang): array
     {
         return [
+            $ang->user->username,
             $ang->nama,
             $ang->universitas->nama,
             $ang->tahunmasukkuliah,

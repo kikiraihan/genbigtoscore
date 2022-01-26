@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Desktop;
+namespace App\Http\Livewire\Mobfirst;
 
 use App\Models\Absensi;
 use App\Models\anggota;
@@ -10,10 +10,11 @@ use App\Models\Kehadiran;
 use App\Models\Segmentbulanan;
 use App\Models\Timkhu;
 use App\Models\Unit;
+use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class ManualAbsen extends Component
+class KaunitAbsen extends Component
 {
     use WithPagination;
 
@@ -27,10 +28,7 @@ class ManualAbsen extends Component
     $absensiable_id,
     $pengurangan,
     
-    $inisial_kondisi,
-    $searchSelectSkope,
-    $terpilihSelectSkope
-    ;
+    $inisial_kondisi;
 
     // bukan untuk form, tidak digunakan untuk input
     public $idBea;//$id_sb,
@@ -45,6 +43,9 @@ class ManualAbsen extends Component
     $search,
     $ditemukan
     ;
+
+    //untuk membatasi perubahan
+    public $nyalakanBatas=false;
 
     protected $listeners=[
         'absenFixHapus'=>'delete'
@@ -63,7 +64,9 @@ class ManualAbsen extends Component
         $this->inisial_kondisi='hadir';
         $this->pengurangan='-2';
         $this->metode='newAbsen';
-        // $this->id_sb=Segmentbulanan::idTerkini();
+        $this->skope='unit';
+        $this->absensiable_type='App\Models\Unit';
+        $this->absensiable_id=auth()->user()->anggota->unit->id;
         $this->idBea=Beasiswa::idTerakhir();
     }
 
@@ -71,20 +74,20 @@ class ManualAbsen extends Component
     {
         $absensi=Absensi::
             with(['absensiable','kehadiran'])
-            // ->where('id_sb', $this->id_sb)
+            ->YangPunyaUnitIni(auth()->user()->anggota->unit->id)
             ->YangPunyaSegmentPadaBeasiswaIni($this->idBea)
+            ->where('skope', 'unit')
             ->where('title', 'like', '%'.$this->search.'%')
             ->orderBy('id_sb','desc')
             ->orderBy('date','desc');
             ;
         // $this->ditemukan=$absensi->count();
 
-        return view('livewire.desktop.manual-absen',[
+        return view('livewire.mobfirst.kaunit-absen',[
             'isiTabel' => $absensi->paginate(30),
-            // 'selectsegment'=>$this->selectsegment(),
             'selectBeasiswa'=>$this->selectBeasiswa(),
-            'selectAbsensiable'=>$this->selectabsensiable(),
             'beasiswa'=>Beasiswa::find($this->idBea),
+            'unit'=>auth()->user()->anggota->unit,
         ]);
     }
 
@@ -93,72 +96,19 @@ class ManualAbsen extends Component
         return Beasiswa::whereHas('segmentbulanan')->get();
     }
 
-    public function selectsegment()//belum terpakai
-    {
-        return Segmentbulanan::
-                HanyaSemesterIni($this->idBea)
-                ->get();
-    }
-
-    public function selectabsensiable()
-    {
-        $selectAbsensiable=null;
-        if($this->skope=='badan')
-            $selectAbsensiable=Badan::where('nama', 'like', '%'.$this->searchSelectSkope.'%')
-                ->get()->take(7);
-        
-        elseif ($this->skope=='unit') 
-            $selectAbsensiable=Unit::where('nama', 'like', '%'.$this->searchSelectSkope.'%')
-                ->get()->take(7);
-
-        elseif ($this->skope=='timkhu') 
-        {
-            $selectAbsensiable=Timkhu::where('nama', 'like', '%'.$this->searchSelectSkope.'%')
-                ->HanyaSekitarSemesterIni($this->idBea)->get();
-            if($selectAbsensiable->isNotEmpty())
-                $selectAbsensiable=$selectAbsensiable->take(7);
-        }
-
-        return $selectAbsensiable;
-    }
-
-    public function setAbsensiable($param)
-    {
-
-        if(!($this->skope==null or $this->skope=='seluruh-genbi'))
-        {
-            // if($this->skope=='badan') dd(Badan::find($param[0]));
-            // elseif($this->skope=='unit') dd(Unit::find($param[0]));
-            // elseif($this->skope=='timkhus') Timkhu::find($param[0]);
-
-            if($this->skope=='badan') $this->absensiable_type='App\Models\Badan';
-            elseif($this->skope=='unit') $this->absensiable_type='App\Models\Unit';
-            elseif($this->skope=='timkhu') $this->absensiable_type='App\Models\Timkhu';
-
-            $this->absensiable_id=$param[0];
-            $this->terpilihSelectSkope=$param[1];
-        }
-
-    }
-
     public function setDeadlinetonull()
     {
         $this->deadline_absen=NULL;
     }
-
 
     public function updatingSearch()
     {
         $this->resetPage();
     }
 
-    public function updatingskope()
-    {
-        $this->absensiable_id=null;
-        $this->absensiable_type=null;
-        $this->terpilihSelectSkope=null;
-        $this->searchSelectSkope=null;
-    }
+
+
+
 
 
 
@@ -190,73 +140,26 @@ class ManualAbsen extends Component
         $abs=$this->isiAnggota($abs,$this->inisial_kondisi);
         
         
-        $this->emit('swalAdded','satu');
+        $this->emit('swalAdded');
         $this->reset([
             'title',
             'date',
             'deadline_absen',
-            'skope',
-            'absensiable_type',
-            'absensiable_id',
-            'pengurangan',
         ]);
     }
 
     protected function isiAnggota(Absensi $abs,$inisial_kondisi)
     {
-        if($abs->skope=='timkhu')
+        // anggotaAktif
+        foreach ($abs->absensiable->anggotaAktif 
+            as $value) 
         {
-            // anggotas
-            foreach ($abs->absensiable->anggotas
-                as $value) 
-            {
-                $ke= new Kehadiran;
-                $ke->id_absen=$abs->id;
-                $ke->id_anggota=$value->id;
-                $ke->valid=TRUE;
-                $ke->kondisi=$inisial_kondisi;
-                $ke->save();
-            }
-        }
-        elseif($abs->skope=='unit'){
-            // anggotaAktif
-            foreach ($abs->absensiable->anggotaAktif 
-                as $value) 
-            {
-                $ke= new Kehadiran;
-                $ke->id_absen=$abs->id;
-                $ke->id_anggota=$value->id;
-                $ke->valid=TRUE;
-                $ke->kondisi=$inisial_kondisi;
-                $ke->save();
-            }
-        }
-        elseif($abs->skope=='badan'){
-            // foreach unit
-            foreach ($abs->absensiable->units as $unit) 
-            {
-                // foreach anggota
-                foreach ($unit->anggotaAktif as $value) {
-                    $ke= new Kehadiran;
-                    $ke->id_absen=$abs->id;
-                    $ke->id_anggota=$value->id;
-                    $ke->valid=TRUE;
-                    $ke->kondisi=$inisial_kondisi;
-                    $ke->save();
-                }
-            }
-        }
-        elseif($abs->skope=='seluruh-genbi'){
-            
-            // foreach anggota
-            foreach (anggota::query()->HanyaYangAktif()->get() as $value) {
-                $ke= new Kehadiran;
-                $ke->id_absen=$abs->id;
-                $ke->id_anggota=$value->id;
-                $ke->valid=TRUE;
-                $ke->kondisi=$inisial_kondisi;
-                $ke->save();
-            }
+            $ke= new Kehadiran;
+            $ke->id_absen=$abs->id;
+            $ke->id_anggota=$value->id;
+            $ke->valid=TRUE;
+            $ke->kondisi=$inisial_kondisi;
+            $ke->save();
         }
         return $abs->save();
     }
@@ -267,6 +170,9 @@ class ManualAbsen extends Component
         // $this->emit('swalDeleted','emitdisini','idhapus');
 
         $toDelete=Absensi::find($id);
+        if(Carbon::now()->gt($toDelete->date->addDays(1)) && $this->nyalakanBatas)
+            return $this->emit('swalMessageError','Batas edit absen sudah berakhir');
+
         $toDelete->delete();
         $this->mount();
     }
@@ -274,10 +180,12 @@ class ManualAbsen extends Component
 
     public function tampilEdit($id)
     {
+        $abs=Absensi::find($id);
+        if(Carbon::now()->gt($abs->date->addDays(1)) && $this->nyalakanBatas)
+            return $this->emit('swalMessageError','Batas edit absen sudah berakhir');
         
         $this->metode='updateAbsen';
         $this->idToUpdate=$id;
-        $abs=Absensi::find($id);
 
         $this->title            = $abs->title;
         $this->date             = $abs->date->format('Y-m-d')."T".$abs->date->format('h:i');
@@ -293,8 +201,7 @@ class ManualAbsen extends Component
 
         $this->validate([
             'title'             =>"required|string",
-            'date'              =>"required|date|before:".Segmentbulanan::tanggalTerakhirBeasiswaIni(Beasiswa::find($this->idBea)).
-                                                "|after:".Segmentbulanan::tanggalPertamaBeasiswaIni(Beasiswa::find($this->idBea)),
+            'date'              =>"required|date|before:".Segmentbulanan::tanggalTerakhirBeasiswaIni(Beasiswa::find($this->idBea))."|after:".Segmentbulanan::tanggalPertamaBeasiswaIni(Beasiswa::find($this->idBea)),
             'deadline_absen'    =>"nullable|date|after_or_equal:date",
             'pengurangan'       =>"required|in:-2,-3,-5",
         ], $this->CustomMessages);
@@ -317,9 +224,9 @@ class ManualAbsen extends Component
             'title',
             'date',
             'deadline_absen',
-            'pengurangan'
         ]);
         $this->metode="newAbsen";
     }
+
 
 }

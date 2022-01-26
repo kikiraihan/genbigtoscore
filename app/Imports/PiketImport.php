@@ -35,12 +35,12 @@ class PiketImport implements ToModel, WithHeadingRow, SkipsOnError, WithValidati
                     if($a)
                     {
                         if ($a->piket()->where('id_sb',$this->id_sb)->exists()) {
-                            $fail('The '.$attribute.' sudah ada duplikasi.');
+                            $fail($attribute.' sudah ada duplikasi.');
                         }
                     }
                     else
                     {
-                        $fail('The '.$attribute.' tidak ditemukan.');
+                        $fail($attribute.' tidak ditemukan.');
                     }
                     
                 },

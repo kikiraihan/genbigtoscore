@@ -72,4 +72,13 @@ class Absensi extends Model
             $query->where('id_beasiswa', $idBeasiswa);
         });
     }
+
+    public function scopeYangPunyaUnitIni($query,$idUnit)
+    {
+        return $query->whereHas('absensiable',function ($query) use($idUnit){
+            $query->where('id', $idUnit);
+        });
+    }
+
+    
 }

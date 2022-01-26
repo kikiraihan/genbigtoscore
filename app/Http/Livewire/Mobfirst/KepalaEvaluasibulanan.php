@@ -27,6 +27,9 @@ class KepalaEvaluasibulanan extends Component
     public
     $search;
 
+    //untuk membatasi perubahan
+    public $nyalakanBatas=false;
+
 
     public function mount()
     {   
@@ -151,10 +154,12 @@ class KepalaEvaluasibulanan extends Component
 
     public function ganti($param)
     {
+        //ada kase mati dulu dpe filter soalnya masih ba input nilai kemarin
         //filter cek kalau bukan bulan dan tahun ini
         if( 
             (Segmentbulanan::find($this->id_sb)->bulan != Carbon::now()->month ) and
-            (Segmentbulanan::find($this->id_sb)->segtahun != Carbon::now()->year )
+            (Segmentbulanan::find($this->id_sb)->segtahun != Carbon::now()->year ) and
+            $this->nyalakanBatas
         )
             return $this->emit('swalMessageError','Batas pengisian evaluasi sudah berakhir');
         

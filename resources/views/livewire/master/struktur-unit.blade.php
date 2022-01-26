@@ -169,9 +169,9 @@
                                 @if ($item->ketua)
                                 <span>
                                     {{$item->ketua->nama}}
-                                    <sup>
+                                    {{-- <sup>
                                         id: {{$item->ketua->id}}
-                                    </sup>
+                                    </sup> --}}
                                 </span>
                                 @else
                                 <span class="">

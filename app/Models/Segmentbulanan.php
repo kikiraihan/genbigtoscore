@@ -84,13 +84,13 @@ class Segmentbulanan extends Model
     {
         $seg=(new static)::segmentAwalBeasiswa($b);
         $seg->beasiswa;
-        return Carbon::createFromDate($seg->beasiswa->tahun,$seg->bulan,1);
+        return Carbon::createFromDate($seg->segtahun,$seg->bulan,1);//$seg->beasiswa->tahun
     }
     public static function tanggalTerakhirBeasiswaIni(Beasiswa $b)
     {
         $seg=(new static)::segmentAkhirBeasiswa($b);
         $seg->beasiswa;
-        return Carbon::createFromDate($seg->beasiswa->tahun,$seg->bulan,1)->endOfMonth();
+        return Carbon::createFromDate($seg->segtahun,$seg->bulan,1)->endOfMonth();//;
     }
 
     

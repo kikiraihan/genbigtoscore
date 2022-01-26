@@ -92,7 +92,52 @@
                                 </x-kiki.badge>
                             @endforeach
                         </td>
+
                         <td class="py-3 px-6 text-center">
+                            <div class="flex item-center justify-center space-x-7">
+                                <x-kiki.molecul.dropdown-tabel :title="'Opsi'">
+                                    <x-kiki.molecul.dropdown-tabel-item class="cursor-pointer" wire:click="$emit('swalAndaYakin','terkonfirmasiPilihKetuaUnit',{{$item->id}},'anda akan menunjuk dia sebagai Kadiv/Ketua')">
+                                        <div class="flex items-center space-x-2 text-gray-500">
+                                            <span class="material-icons-outlined">
+                                                supervised_user_circle
+                                            </span>
+                                            <span>Pilih Kepala</span>
+                                        </div>
+                                    </x-kiki.molecul.dropdown-tabel-item>
+                                    <x-kiki.molecul.dropdown-tabel-item class="cursor-pointer" wire:click="pindahUnit({{$item->id}})">
+                                        <div class="flex items-center space-x-2 text-yellow-300">
+                                            <span class="material-icons-outlined">
+                                                social_distance
+                                            </span>
+                                            <span>Pindah Unit</span>
+                                        </div>
+                                    </x-kiki.molecul.dropdown-tabel-item>
+                                    
+                                    <x-kiki.molecul.dropdown-tabel-item class="cursor-pointer" 
+                                    wire:click="$emit('swalAndaYakin','terkonfirmasiDemisioner',{{$item->id}}, 'Anda akan mendemisionerkan anggota ini. Dia akan dikeluarkan dari pengurus, status akan menjadi nonaktif/pasif dan semua role akan direset kembali menjadi anggota biasa. Kecuali data unitnya terakhir akan tetap disimpan.')">
+                                        <div class="flex items-center space-x-2 text-red-300">
+                                            <span class="material-icons-outlined">
+                                                person_off
+                                            </span>
+                                            <span>Demisionerkan</span>
+                                        </div>
+                                    </x-kiki.molecul.dropdown-tabel-item>
+                                    
+                                    <x-kiki.molecul.dropdown-tabel-item class="cursor-pointer" 
+                                    wire:click="$emit('swalAndaYakin','terkonfirmasiResetKeanggotaan',{{$item->id}},'Keanggotaan dalam pengurus akan direset: semua role akan dihapus dan tersisa `anggota` dan unit menjadi `pengurus inti`')">
+                                        <div class="flex items-center space-x-2">
+                                            <span class="material-icons-outlined">
+                                                restart_alt
+                                            </span>
+                                            <span>Reset Keanggotaan</span>
+                                        </div>
+                                    </x-kiki.molecul.dropdown-tabel-item>
+                                </x-kiki.molecul.dropdown-tabel>
+
+                            </div>
+                        </td>
+
+                        {{-- <td class="py-3 px-6 text-center">
                             <div class="flex item-center justify-center space-x-7">
                                 <div wire:click="$emit('swalAndaYakin','terkonfirmasiPilihKetuaUnit',{{$item->id}},'anda akan menunjuk dia sebagai Kadiv/Ketua')" class="w-4 transform hover:text-purple-500 hover:scale-110 flex items-center  cursor-pointer">
                                     <span class="material-icons-outlined" style="font-size: 20px">    
@@ -116,7 +161,7 @@
                                     </span>
                                 </div>
                             </div>
-                        </td>
+                        </td> --}}
                     </tr>
                     @endforeach
 

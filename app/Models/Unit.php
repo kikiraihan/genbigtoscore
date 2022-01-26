@@ -31,6 +31,16 @@ class Unit extends Model
     }
 
 
+    //dpe getter
+    public function getKetuaAttribute()
+    {
+        return $this->RelasiKetua->first();
+    }
+    public function getIdKetuaAttribute()
+    {
+        return $this->RelasiKetua->first()->id;
+    }
+
     //SCOPE
     public function scopeHanyaYangAktif($query)
     {
@@ -68,11 +78,6 @@ class Unit extends Model
     {
         return $this->anggotaAktif()
             ->HanyaYangPunyaRoleIni(["Kepala Unit","Kekom","Korwil"]);
-    }
-    //dpe getter
-    public function getKetuaAttribute()
-    {
-        return $this->RelasiKetua->first();
     }
 
     public function badan()

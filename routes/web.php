@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\CobaController;
 use App\Http\Controllers\ImportAnggotaController;
 use App\Http\Controllers\ImportPiketController;
 use App\Http\Livewire\AturBeasiswa;
@@ -19,9 +18,11 @@ use App\Http\Livewire\Form\EditAnggotaUnit;
 use App\Http\Livewire\HasilPenilaian;
 use App\Http\Livewire\Master\StrukturBadan;
 use App\Http\Livewire\Master\StrukturUnit;
+use App\Http\Livewire\Mobfirst\AbsenAll;
+use App\Http\Livewire\Mobfirst\KaunitAbsen;
+use App\Http\Livewire\Mobfirst\KaunitKehadiran;
 use App\Http\Livewire\Mobfirst\KepalaEvaluasibulanan;
 use App\Models\anggota;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -146,4 +147,10 @@ MOBILE FIRST
 
 Route::get('/evaluasi', KepalaEvaluasibulanan::class)
     ->middleware(['auth','role:Korwil|Kekom|Kepala Unit'])->name('kepala.evaluasi');
+Route::get('/absen/kaunit', KaunitAbsen::class)
+    ->middleware(['auth','role:Kepala Unit'])->name('kaunit.absen');
+Route::get('absen/kaunit/kehadiran/{id}', KaunitKehadiran::class)
+    ->middleware(['auth','role:Kepala Unit'])->name('kaunit.absen.kehadiran');
+Route::get('absen/all', AbsenAll::class)
+    ->middleware(['auth'])->name('absen.all');
 

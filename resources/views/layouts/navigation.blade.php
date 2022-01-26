@@ -103,6 +103,15 @@
     </x-kiki.sidebar-link>
     @endhasanyrole
 
+    @hasanyrole('Kepala Unit')
+    <x-kiki.sidebar-link :lvroute="'kaunit.absen'" :icon="'edit_calendar'">
+        Absen Unit
+    </x-kiki.sidebar-link>
+    @endhasanyrole
+
+    
+
+
 
     @hasanyrole('Admin|Korwil|Kekom')
     <div class="hidden md:block">
@@ -166,7 +175,7 @@
     const btn = document.querySelector('.ini-tombol-sidebar');
     const btnTutup = document.querySelector('.ini-tombol-tutup');
     const sidebar = document.querySelector('.ini-sidebar');
-    // buka=false
+    // let buka=false
 
     // toggle
     toggle_burger();
@@ -176,15 +185,28 @@
         btn.addEventListener('click', ()=>{
             sidebar.classList.toggle('-translate-x-full');
             sidebar.classList.toggle('shadow');
-            // buka=!buka;
+            // buka=true;
+
+            // if (buka==true) {
+                // document.addEventListener('click', function(e) {
+                //     if (e.target != sidebar && e.target.parentNode != sidebar && e.target != btn && e.target.parentNode != btn) {
+                //         sidebar.classList.toggle('-translate-x-full');
+                //         sidebar.classList.toggle('shadow');
+                //         buka=false;
+                //     }
+                // })
+            // }
         })
 
         btnTutup.addEventListener('click', ()=>{
             sidebar.classList.toggle('-translate-x-full');
             sidebar.classList.toggle('shadow');
+            // buka=false;
+            // console.log(buka)
         })
 
     }
+
 
 
     //I'm using "click" but it works with any event

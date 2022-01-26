@@ -1,6 +1,5 @@
 <x-slot name="header">
     @include('layouts.navigation',['warna'=>'bg-white'])
-    @include('layouts.navigation-tab',['warna'=>'bg-white'])
 </x-slot>
 
 <x-slot name="footer">
@@ -17,13 +16,13 @@
 
 
 <div>
-    {{-- Stop trying to control. --}}
+    {{-- Success is as dangerous as failure. --}}
 
     
     <div id="atas" class="container mx-auto bg-gray-100 mb-28">
         
         <div class="flex justify-between items-center mt-6">
-            <div class="f-playfair font-bold text-2xl capitalize">
+            <div class="f-playfair font-bold text-2xl capitalize ml-3 md:ml-0">
                 Absensi
                 <x-kiki.loading-spin wire:loading  class="text-blue-500"/>
             </div>
@@ -47,17 +46,17 @@
         {{-- form --}}
         <form wire:submit.prevent="{{$metode}}">
 
-            <div class="container mx-auto grid grid-rows-3 grid-cols-2 grid-flow-col gap-2 px-2 mt-8">
+            <div class="container mx-auto flex-col flex gap-2 px-2 mt-8">
 
                 <div>
-                    <label class="f-roboto ml-1 text-gray-500 text-sm">Judul</label>
+                    <label class="f-roboto ml-1 text-gray-500 text-sm"><x-kiki.bintang/>Judul</label>
                     <x-kiki.input-standar wire:model.lazy="title" id="title" type="text" placeholder="..." />
                     <x-kiki.error-input :kolom="'title'" />
                 </div>
 
                 <div class="grid grid-cols-2 gap-2">
                     <div>
-                        <label class="f-roboto ml-1 text-gray-500 text-sm">Start</label>
+                        <label class="f-roboto ml-1 text-gray-500 text-sm"><x-kiki.bintang/>Start</label>
                         <x-kiki.input-standar type="datetime-local" wire:model.lazy="date" id="date" />
                         <x-kiki.error-input :kolom="'date'" />
                     </div>
@@ -78,64 +77,35 @@
                     </div>
                 </div>
 
-                <div>
-                    <label class="f-roboto ml-1 text-gray-500 text-sm">Bobot Pengurangan</label>
-                    <x-kiki.select-standar wire:model="pengurangan">
-                        <option value="" hidden selected>...</option>
-                        <option class="w-full" value='-2'> - 2</option>
-                        {{-- <option class="w-full" value='-3'> - 3</option> --}}
-                        <option class="w-full" value='-5'> - 5</option>
-                    </x-kiki.select-standar>
-                    <x-kiki.error-input :kolom="'pengurangan'" />
+                <div class="grid grid-cols-2 gap-2">
+
+                    <div>
+                        <label class="f-roboto ml-1 text-gray-500 text-sm"><x-kiki.bintang/>Bobot Pengurangan</label>
+                        <x-kiki.select-standar wire:model="pengurangan">
+                            <option value="" hidden selected>...</option>
+                            <option class="w-full" value='-2'> - 2</option>
+                            {{-- <option class="w-full" value='-3'> - 3</option> --}}
+                            <option class="w-full" value='-5'> - 5</option>
+                        </x-kiki.select-standar>
+                        <x-kiki.error-input :kolom="'pengurangan'" />
+                    </div>
+    
+                    @if ($metode=="newAbsen")
+                    <div>
+                        <label class="f-roboto ml-1 text-gray-500 text-sm"><x-kiki.bintang/>Kondisi awal</label>
+                        <x-kiki.select-standar wire:model="inisial_kondisi">
+                            <option value="" hidden selected>...</option>
+                            <option class="w-full" value="hadir">Hadir semua</option>
+                            <option class="w-full" value="tidakhadir">Tidak Hadir semua</option>
+                            <option class="w-full" value="izin">Izin</option>
+                        </x-kiki.select-standar>
+                        <x-kiki.error-input :kolom="'inisial_kondisi'" />
+                    </div>
+                    @endif
+
                 </div>
 
-                @if ($metode=="newAbsen")
-                <div>
-                    <label class="f-roboto ml-1 text-gray-500 text-sm">Kondisi awal</label>
-                    <x-kiki.select-standar wire:model="inisial_kondisi">
-                        <option value="" hidden selected>...</option>
-                        <option class="w-full" value="hadir">Hadir semua</option>
-                        <option class="w-full" value="tidakhadir">Tidak Hadir semua</option>
-                        <option class="w-full" value="izin">Izin</option>
-                    </x-kiki.select-standar>
-                    <x-kiki.error-input :kolom="'inisial_kondisi'" />
-                </div>
-                <div>
-                    <label class="f-roboto ml-1 text-gray-500 text-sm">Lingkup</label>
-                    <x-kiki.select-standar wire:model="skope">
-                        <option value="" hidden selected>...</option>
-                        <option class="w-full" value='seluruh-genbi'> Seluruh Genbi</option>
-                        <option class="w-full" value='badan'>Badan </option>
-                        {{-- *Wilayah/Komisariat --}}
-                        <option class="w-full" value='unit'>Unit </option>
-                        {{-- *Departemen/Divisi --}}
-                        <option class="w-full" value='timkhu'>Tim Khusus </option>
-                        {{-- *Khusus panitia --}}
-                    </x-kiki.select-standar>
-                    <x-kiki.error-input :kolom="'skope'" />
-                </div>
-                @endif
 
-                @if (!($skope==null or $skope=='seluruh-genbi') and $metode=="newAbsen")
-                <div>
-                    <label class="f-roboto ml-1 mr-2 text-gray-500 text-sm capitalize">Pilih {{$skope}}</label>
-                    <x-kiki.loading-spin wire:loading wire:target="setAbsensiable"  class="text-blue-300"/>
-                    <x-kiki.molecul.select-search-lite :terpilih="$terpilihSelectSkope" wire:model="searchSelectSkope">
-                        
-                        @foreach ($selectAbsensiable as $item)
-                            <li>
-                                <p wire:click="setAbsensiable({{json_encode([$item->id,$item->nama])}})" x-on:click="open = ! open"
-                                    class="p-2 block text-black hover:bg-blue-200 cursor-pointer">
-                                    {{$item->nama}}
-                                </p>
-                            </li>
-                        @endforeach
-                        {{-- {{ $selectAbsensiable->links() }} --}}
-                        
-                    </x-kiki.molecul.select-search-lite>
-                    <x-kiki.error-input :kolom="'absensiable_id'" />
-                </div>
-                @endif
 
 
                 
@@ -166,10 +136,16 @@
         {{-- table --}}
         <div class="bg-white shadow-md rounded my-6 overflow-x-auto">
 
-            <div class="grid grid-cols-4 items-center">
-
-                
-                <div class="flex p-2 space-x-1 col-span-3">
+            <div class="flex items-center">
+                <div class="items-center flex justify-end gap-2 px-3">
+                    <span class="material-icons-outlined">
+                        account_box
+                    </span>
+                    <span>
+                        {{$unit->singkat}}
+                    </span>
+                </div>
+                <div class="flex p-2 space-x-1 w-full">
                     <button class="w-auto flex justify-end items-center text-blue-500 p-2 hover:text-blue-400">
                         <i class="material-icons">search</i>
                     </button>
@@ -185,7 +161,6 @@
                     <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                         <th class="py-3 px-6 text-left">Date</th>
                         <th class="py-3 px-6 text-left">Judul Absen</th>
-                        <th class="py-3 px-6 text-center">Lingkup</th>
                         <th class="py-3 px-6 text-center">Peserta</th>
                         <th class="py-3 px-6 text-center">Actions</th>
                     </tr>
@@ -198,16 +173,7 @@
 
                 <tbody class="text-gray-600 text-sm font-light">
 
-                    @foreach ($isiTabel as $key=>$item)
-                    
-                    @if ( ($key!=0 and $isiTabel[$key]->date->monthName!=$isiTabel[$key-1]->date->monthName) OR $key==0)
-                    <tr>
-                        <td class="f-roboto text-gray-500 mt-2 pl-2">
-                            {{$item->date->monthName}}
-                        </td>
-                    </tr>
-                    @endif
-
+                    @foreach ($isiTabel as $item)
                     <tr class="border-b border-gray-200 hover:bg-gray-100">
                         <td class="py-3 px-6 text-left">
                             <div class="flex items-center space-x-2">
@@ -236,35 +202,12 @@
                                 <x-kiki.badge class="bg-blue-100 text-gray-500 text-xs">
                                     {{$item->pengurangan}}
                                 </x-kiki.badge>
-                                <span class="font-medium w-96 truncate">
+                                <span class="font-medium truncate">
                                     {{$item->title}}
                                 </span>
                             </div>
                         </td>
-                        <td class="py-3 px-6 text-center capitalize font-semibold">
-                            @if ($item->skope=="badan")
-                            <div class="inline-flex items-center space-x-1 bg-gray-200 text-gray-600 rounded">
-                                <span class="material-icons-outlined text-sm rounded-l p-0.5 text-white @if ($item->absensiable->id==1) bg-blue-500 @elseif ($item->absensiable->id==2) bg-red-400 @elseif ($item->absensiable->id==3) bg-green-400 @elseif ($item->absensiable->id==4) bg-yellow-400 @endif">
-                                    people
-                                </span>
-                                <span class="text-xs py-0.5 px-1.5">
-                                    All {{$item->absensiable->nama}}
-                                </span>
-                            </div>
-                            @elseif ($item->skope=="unit")
-                            <span class="bg-gray-100 text-gray-500 border border-gray-200 py-0.5 px-1.5 rounded text-xs">
-                                {{$item->absensiable->singkat}}
-                            </span>
-                            @elseif ($item->skope=="timkhu")
-                            <span class="bg-yellow-200 text-yellow-600 py-0.5 px-1.5 rounded text-xs">
-                                {{$item->absensiable->nama}}
-                            </span>
-                            @elseif ($item->skope=="seluruh-genbi")
-                            <span class="bg-blue-200 text-blue-600 py-0.5 px-1.5 rounded text-xs">
-                                All GenBI
-                            </span>
-                            @endif
-                        </td>
+                        
                         <td class="py-3 px-6  flex items-center justify-center space-x-2">
                             <div class="text-green-500 items-center flex space-x-1">
                                 <span class="material-icons-outlined text-base">
@@ -296,7 +239,7 @@
                         
                         <td class="py-3 px-6 text-center">
                             <div class="flex item-center justify-center space-x-7">
-                                <a href="{{ route('manual.absen.kehadiran', ['id'=>$item->id]) }}" class="w-4 transform hover:text-purple-500 hover:scale-110">
+                                <a href="{{ route('kaunit.absen.kehadiran', ['id'=>$item->id]) }}" class="w-4 transform hover:text-purple-500 hover:scale-110">
                                     <span class="material-icons-outlined" style="font-size: 20px">
                                         how_to_reg
                                     </span>
@@ -333,3 +276,4 @@
 
 
 </div>
+

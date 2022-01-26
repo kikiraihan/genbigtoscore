@@ -1,12 +1,12 @@
 <nav id="navbarMobile" class="fixed bottom-0 inset-x-0 bg-white 
         flex justify-between text-xs text-gray-700 
         f-scp z-10 ">
-    <a href="#" class="w-full text-center block p-3 hover:bg-blue-300">
+    <a href="{{ route('absen.all') }}" class="w-full text-center block p-3 hover:bg-blue-300">
         <span class="block material-icons-outlined text-3xl">
-            edit_calendar
+            event_note
         </span>
         <span class="block">
-            Kalender
+            All Absen
         </span>
     </a>
     <a href="#" class="w-full text-center block p-3 hover:bg-blue-300">
@@ -14,7 +14,7 @@
             people_alt
         </span>
         <span class="block">
-            Pegawai
+            GenBIers
         </span>
     </a>
     

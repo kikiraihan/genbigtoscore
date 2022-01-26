@@ -43,11 +43,11 @@ class Kehadiran extends Model
     // BELONGS TO
     public function anggota()
     {
-        $this->belongsTo(anggota::class,'id_anggota');
+        return $this->belongsTo(anggota::class,'id_anggota');
     }
     public function absensi()
     {
-        $this->belongsTo(Absensi::class,'id_absen');
+        return $this->belongsTo(Absensi::class,'id_absen');
     }
 
     // public function segmentbulanan()

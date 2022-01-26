@@ -16,7 +16,7 @@
         window.livewire.on('swalToBersihkanPiket', () => {
             Swal.fire({
                 title: 'Bersihkan Piket Hadir',
-                text: "Piket yang berisi 0 tidak hadir dan 0 izin memang tidak akan dihitung disistem, dan akan dihapus",
+                text: "Piket yang berisi 0 tidak hadir dan 0 izin sebenarnya tidak perlu disimpan, dan sebaiknya dihapus untuk efisiensi memori, anda yakin akan menghapus?",
                 icon: 'info',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -40,7 +40,7 @@
         window.livewire.on('swalToDeletedAllPiket', () => {
             Swal.fire({
                 title: 'Anda yakin?',
-                text: "Anda akan semua piket pada segment bulan ini!",
+                text: "Anda akan menghapus semua piket pada segment bulan ini!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -99,7 +99,7 @@
         <form action="{{ route('manual.piket.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
-            <div class="md:grid md:grid-cols-2 px-2 mt-8 gap-2">
+            <div class="md:grid md:grid-cols-2 px-2 mt-8 gap-2 md:gap-8">
 
                 
                 <div class="container mx-auto">
@@ -164,7 +164,7 @@
                 </div>
 
 
-                <div class="space-y-2 bg-white py-2 px-4">{{-- keterangan --}}
+                <div class="space-y-2 bg-white py-2 px-4 mt-4 md:mt-0">{{-- keterangan --}}
                     <div class="text-left">
                         <label class="f-roboto ml-1 text-gray-500 text-sm block">Template</label>
                         <x-kiki.button-with-google-icon wire:click="downloadTemplate" :icon="'download'" class="bg-gray-100  shadow-sm text-green-500  inline-flex p-2 rounded cursor-pointer   hover:shadow-md  hover:text-green-400"> {{-- href="{{ asset('keperluan_import/template_piket.xlsx') }}" --}}
