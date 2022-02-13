@@ -184,6 +184,7 @@ class KepalaEvaluasibulanan extends Component
             $n= new Nilaieb;
             $n->id_sb=$this->id_sb;
             $n->id_anggota=$value->id;
+            $n->nilai='3/5';
             $n->save();
         };
     }
