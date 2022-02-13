@@ -145,8 +145,9 @@ MOBILE FIRST
 ------------------------------------------------------------------------*/
 //PENILAIAAN EVALUASI BULANAN
 
-Route::get('/evaluasi', KepalaEvaluasibulanan::class)
-    ->middleware(['auth','role:Korwil|Kekom|Kepala Unit'])->name('kepala.evaluasi');
+// ada kse off sementara
+// Route::get('/evaluasi', KepalaEvaluasibulanan::class)
+//     ->middleware(['auth','role:Korwil|Kekom|Kepala Unit'])->name('kepala.evaluasi');
 Route::get('/absen/kaunit', KaunitAbsen::class)
     ->middleware(['auth','role:Kepala Unit'])->name('kaunit.absen');
 Route::get('absen/kaunit/kehadiran/{id}', KaunitKehadiran::class)

@@ -17,7 +17,7 @@ class CreateNilaiebsTable extends Migration
             $table->id();
             $table->foreignId('id_sb')->constrained('segmentbulanans')->onDelete('cascade');//FK
             $table->foreignId('id_anggota')->constrained('anggotas')->onDelete('cascade');//FK
-            $table->string('nilai')->default('0');//1/5dst
+            $table->string('nilai')->default('3/5');//1/5dst
             $table->timestamps();
         });
     }

@@ -97,11 +97,12 @@
         </div>
     @endhasanyrole
 
-    @hasanyrole('Korwil|Kekom|Kepala Unit')
+    {{-- ada kse off sementara --}}
+    {{-- @hasanyrole('Korwil|Kekom|Kepala Unit')
     <x-kiki.sidebar-link :lvroute="'kepala.evaluasi'" :icon="'supervised_user_circle'">
         Evaluasi Bulanan
     </x-kiki.sidebar-link>
-    @endhasanyrole
+    @endhasanyrole --}}
 
     @hasanyrole('Kepala Unit')
     <x-kiki.sidebar-link :lvroute="'kaunit.absen'" :icon="'edit_calendar'">
