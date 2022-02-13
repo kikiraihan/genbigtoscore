@@ -154,6 +154,9 @@ class KepalaEvaluasibulanan extends Component
 
     public function ganti($param)
     {
+        //ada kase off dlu
+        return $this->emit('swalMessageError','input nilai kadiv langsung sedang dalam maintenance');
+
         //ada kase mati dulu dpe filter soalnya masih ba input nilai kemarin
         //filter cek kalau bukan bulan dan tahun ini
         if( 
