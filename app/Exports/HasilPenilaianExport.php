@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\Models\Anggota;
+use App\Models\anggota;
 use App\Models\Beasiswa;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromQuery;
@@ -21,7 +21,7 @@ class HasilPenilaianExport implements FromQuery, WithMapping, WithHeadings
     public function query()
     {
         return anggota::
-        with(['kepengurusan.unit.badan','universitas'])
+        with(['kepengurusan.unit.badan','universitas','beasiswas'])
         ->hanyaYangAktif()
         ->orderBy('id_universitas')
         ->orderBy('nama')
@@ -40,11 +40,16 @@ class HasilPenilaianExport implements FromQuery, WithMapping, WithHeadings
         else
             $status="Lulus";
 
+        $beasiswaall=[];
+        foreach ($ang->beasiswas as $key => $value) 
+            array_push($beasiswaall, $value->tahun."-".$value->semester);
+
         return [
             $ang->nama,
             $ang->universitas->nama,
             round($nilai,2),
             $ang->menerima_beasiswa?'Penerima':'Tidak menerima',
+            json_encode($beasiswaall),
             $status,
         ];
     }
@@ -57,6 +62,7 @@ class HasilPenilaianExport implements FromQuery, WithMapping, WithHeadings
             'Universitas',
             'Nilai',
             'Beasiswa Semester Sebelumnya',
+            'Total Beasiswa',
             'Status Kelulusan',
         ];
     }
