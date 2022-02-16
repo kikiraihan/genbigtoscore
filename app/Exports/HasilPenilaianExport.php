@@ -49,6 +49,7 @@ class HasilPenilaianExport implements FromQuery, WithMapping, WithHeadings
             $ang->universitas->nama,
             round($nilai,2),
             $ang->menerima_beasiswa?'Penerima':'Tidak menerima',
+            count($beasiswaall),
             json_encode($beasiswaall),
             $status,
         ];
@@ -63,6 +64,7 @@ class HasilPenilaianExport implements FromQuery, WithMapping, WithHeadings
             'Nilai',
             'Beasiswa Semester Sebelumnya',
             'Total Beasiswa',
+            'Rincian Beasiswa',
             'Status Kelulusan',
         ];
     }
