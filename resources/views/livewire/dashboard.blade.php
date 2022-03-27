@@ -87,7 +87,11 @@
                                 </span>
                             @endif
                             <span>
-                                {{round($nilai,2)}}
+                                @if ($tampilkanNilai or $nilai==0)
+                                    {{round($nilai,2)}}
+                                @else
+                                    ---
+                                @endif
                             </span>
                         </div>
 
@@ -131,10 +135,18 @@
                                 {{substr($seg->namaBulan,0,3)}}
                             </div>
                             <div class=" text-center">
+                                @if ($tampilkanNilai or $nilai==0)
                                 {{round($userlogin->anggota->getAtpSayaPadaSegment($seg->id)+30,2)}}
+                                @else
+                                -
+                                @endif
                             </div>
                             <div class=" text-center">
+                                @if ($tampilkanNilai or $nilai==0)
                                 {{round($userlogin->anggota->getEbSayaPadaSegment($seg->id),2)}}
+                                @else
+                                -
+                                @endif
                             </div>
                         </div>
                         @endforeach
@@ -144,10 +156,18 @@
                                 Total
                             </div>
                             <div class=" text-center f-robotomon">
-                                {{round($userlogin->anggota->getAtpBeasiswaFull($id_beasiswa),2)}}
+                                @if ($tampilkanNilai or $nilai==0)
+                                    {{round($userlogin->anggota->getAtpBeasiswaFull($id_beasiswa),2)}}
+                                @else
+                                    -
+                                @endif
                             </div>
                             <div class=" text-center f-robotomon">
-                                {{round($userlogin->anggota->getEbBeasiswaFull($id_beasiswa),2)}}
+                                @if ($tampilkanNilai or $nilai==0)
+                                    {{round($userlogin->anggota->getEbBeasiswaFull($id_beasiswa),2)}}
+                                @else
+                                    -
+                                @endif
                             </div>
                         </div>
 

@@ -11,10 +11,12 @@ class Dashboard extends Component
 {
 
     public $id_beasiswa;
+    public $tampilkanNilai;
 
     public function mount()
     {
         $this->id_beasiswa=Beasiswa::idTerakhir();
+        $this->tampilkanNilai=false;
     }
 
 

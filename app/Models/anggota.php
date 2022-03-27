@@ -409,6 +409,7 @@ class anggota extends Model
     public function scopeHanyaYangPunyaRoleIni($query,$arrayRole)//["Kepala Unit","Kekom","Korwil"]
     {
         $query->whereHas('user',function ($qu) use ($arrayRole){
+            //sebenarnya sudah ada method role, ini khusus scope ->role('writer'), nanti coba ganti
             return $qu->whereHas('roles', function ($q) use ($arrayRole){
                 return $q->whereIn('name', $arrayRole);
             });
