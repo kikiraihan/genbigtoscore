@@ -1,29 +1,16 @@
-<x-slot name="header">
-    @include('layouts.navigation',['warna'=>'bg-white'])
-</x-slot>
-
-<x-slot name="footer">
-    @include('layouts.navigationbawah')
-</x-slot>
-
 <x-slot name="stylehalaman">
-    @livewireStyles
 </x-slot>
 <x-slot name="scripthalaman">
     @livewireScripts
-    @include('layouts.scriptsweetalert')
+    {{-- @include('layouts.scriptsweetalert') --}}
 </x-slot>
 
-
-
-
-
-<div>
+<div class="container w-full md:max-w-4xl mx-auto pt-20">
     {{-- To attain knowledge, add things every day; To attain wisdom, subtract things every day. --}}
 
 
     <!-- info bar -->
-    <div class="container mx-auto p-3 bg-gradient-to-b from-gray-50 to-gray-100 divide-y-2 divide-gray-50">
+    <div class="container mx-auto p-3 bg-gradient-to-b from-slate-50 to-gray-100 divide-y-2 divide-gray-50 rounded-t-xl">
         
         @foreach ($isiTabel as $key=>$item)
         @if ( ($key!=0 and $isiTabel[$key]->date->monthName!=$isiTabel[$key-1]->date->monthName) OR $key==0)

@@ -2,9 +2,9 @@
     
     
 
-    <div class="flex flex-col h-screen">
+    <div class="flex flex-col h-screen md:max-w-2xl md:mx-auto">
 
-        <div class="flex justify-center p-5 bg-gray-100 shadow">
+        <div class="flex justify-center p-5 bg-gray-100">
             <div class="inline-flex items-center ">
                 <img src="{{ asset('assets_kiki/genbi_logo.svg') }}" class="transform w-28">
             </div>
@@ -57,9 +57,12 @@
                         <x-kiki.error-input :kolom="'password'"/>
                     </div>
     
-                    <input class="border-none shadow p-2 w-full rounded focus:outline-none focus:ring-2 
-                    focus:ring-blue-300 bg-blue-500  text-white
-                    " type="submit" name="login" id="login" value="Login">
+                    <div class="flex space-x-2">
+                        <input class="border-none shadow p-3 md:p-2 w-full rounded focus:outline-none focus:ring-2 focus:ring-blue-300 bg-blue-500 hover:bg-blue-600 cursor-pointer text-white" type="submit" name="login" id="login" value="Login">
+                        <a href="{{ route('landing.home') }}" class="border-none shadow p-3 md:p-2 w-full rounded focus:outline-none focus:ring-2 focus:ring-zinc-100 bg-zinc-300 hover:bg-zinc-400  text-gray-600 text-center">
+                            Kembali
+                        </a>
+                    </div>
                 </div>
             </form>
             
