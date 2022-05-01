@@ -27,6 +27,7 @@ use App\Http\Livewire\Mobfirst\KaunitAbsen;
 use App\Http\Livewire\Mobfirst\KaunitKehadiran;
 use App\Http\Livewire\Mobfirst\KepalaEvaluasibulanan;
 use App\Models\anggota;
+use App\Models\Nilaieb;
 use Illuminate\Support\Facades\Route;
 
 
@@ -51,15 +52,12 @@ Route::group(['prefix' => ''], function ($landing) {
 */
 Route::get('/coba', function () 
 {   
-    // dd(Carbon::now()->locale('in'));
-
-    $a=anggota::with(['kepengurusan','universitas','user'])->hanyaYangAktif()->get();
-    foreach ($a as $key => $in) {
-        echo $in->nama." | ".$in->user->username."<br>";
-    }
-    // $idSegment=$id;
-    // $ang=anggota::find($id);
-    // return $ang->getNilaiAkhir(15);
+    $beasiswa= App\Models\Beasiswa::yangTerakhir();
+    $segments=$beasiswa->segmentbulanan;
+    foreach ($segments as $s) $listId[]=$s->id;
+    
+    $ini=Nilaieb::whereIn('id_sb',$listId)->where('id_anggota',1);
+    dd($ini->get());
 });
 
 Route::get('/pasmulai',function(){

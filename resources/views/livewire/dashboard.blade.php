@@ -71,7 +71,7 @@
                         </x-kiki.sublabel>
 
                         @php
-                            $nilai=$userlogin->anggota->getNilaiAkhir($id_beasiswa)
+                            $nilai=$nilaiAkhir;
                         @endphp
                         <div
                             class="text-4xl justify-center self-end font-medium text-gray-100 f-robotomon flex items-end col-span-3 mb-2">
@@ -157,14 +157,14 @@
                             </div>
                             <div class=" text-center f-robotomon">
                                 @if ($tampilkanNilai or $nilai==0)
-                                    {{round($userlogin->anggota->getAtpBeasiswaFull($id_beasiswa),2)}}
+                                    {{round($userlogin->anggota->getAtpBeasiswaFull($beasiswa),2)}}
                                 @else
                                     -
                                 @endif
                             </div>
                             <div class=" text-center f-robotomon">
                                 @if ($tampilkanNilai or $nilai==0)
-                                    {{round($userlogin->anggota->getEbBeasiswaFull($id_beasiswa),2)}}
+                                    {{round($userlogin->anggota->getEbBeasiswaFull($beasiswa),2)}}
                                 @else
                                     -
                                 @endif
@@ -217,7 +217,7 @@
                             {{$userlogin->anggota->Kepengurusan->periode}}
                         </x-kiki.molecul.data-dash> --}}
                         <x-kiki.molecul.data-dash :label="'Status Beasiswa'">
-                            @if ($userlogin->anggota->menerima_beasiswa)
+                            @if ($userlogin->anggota->isMenerimaBeasiswa($id_beasiswa))
                             <x-kiki.badge class="bg-green-200 text-gray-500">
                                 Penerima
                             </x-kiki.badge>

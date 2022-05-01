@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Desktop;
 use App\Exports\AnggotaExport;
 use App\Models\anggota;
 use App\Models\Badan;
+use App\Models\Beasiswa;
 use App\Models\Unit;
 use App\Models\User;
 use App\Traits\Demisionerkan;
@@ -28,12 +29,18 @@ class DesktopAnggota extends Component
     ];
 
     public 
+    $idBeasiswaTerakhir,
     $angkatan,//$angkatan genbi
     $statusAktif=1;
 
     // untuk index
     public
     $search;
+
+    public function mount()
+    {
+        $this->idBeasiswaTerakhir=Beasiswa::idTerakhir();
+    }
 
     public function render()
     {

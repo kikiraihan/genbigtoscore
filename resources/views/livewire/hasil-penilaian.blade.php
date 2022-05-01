@@ -104,7 +104,7 @@
                     @foreach ($isiTabel as $item)
 
                     @php
-                        $nilai=$item->getNilaiAkhir($id_beasiswa);
+                        $nilai=$nilaiAkhir[$item->id];
                     @endphp
 
                     <tr class="border-b border-gray-200 hover:bg-gray-100
@@ -135,7 +135,7 @@
                         </td>
 
                         <td class="py-3 px-6 text-center whitespace-nowrap">
-                            @if ($item->menerima_beasiswa)
+                            @if ($item->isMenerimaBeasiswa($id_beasiswa))
                             <x-kiki.badge class="bg-green-200 text-gray-500">
                                 Penerima
                             </x-kiki.badge>

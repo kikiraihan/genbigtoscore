@@ -75,7 +75,7 @@ class User extends Authenticatable
             // $request->user()->avatar                     => "/storage/user-avatar/11-2020-04-07 15:05:06.png"//hasil dari accessor
 
         }else
-        return $this->gravatar;//"https://ssl.gstatic.com/accounts/ui/avatar_2x.png";//default kalau null;
+        return "https://ssl.gstatic.com/accounts/ui/avatar_2x.png";//default kalau null;$this->gravatar;
     }
 
 

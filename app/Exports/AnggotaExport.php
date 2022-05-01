@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Models\anggota;
+use App\Models\Beasiswa;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\FromQuery;
@@ -17,6 +18,7 @@ class AnggotaExport implements FromQuery, WithMapping, WithHeadings
     public function __construct($statusAktif)
     {
         $this->statusAktif=$statusAktif;
+        $this->id_beasiswa=Beasiswa::idTerakhir();
     }
 
     public function headings(): array
@@ -57,7 +59,7 @@ class AnggotaExport implements FromQuery, WithMapping, WithHeadings
             $ang->nama,
             $ang->universitas->nama,
             $ang->tahunmasukkuliah,
-            $ang->menerima_beasiswa?'Penerima':'Tidak menerima',
+            $ang->isMenerimaBeasiswa($this->id_beasiswa)?'Penerima':'Tidak menerima',
             $ang->kepengurusan?$ang->namaUnit:'',
             $ang->awalmasukgenbi,
             json_encode($ang->user->getRoleNames())

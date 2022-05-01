@@ -20,9 +20,9 @@ class Segmentbulanan extends Model
     //     'bulan' => 'datetime:Y-m-d',
     // ];
 
-    protected $appends=[
-        'namaBulan',
-    ];
+    // protected $appends=[
+    //     // 'namaBulan',
+    // ];
 
     // STATIC METHOD
     public static function idTerkini()//cuma jaga terpakai di penilaian manual

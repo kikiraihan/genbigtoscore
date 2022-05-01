@@ -4,6 +4,7 @@ namespace App\Exports;
 
 use App\Models\anggota;
 use App\Models\Beasiswa;
+use App\Traits\HitungNilai;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -11,17 +12,23 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 
 class HasilPenilaianExport implements FromQuery, WithMapping, WithHeadings
 {
-    use Exportable;
+    use Exportable,HitungNilai;
 
-    public function __construct($id_beasiswa)
+    public function __construct(Beasiswa $beasiswa, $anggotas)
     {
-        $this->$id_beasiswa=$id_beasiswa;
+        $this->beasiswa=$beasiswa;
+        $this->nilaiAkhir=$this->allNilai(
+            $beasiswa,
+            $anggotas
+        );
     }
 
     public function query()
     {
         return anggota::
-        with(['kepengurusan.unit.badan','universitas','beasiswas'])
+        with(['kepengurusan.unit.badan','universitas','beasiswas',
+            'tidakHadirAbsensi','piketSegments','timkhus','nilaiTambahanSegments','nilaiEbs'
+        ])
         ->hanyaYangAktif()
         ->orderBy('id_universitas')
         ->orderBy('nama')
@@ -30,8 +37,7 @@ class HasilPenilaianExport implements FromQuery, WithMapping, WithHeadings
 
     public function map($ang): array
     {
-        // $nilai=$ang->getNilaiAkhir($this->id_beasiswa);
-        $nilai=$ang->getNilaiAkhir(Beasiswa::idTerakhir());
+        $nilai=$this->nilaiAkhir[$ang->id];
 
         if ($nilai<70)
             $status="Tidak Lulus";
@@ -48,7 +54,7 @@ class HasilPenilaianExport implements FromQuery, WithMapping, WithHeadings
             $ang->nama,
             $ang->universitas->nama,
             round($nilai,2),
-            $ang->menerima_beasiswa?'Penerima':'Tidak menerima',
+            $ang->isMenerimaBeasiswa($this->beasiswa->id)?'Penerima':'Tidak menerima',
             count($beasiswaall),
             json_encode($beasiswaall),
             $status,

@@ -57,17 +57,6 @@ class anggota extends Model
         return $beasiswa1->tahun."/".$beasiswa1->semester;
     }
 
-    public function getMenerimaBeasiswaAttribute()
-    {
-        $saya=$this->beasiswas()->latest()->orderBy('id', 'desc')->first();
-        if(!$saya)
-            return false;
-
-        $beasiswaTerakhir=Beasiswa::idTerakhir();
-        
-        return ($beasiswaTerakhir==$saya->id);
-    }
-
     public function getNamaUnitSingkatAttribute(){
         return $this->unit->singkat; 
     }
@@ -88,6 +77,18 @@ class anggota extends Model
         return false;
     }
 
+    //akan deprecated nanti, diganti dengan isMenerimaBeasiswa, soalnya ada redudansi bpangge model
+    public function getMenerimaBeasiswaAttribute()
+    {
+        $saya=$this->beasiswas()->latest()->orderBy('id', 'desc')->first();
+        if(!$saya)
+            return false;
+
+        $beasiswaTerakhir=Beasiswa::idTerakhir();
+        
+        return ($beasiswaTerakhir==$saya->id);
+    }
+
 
     // getter berparameter
     public function getNilaiPadaTimkhu($idTim)
@@ -100,6 +101,15 @@ class anggota extends Model
         
         elseif($tim->pivot->peran=="anggota" or $tim->pivot->peran=="kepala" )
             return ( ($tim->bobot*$param[0]) /$param[1] );
+    }
+
+    public function IsMenerimaBeasiswa($idBeasiswaTerakhir)
+    {
+        $saya=$this->beasiswas()->latest()->orderBy('id', 'desc')->first();
+        if(!$saya)
+            return false;
+        
+        return ($idBeasiswaTerakhir==$saya->id);
     }
 
 
@@ -521,6 +531,7 @@ class anggota extends Model
 
     public function getAtpSayaPadaSegment($idSegment)
     {
+
         $absen=0;
         foreach($this->tidakHadirAbsensi()->where('id_sb',$idSegment)->get() as $abs)
         {
@@ -570,6 +581,7 @@ class anggota extends Model
 
     public function getEbSayaPadaSegment($idSegment)
     {
+
         $evaluasi=0;
         $e=$this->nilaiEbs()->wherePivot('id_sb',$idSegment)->first();
         if($e and $e->pivot->nilai!=0)
@@ -580,11 +592,11 @@ class anggota extends Model
         return $evaluasi;
     }
 
-
-    public function getAtpBeasiswaFull($idBeasiswa)
+    //akan deprecated
+    public function getAtpBeasiswaFull(Beasiswa $beasiswa)
     {
         $j_atp=0;
-        $segments=Beasiswa::find($idBeasiswa)->segmentbulanan;
+        $segments=$beasiswa->segmentbulanan;
         $n=$segments->count();
         if($n==0) return 0;
 
@@ -596,10 +608,11 @@ class anggota extends Model
         return ( ( ($j_atp+($n*30))/($n*30) )*100 );
     }
 
-    public function getEbBeasiswaFull($idBeasiswa)
+    //akan deprecated
+    public function getEbBeasiswaFull(Beasiswa $beasiswa)
     {
         $j_eb=0;
-        $segments=Beasiswa::find($idBeasiswa)->segmentbulanan;
+        $segments=$beasiswa->segmentbulanan;
         $n=$segments->count();
         if($n==0) return 0;
 
@@ -610,16 +623,17 @@ class anggota extends Model
         return ( ($j_eb/($n*30))*100 );
     }
 
-    public function getNilaiAkhir($idBeasiswa)
+    //akan deprecated, karena terlalu lama diproses
+    public function getNilaiAkhir(Beasiswa $beasiswa)
     {
         //70% atp // 30% eb
-        return $this->getAtpBeasiswaFull($idBeasiswa)*0.7
-        +$this->getEbBeasiswaFull($idBeasiswa)*0.3;
+        return $this->getAtpBeasiswaFull($beasiswa)*0.7
+        +$this->getEbBeasiswaFull($beasiswa)*0.3;
     }
 
-    public function statusLulus($idBeasiswa)
+    public function statusLulus(Beasiswa $beasiswa)
     {
-        if($this->getNilaiAkhir($idBeasiswa) >=70)
+        if($this->getNilaiAkhir($beasiswa) >=70)
             return true;
         else
             return false;

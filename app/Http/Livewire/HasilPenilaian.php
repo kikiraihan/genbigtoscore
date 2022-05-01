@@ -7,15 +7,18 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Models\anggota;
 use App\Models\Beasiswa;
 use App\Models\Segmentbulanan;
+use App\Traits\HitungNilai;
 use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class HasilPenilaian extends Component
 {
-    use WithPagination;
+    use WithPagination, HitungNilai;
 
     public $id_beasiswa;
+    public $beasiswa;
+    public $nilaiAkhir;
 
     // untuk index
     public
@@ -25,12 +28,19 @@ class HasilPenilaian extends Component
     public function mount()
     {
         $this->id_beasiswa=Beasiswa::idTerakhir();
+        $this->beasiswa=Beasiswa::yangTerakhir();
+        $this->nilaiAkhir=$this->allNilai(
+            $this->beasiswa,
+            anggota::hanyaYangAktif()->get()
+        );
     }
 
     public function render()
     {
         $ang=anggota::
-            with(['kepengurusan.unit.badan','universitas'])
+            with(['kepengurusan.unit.badan','universitas',
+            'tidakHadirAbsensi','piketSegments','timkhus','nilaiTambahanSegments','nilaiEbs'
+            ])
             ->where('nama', 'like', '%'.$this->search.'%')
             // ->HanyaPenerimaBeasiswaIni($this->id_beasiswa)
             ->hanyaYangAktif()
@@ -41,7 +51,7 @@ class HasilPenilaian extends Component
         return view('livewire.hasil-penilaian',[
             'isiTabel'=>$ang->paginate(300),
             'selectBeasiswa'=>$this->selectBeasiswa(),
-            'beasiswa'=>Beasiswa::yangTerakhir()
+            'beasiswa'=>Beasiswa::yangTerakhir(),
         ]);
     }
 
@@ -61,7 +71,8 @@ class HasilPenilaian extends Component
     {
         $waktu=Carbon::now();
 
-        return Excel::download(new HasilPenilaianExport($this->id_beasiswa), 'hasil_penilaian_'.$waktu->format('Y_M_d').'.xlsx');
+        return Excel::download(new HasilPenilaianExport($this->beasiswa,
+        anggota::hanyaYangAktif()->get()), 'hasil_penilaian_'.$waktu->format('Y_M_d').'.xlsx');
     }
 
 }

@@ -13,7 +13,7 @@
 <div class="container w-full md:max-w-4xl mx-auto pt-20 xl:pt-0 px-4">
 
 
-    <ol class="relative border-l border-gray-200 dark:border-gray-700 mt-16">
+    <ol class="relative border-l border-gray-200 dark:border-gray-700 mt-12">
 
         {{-- 2021-2022 --}}
         <li class="mb-10 ml-4">
@@ -25,8 +25,8 @@
             <div class="mt-2">
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white inline">Pembina : </h3>
                 <span class="inline-flex space-x-2">
-                    <div class="text-sm text-gray-500 pl-2">Abdullah Ulil Albab </div>
-                    <div class="text-sm text-gray-500 border-l-2 pl-2">Siti Murtafi'ah Mooduto </div>
+                    <div class="text-sm text-gray-500 pl-2">Mas Abdullah Ulil Albab </div>
+                    <div class="text-sm text-gray-500 border-l-2 pl-2">Mba Siti Murtafi'ah Mooduto </div>
                 </span>
                 <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
                 </p>
@@ -34,9 +34,7 @@
 
             <div class="flex space-x-8 mt-2 divide-x-2 my-3 md:items-center items-start">
                 <div class="flex items-center space-x-4">
-                    <img class="w-10 h-10 rounded-full"
-                        src="https://www.gravatar.com/avatar/79321fcb486d40b3ef5b0b262b4ee1df.png?d=robohash&s=200&r=pg"
-                        alt="">
+                    <img class="w-10 h-10 rounded-full" src="{{$foto['komang']}}">
                     <div class="space-y-1 font-medium">
                         <div>Ketua Umum</div>
                         <div class="text-sm text-gray-500">Komang Darma Widia</div>
@@ -44,9 +42,9 @@
                 </div>
 
                 <div class="flex items-center md:space-x-4 px-4">
-                    <img class="hidden md:inline w-10 h-10 rounded-full" src="https://www.gravatar.com/avatar/79321fcb486d40b3ef5b0b262b4ee1df.png?d=robohash&s=200&r=pg" alt="">
-                    <img class="hidden md:inline w-10 h-10 rounded-full" src="https://www.gravatar.com/avatar/79321fcb486d40b3ef5b0b262b4ee1df.png?d=robohash&s=200&r=pg" alt="">
-                    <img class="hidden md:inline w-10 h-10 rounded-full" src="https://www.gravatar.com/avatar/79321fcb486d40b3ef5b0b262b4ee1df.png?d=robohash&s=200&r=pg" alt="">
+                    <img class="hidden md:inline w-10 h-10 rounded-full" src="{{$foto['aco']}}">
+                    <img class="hidden md:inline w-10 h-10 rounded-full" src="{{$foto['minarti']}}">
+                    <img class="hidden md:inline w-10 h-10 rounded-full" src="{{$foto['apik']}}">
                     <div class="space-y-1 font-medium">
                         <div>Ketua Komisariat (UNG | IAIN | UG)</div>
                         <span class="block md:flex md:space-x-2">
@@ -144,9 +142,9 @@
             <div class="mt-2">
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white inline">Pembina : </h3>
                 <span class="inline-flex space-x-2">
-                    <div class="text-sm text-gray-500 pl-2">Arief Setyowidodo </div>
-                    <div class="text-sm text-gray-500 border-l-2 pl-2">Abdullah Ulil Albab </div>
-                    <div class="text-sm text-gray-500 border-l-2 pl-2">Siti Murtafi'ah Mooduto </div>
+                    <div class="text-sm text-gray-500 pl-2">Mas Arief Setyowidodo </div>
+                    <div class="text-sm text-gray-500 border-l-2 pl-2">Mas Abdullah Ulil Albab </div>
+                    <div class="text-sm text-gray-500 border-l-2 pl-2">Mba Siti Murtafi'ah Mooduto </div>
                 </span>
                 <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
                 </p>
@@ -155,7 +153,7 @@
             <div class="flex space-x-8 mt-2 divide-x-2 my-3 md:items-center items-start">
                 <div class="flex items-center space-x-4">
                     <img class="w-10 h-10 rounded-full"
-                        src="https://www.gravatar.com/avatar/79321fcb486d40b3ef5b0b262b4ee1df.png?d=robohash&s=200&r=pg"
+                        src="{{$foto['kiki']}}"
                         alt="">
                     <div class="space-y-1 font-medium">
                         <div>Ketua Umum</div>
@@ -164,9 +162,9 @@
                 </div>
 
                 <div class="flex items-center md:space-x-4 px-4">
-                    <img class="hidden md:inline w-10 h-10 rounded-full" src="https://www.gravatar.com/avatar/79321fcb486d40b3ef5b0b262b4ee1df.png?d=robohash&s=200&r=pg" alt="">
-                    <img class="hidden md:inline w-10 h-10 rounded-full" src="https://www.gravatar.com/avatar/79321fcb486d40b3ef5b0b262b4ee1df.png?d=robohash&s=200&r=pg" alt="">
-                    <img class="hidden md:inline w-10 h-10 rounded-full" src="https://www.gravatar.com/avatar/79321fcb486d40b3ef5b0b262b4ee1df.png?d=robohash&s=200&r=pg" alt="">
+                    <img class="hidden md:inline w-10 h-10 rounded-full" src="{{$foto['naswa']}}">
+                    <img class="hidden md:inline w-10 h-10 rounded-full" src="{{$foto['tasya']}}">
+                    <img class="hidden md:inline w-10 h-10 rounded-full" src="{{$foto['roly']}}">
                     <div class="space-y-1 font-medium">
                         <div>Ketua Komisariat (UNG | IAIN | UG)</div>
                         <span class="block md:flex md:space-x-2">
@@ -265,9 +263,10 @@
             <div class="mt-2">
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white inline">Pembina : </h3>
                 <span class="inline-flex space-x-2">
-                    <div class="text-sm text-gray-500 pl-2">Rahmi Mabruri</div>
-                    <div class="text-sm text-gray-500 border-l-2 pl-2">Arief Setyowidodo  </div>
-                    <div class="text-sm text-gray-500 border-l-2 pl-2">Siti Murtafi'ah Mooduto </div>
+                    <div class="text-sm text-gray-500 pl-2">Pak One Yusril Fikar</div>
+                    <div class="text-sm text-gray-500 border-l-2 pl-2">Bang Rahmi Mabruri</div>
+                    <div class="text-sm text-gray-500 border-l-2 pl-2">Mas Arief Setyowidodo  </div>
+                    <div class="text-sm text-gray-500 border-l-2 pl-2">Mba Siti Murtafi'ah Mooduto </div>
                 </span>
                 <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
                 </p>
@@ -276,7 +275,7 @@
             <div class="flex space-x-8 mt-2 divide-x-2 my-3 md:items-center items-start">
                 <div class="flex items-center space-x-4">
                     <img class="w-10 h-10 rounded-full"
-                        src="https://www.gravatar.com/avatar/79321fcb486d40b3ef5b0b262b4ee1df.png?d=robohash&s=200&r=pg"
+                        src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png"
                         alt="">
                     <div class="space-y-1 font-medium">
                         <div>Ketua Umum</div>
@@ -285,9 +284,9 @@
                 </div>
 
                 <div class="flex items-center md:space-x-4 px-4">
-                    <img class="hidden md:inline w-10 h-10 rounded-full" src="https://www.gravatar.com/avatar/79321fcb486d40b3ef5b0b262b4ee1df.png?d=robohash&s=200&r=pg" alt="">
-                    <img class="hidden md:inline w-10 h-10 rounded-full" src="https://www.gravatar.com/avatar/79321fcb486d40b3ef5b0b262b4ee1df.png?d=robohash&s=200&r=pg" alt="">
-                    <img class="hidden md:inline w-10 h-10 rounded-full" src="https://www.gravatar.com/avatar/79321fcb486d40b3ef5b0b262b4ee1df.png?d=robohash&s=200&r=pg" alt="">
+                    <img class="hidden md:inline w-10 h-10 rounded-full" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" alt="">
+                    <img class="hidden md:inline w-10 h-10 rounded-full" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" alt="">
+                    <img class="hidden md:inline w-10 h-10 rounded-full" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" alt="">
                     <div class="space-y-1 font-medium">
                         <div>Ketua Komisariat (UNG | IAIN | UG)</div>
                         <span class="block md:flex md:space-x-2">
@@ -375,8 +374,9 @@
             <div class="mt-2">
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white inline">Pembina : </h3>
                 <span class="inline-flex space-x-2">
-                    <div class="text-sm text-gray-500 pl-2">Unggul</div>
-                    <div class="text-sm text-gray-500 border-l-2 pl-2">Rahmi Mabruri</div>
+                    <div class="text-sm text-gray-500 pl-2">Mas Iksan Wahyudi</div>
+                    <div class="text-sm text-gray-500 border-l-2 pl-2">Pak Unggul Priyatna</div>
+                    <div class="text-sm text-gray-500 border-l-2 pl-2">Bang Rahmi Mabruri</div>
                 </span>
                 <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
                 </p>
@@ -385,7 +385,7 @@
             <div class="flex space-x-8 mt-2 divide-x-2 my-3 md:items-center items-start">
                 <div class="flex items-center space-x-4">
                     <img class="w-10 h-10 rounded-full"
-                        src="https://www.gravatar.com/avatar/79321fcb486d40b3ef5b0b262b4ee1df.png?d=robohash&s=200&r=pg"
+                        src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png"
                         alt="">
                     <div class="space-y-1 font-medium">
                         <div>Ketua Umum</div>

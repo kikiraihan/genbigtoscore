@@ -202,7 +202,7 @@
 
 
                         <td class="py-3 px-6 text-center whitespace-nowrap">
-                            @if ($item->menerima_beasiswa)
+                            @if ($item->isMenerimaBeasiswa($idBeasiswaTerakhir))
                             <x-kiki.badge class="bg-green-200 text-gray-500">
                                 Penerima
                             </x-kiki.badge>
