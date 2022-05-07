@@ -147,6 +147,7 @@
                         ['icon'=>'fas fa-users','title'=>'Penerima Aktif','counter'=>($anggotaPenerima),'warna'=>'blue'],
                         ['icon'=>'fas fa-users','title'=>'Non Penerima Aktif','counter'=>($anggotaAktif-$anggotaPenerima),'warna'=>'sky'],
                         ['icon'=>'fas fa-users','title'=>'Alumni (Kisaran)','counter'=>$anggotaNonAktif+200,'warna'=>'amber'],
+                        ['icon'=>'fas fa-shoe-prints','title'=>'Aktivitas','counter'=>$absensiCount,'warna'=>'orange'],
                     ] as $item)
                     <div class="flex items-center p-2 rounded-lg justify-center">
                         <div class="p-3 mr-4 text-{{$item['warna']}}-500 bg-{{$item['warna']}}-100 rounded-full dark:text-{{$item['warna']}}-100 dark:bg-{{$item['warna']}}-500">

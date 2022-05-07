@@ -144,12 +144,21 @@ Adinda Pratiwi Musa
         <div class="bg-white shadow-md rounded my-6 overflow-x-auto">
             
             
-
-            <div class="flex p-2 space-x-1 col-span-3">
-                <button class="w-auto flex justify-end items-center text-blue-500 p-2 hover:text-blue-400">
-                    <i class="material-icons">search</i>
-                </button>
-                <x-kiki.input-standar placeholder="Search" type="text" wire:model.debounce.500ms="search" id="search" class="w-full rounded p-2" />
+            <div class="grid grid-cols-4 items-center">
+                <div class="flex p-2 space-x-1 col-span-3">
+                    <button class="w-auto flex justify-end items-center text-blue-500 p-2 hover:text-blue-400">
+                        <i class="material-icons">search</i>
+                    </button>
+                    <x-kiki.input-standar placeholder="Search" type="text" wire:model.debounce.500ms="search" id="search" class="w-full rounded p-2" />
+                </div>
+                <div class="p-2">
+                    <x-kiki.select-standar wire:model="filterKehadiran">
+                        <option value="" selected>Filter Kehadiran</option>
+                        <option class="w-full" value='hadir'>Hadir</option>
+                        <option class="w-full" value='tidakhadir'>Tidak Hadir</option>
+                        <option class="w-full" value='izin'>Izin</option>
+                    </x-kiki.select-standar>
+                </div>
             </div>
             
             

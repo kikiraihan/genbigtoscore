@@ -374,8 +374,9 @@
             <div class="mt-2">
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white inline">Pembina : </h3>
                 <span class="inline-flex space-x-2">
-                    <div class="text-sm text-gray-500 pl-2">Mas Iksan Wahyudi</div>
-                    <div class="text-sm text-gray-500 border-l-2 pl-2">Pak Unggul Priyatna</div>
+                    <div class="text-sm text-gray-500 pl-2">Pak Unggul Priyatna</div>
+                    <div class="text-sm text-gray-500 border-l-2 pl-2">Mas Imam</div>
+                    <div class="text-sm text-gray-500 border-l-2 pl-2">Mas Iksan Wahyudi</div>
                     <div class="text-sm text-gray-500 border-l-2 pl-2">Bang Rahmi Mabruri</div>
                 </span>
                 <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">

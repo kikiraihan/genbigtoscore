@@ -56,6 +56,18 @@
     <!--/container-->
 
     @include('layouts.landing.footer')
+    <div class="bg-white flex justify-center text-xs text-gray-400 space-x-4 p-2 f-roboto">
+        <span class="font-bold">Scoring System</span>
+        <span class="material-icons self-center" style="font-size: 6px;">
+            fiber_manual_record
+        </span>
+        <span class="hidden lg:inline">Generasi Baru Indonesia Gorontalo</span>
+        <span class="lg:hidden inline">GenBI GTO</span>
+        <span class="material-icons self-center" style="font-size: 6px;">
+            fiber_manual_record
+        </span>
+        <span>Coded <a href="https://linktr.ee/kikiraihann" class="hover:text-blue-300 font-bold">©Katili.dev</a></span>
+    </div>
 
     {{-- font awesome --}}
     <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>

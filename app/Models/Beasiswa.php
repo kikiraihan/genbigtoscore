@@ -49,7 +49,7 @@ class Beasiswa extends Model
             'beasiswa_anggotas',
             'id_beasiswa',
             'id_anggota'
-        );
+        )->withPivot('tgl_uang_kas');
     }
 
     public function isTheLastRecord()

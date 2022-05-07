@@ -26,6 +26,7 @@ use App\Http\Livewire\Mobfirst\AbsenAll;
 use App\Http\Livewire\Mobfirst\KaunitAbsen;
 use App\Http\Livewire\Mobfirst\KaunitKehadiran;
 use App\Http\Livewire\Mobfirst\KepalaEvaluasibulanan;
+use App\Http\Livewire\TglUangKas;
 use App\Models\anggota;
 use App\Models\Nilaieb;
 use Illuminate\Support\Facades\Route;
@@ -124,11 +125,14 @@ Route::get('desktop/master/struktur/unit/{id}/edit-anggota', EditAnggotaUnit::cl
     ->middleware(['auth','role:Admin|Korwil|Kekom'])->name('master.unit.edit-anggota');
 
 
-// Tim
+// lainnya
 Route::get('beasiswa/atur', AturBeasiswa::class)
     ->middleware(['auth','role:Admin'])->name('beasiswa');
+Route::get('beasiswa/uangkas', TglUangKas::class)
+    ->middleware(['auth','role:Admin|Benkom|Benwil'])->name('beasiswa.uangkas');
 Route::get('hasilnilai', HasilPenilaian::class)
     ->middleware(['auth','role:Admin|Korwil'])->name('hasilnilai');
+
 
 
 
@@ -139,7 +143,6 @@ Route::get('hasilnilai', HasilPenilaian::class)
 MOBILE FIRST
 ------------------------------------------------------------------------*/
 //PENILAIAAN EVALUASI BULANAN
-
 Route::get('/evaluasi', KepalaEvaluasibulanan::class)
     ->middleware(['auth','role:Korwil|Kekom|Kepala Unit'])->name('kepala.evaluasi');
 Route::get('/absen/kaunit', KaunitAbsen::class)

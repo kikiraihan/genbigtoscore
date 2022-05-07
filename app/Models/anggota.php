@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -89,6 +90,17 @@ class anggota extends Model
         return ($beasiswaTerakhir==$saya->id);
     }
 
+    public function getTanggalBayarUangKasAttribute()
+    {
+        $bea=$this->beasiswas()->latest()->orderBy('id', 'desc')->first();
+        if(!$bea)
+            return false;
+
+        if ($bea->pivot->tgl_uang_kas)
+            return Carbon::parse($bea->pivot->tgl_uang_kas);
+        else return false;
+    }
+
 
     // getter berparameter
     public function getNilaiPadaTimkhu($idTim)
@@ -127,7 +139,7 @@ class anggota extends Model
             'beasiswa_anggotas',
             'id_anggota',
             'id_beasiswa'
-        );
+        )->withPivot('tgl_uang_kas');
     }
 
     public function nilaiEbs()

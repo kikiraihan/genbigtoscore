@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Desktop;
 
 use App\Models\Absensi;
+use App\Models\anggota;
 use App\Models\Kehadiran;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -15,6 +16,7 @@ class ManualKehadiran extends Component
 
     //index
     public $search;
+    public $filterKehadiran;
 
     // form
     public $namabanyak;
@@ -31,9 +33,13 @@ class ManualKehadiran extends Component
             ->absenanggota()
             ->HanyaYangAktif()//scope
             ->bernama($this->search)
-            ->orderBy('pivot_kondisi', 'desc')
+            // ->orderBy('pivot_kondisi', 'desc')
             ->orderBy('nama', 'asc')
             ;
+                
+        if ($this->filterKehadiran) 
+            $anggota->wherePivot('kondisi',$this->filterKehadiran);
+
         return view('livewire.desktop.manual-kehadiran',[
             'abs'=>$abs,
             'isiTabel'=>$anggota->paginate(30),
@@ -42,6 +48,15 @@ class ManualKehadiran extends Component
 
     public function ganti($param)
     {
+        //filter uang kas, *tidak pake, smo blok di nilai langsung saja. Aman itu, karena bendum saja tidak bisa bkse mundur. baru sesuai dengan kenyataan karena memang hadir, cuma dalam penilaian tidak dihitung.
+        // if ($param[1]!='tidakhadir')
+        // {
+        //     $tgluangkas=Kehadiran::find($param[0])->anggota->TanggalBayarUangKas;
+        //     if (!$tgluangkas) 
+        //         return $this->emit('swalMessageError','Anggota ini belum membayar uang kas');
+        // }
+
+        //lanjut
         $ke=Kehadiran::find($param[0]);
         $ke->kondisi=$param[1];
         $ke->save();

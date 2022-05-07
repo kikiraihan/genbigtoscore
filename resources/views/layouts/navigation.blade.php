@@ -110,7 +110,15 @@
     </x-kiki.sidebar-link>
     @endhasanyrole
 
-    
+    @hasanyrole('Korwil|Benwil|Benkom')
+    <hr class="mt-1 mb-4">
+    <x-kiki.sublabel class="px-4">
+        Bendahara
+    </x-kiki.sublabel>
+    <x-kiki.sidebar-link :lvroute="'beasiswa.uangkas'" :icon="'edit_calendar'">
+        Uang Kas
+    </x-kiki.sidebar-link>
+    @endhasanyrole
 
 
 

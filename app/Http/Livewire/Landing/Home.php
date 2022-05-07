@@ -75,6 +75,7 @@ class Home extends Component
         return view('livewire.landing.home',[
             'quote'=>$this->getQuote(),
             'absensi'=>$absen->take(6)->get(),
+            'absensiCount'=>$absen->YangPunyaSegmentPadaBeasiswaIni($this->idBea)->count(),
             'teratas'=>$this->AktifTigaTeratas(),
             'terbawah'=>$this->AktifTigaTerbawah(),
             'anggotaAktif'=>anggota::hanyaYangAktif()->count(),
