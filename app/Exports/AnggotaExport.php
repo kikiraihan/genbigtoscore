@@ -27,9 +27,12 @@ class AnggotaExport implements FromQuery, WithMapping, WithHeadings
             // '#',
             'Username',
             'Nama',
+            'NIM',
             'Universitas',
             'Angkatan Kampus',
             'Beasiswa Semester Sebelumnya',
+            'Total Beasiswa',
+            'Rincian Beasiswa',
             'Unit',
             'Angkatan GenBI',
             'Role',
@@ -54,12 +57,19 @@ class AnggotaExport implements FromQuery, WithMapping, WithHeadings
 
     public function map($ang): array
     {
+        $beasiswaall=[];
+        foreach ($ang->beasiswas as $key => $value) 
+            array_push($beasiswaall, $value->tahun."-".$value->semester);
+
         return [
             $ang->user->username,
             $ang->nama,
+            $ang->nim,
             $ang->universitas->nama,
             $ang->tahunmasukkuliah,
             $ang->isMenerimaBeasiswa($this->id_beasiswa)?'Penerima':'Tidak menerima',
+            count($beasiswaall),
+            json_encode($beasiswaall),
             $ang->kepengurusan?$ang->namaUnit:'',
             $ang->awalmasukgenbi,
             json_encode($ang->user->getRoleNames())
