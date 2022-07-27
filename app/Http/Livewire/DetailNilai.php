@@ -35,7 +35,8 @@ class DetailNilai extends Component
             'piket'=>$anggota->getPiketPadaBeasiswa($this->idBeasiswa)->sortBy('id_sb'),
             'anggotaTimkhu'=>$anggota->getNilaiTimkhuPadaBeasiswa($this->idBeasiswa)->sortByDesc(function($query){
                 return $query->timkhu->id;
-             }),
+            }),
+            'anggota'=>$anggota,
             'tambahan'=>$anggota->getTambahanPadaBeasiswa($this->idBeasiswa)->sortBy('id'),
             'nilaieb'=>$anggota->getEbPadaBeasiswa($this->idBeasiswa),
             'beasiswa'=>Beasiswa::find($this->idBeasiswa),

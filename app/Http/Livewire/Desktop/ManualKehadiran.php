@@ -37,8 +37,7 @@ class ManualKehadiran extends Component
             ->orderBy('nama', 'asc')
             ;
                 
-        if ($this->filterKehadiran) 
-            $anggota->wherePivot('kondisi',$this->filterKehadiran);
+        if ($this->filterKehadiran) $anggota->wherePivot('kondisi',$this->filterKehadiran);
 
         return view('livewire.desktop.manual-kehadiran',[
             'abs'=>$abs,

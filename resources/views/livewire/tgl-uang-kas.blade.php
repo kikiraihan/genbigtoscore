@@ -87,7 +87,7 @@
                         </td>
                         <td class="py-3 px-3 text-left">
                             @if ($item->pivot->tgl_uang_kas)
-                                {{Carbon\Carbon::parse($item->pivot->tgl_uang_kas)}}
+                                {{Carbon\Carbon::parse($item->pivot->tgl_uang_kas)->format('d F Y, H:i')}}
                             @endif
                         </td>
                         <td class="py-3 px-3 text-center">

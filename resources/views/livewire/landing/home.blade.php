@@ -173,16 +173,10 @@
 
     <section class="bg-gray-100 border-b py-8">
         <h2 class="w-full my-2 text-4xl font-black leading-tight text-center text-gray-800">
-            Aktivitas
+            Ringkasan
         </h2>
         <div class="w-full mb-4">
             <div class="h-1 mx-auto bg-gradient-to-r from-cyan-500 to-blue-500 w-64 opacity-25 my-0 py-0 rounded-t">
-            </div>
-        </div>
-
-        <div class="items-center w-full mx-auto content-end px-12 mb-14 ">
-            <div class="browser-mockup flex-1 bg-white rounded shadow-xl md:col-span-2">
-                @include('layouts.landing.layar-absen',['isiTabel'=>$absensi,'sekarang'=>$sekarang])
             </div>
         </div>
 
@@ -307,6 +301,12 @@
             </span>
         </div>
 
+
+        <div class="items-center w-full mx-auto content-end px-12 mt-8 ">
+            <div class="browser-mockup flex-1 bg-white rounded shadow-xl md:col-span-2">
+                @include('layouts.landing.layar-absen',['isiTabel'=>$absensi,'sekarang'=>$sekarang])
+            </div>
+        </div>
 
     </section>
 

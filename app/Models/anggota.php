@@ -101,6 +101,14 @@ class anggota extends Model
         else return false;
     }
 
+    public function getBeasiswaDiterimaTerakhirAttribute()
+    {
+        $bea=$this->beasiswas()->latest()->orderBy('id', 'desc')->first();
+        if(!$bea)
+            return false;
+        return $bea;
+    }
+
 
     // getter berparameter
     public function getNilaiPadaTimkhu($idTim)

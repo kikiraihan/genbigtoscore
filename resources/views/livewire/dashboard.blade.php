@@ -228,6 +228,18 @@
                             @endif
                         </x-kiki.molecul.data-dash>
 
+                        <x-kiki.molecul.data-dash :label="'Uang Kas Terakhir'">
+                            @if ($userlogin->anggota->TanggalBayarUangKas)
+                            <x-kiki.badge class="bg-green-200 text-gray-500">
+                                Dibayar {{$userlogin->anggota->TanggalBayarUangKas->format('d F Y')}}
+                            </x-kiki.badge>
+                            @else
+                            <x-kiki.badge class="bg-red-200 text-gray-500">
+                                Belum Bayar
+                            </x-kiki.badge>
+                            @endif
+                        </x-kiki.molecul.data-dash>
+
                         <x-kiki.molecul.data-dash :label="'Status Keanggotaan'">
                             @if ($userlogin->anggota->kepengurusan->tanggal_demisioner==NULL)
                             <x-kiki.badge class="bg-green-200 text-gray-500">
