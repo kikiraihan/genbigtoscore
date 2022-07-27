@@ -46,7 +46,10 @@ class DesktopAnggota extends Component
     {
         $ang=anggota::
             with(['kepengurusan.unit.badan','universitas','user'])
-            ->where('nama', 'like', '%'.$this->search.'%')
+            ->where(function ($query) {
+                $query->where('nama', 'like', '%'.$this->search.'%')
+                    ->orWhere('nim', 'like', '%'.$this->search.'%');
+            })
             ->orderBy('id_universitas')
             ->orderBy('nama')
             ;
