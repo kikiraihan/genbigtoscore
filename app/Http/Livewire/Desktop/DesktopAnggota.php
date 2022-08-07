@@ -243,13 +243,6 @@ class DesktopAnggota extends Component
         foreach ($arrayModel as $a) $arrayModelExtract[]=$a['nim'];
         sort($arrayModelExtract);
 
-        //so tidak perlu karena ini so pake nim, jadi gak mungkin dobel.
-        // --------------------------------------------------------------
-        //kalau ada yang nama dobel di database, akan menyebabkan  count($arrayModel) > count($dariInput)
-        // if(count($arrayModel) > count($dariInput))
-        //     return $galat[]=["Error, jumlah array dan yang di input tidak sama, sepertinya ada dobel nama di database."];
-        // --------------------------------------------------------------
-
         // dd($arrayModelExtract,$dariInput);
         while ($imodel < count($arrayModelExtract)) 
         {
