@@ -194,12 +194,12 @@ class DesktopAnggota extends Component
 
 
 
-    public function kepengurusanBaru($namaAktif)
+    public function kepengurusanBaru($nimAktif)
     {
-        $namaAktif=explode(PHP_EOL,$namaAktif);
+        $nimAktif=explode(PHP_EOL,$nimAktif);
         
         //cek jika ada error, tidak akan dilanjut
-        $galat=$this->cekError($namaAktif);
+        $galat=$this->cekError($nimAktif);
         if(count($galat))
             return $this->emit(
                 'swalErrorMulaiKepengurusan',
@@ -218,7 +218,7 @@ class DesktopAnggota extends Component
         //aktifkan lagi aktifModel
         //harus disini karena dibagian demisioner harus duluan, kalau mo taruh diatas demis dpe deklarasi, dia mo anggap sebelum demisioner dpe deklarasi
         $aktifModel=anggota::with(['kepengurusan'])
-        ->whereIn('nama',$namaAktif)->get();
+        ->whereIn('nim',$nimAktif)->get();
         foreach (
             $aktifModel as $key => $ang
             )
@@ -238,11 +238,22 @@ class DesktopAnggota extends Component
         $galat=[];
         $imodel=0;
         $iinput=0;
-        $arrayModel=anggota::whereIn('nama',$dariInput)->select('nama')->orderBy('nama','asc')->get()->toArray();
-        // dd($arrayModel,$dariInput);
-        while ($imodel < count($arrayModel)) 
+        $arrayModel=anggota::whereIn('nim',$dariInput)->select('nim')->orderBy('nim','asc')->get()->toArray();
+        $arrayModelExtract=[];
+        foreach ($arrayModel as $a) $arrayModelExtract[]=$a['nim'];
+        sort($arrayModelExtract);
+
+        //so tidak perlu karena ini so pake nim, jadi gak mungkin dobel.
+        // --------------------------------------------------------------
+        //kalau ada yang nama dobel di database, akan menyebabkan  count($arrayModel) > count($dariInput)
+        // if(count($arrayModel) > count($dariInput))
+        //     return $galat[]=["Error, jumlah array dan yang di input tidak sama, sepertinya ada dobel nama di database."];
+        // --------------------------------------------------------------
+
+        // dd($arrayModelExtract,$dariInput);
+        while ($imodel < count($arrayModelExtract)) 
         {
-            if(trim(strtolower($dariInput[$iinput]))==trim(strtolower($arrayModel[$imodel]["nama"])))
+            if($dariInput[$iinput]==$arrayModelExtract[$imodel])
             {
                 $imodel++;
                 $iinput++;
@@ -255,6 +266,7 @@ class DesktopAnggota extends Component
             }
         }
         // dd($galat);
+        //sisanya yang tidak ditemukan, maka semua galat. ini biasanya karena yang didapat dari db kurang.
         while($iinput < count($dariInput))
         {
             $galat[]=$dariInput[$iinput];

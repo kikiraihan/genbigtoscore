@@ -265,8 +265,8 @@
             +"<br><small>Pastikan anda menginput nama sesuai dengan database.</small>"
         +"</div>",
         input: 'textarea',
-        inputLabel: 'Silahkan input semua pengurus aktif',
-        inputPlaceholder: 'Douglas Maicon\nLisa Manoban\nSteve Jobs\n...\n(setiap baris untuk satu nama)',
+        inputLabel: 'Silahkan input nim semua pengurus aktif',
+        inputPlaceholder: '53141312\n53141313\n53141311\n...\n(setiap baris untuk satu nama)',
         inputAttributes: {
             'aria-label': 'Type your message here'
         },
