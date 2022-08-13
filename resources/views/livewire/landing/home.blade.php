@@ -184,10 +184,10 @@
             <div class="p-4 max-w-md bg-white rounded-lg border shadow-xl sm:p-8 dark:bg-gray-800 dark:border-gray-700">
                 <div class="flex justify-between items-center mb-4">
                     <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">
-                        Keaktifan 
+                        <i class="fas fa-arrow-up text-green-600"></i> 3 Teratas
                     </h5>
-                    <span class="text-sm font-medium text-green-600">
-                        <i class="fas fa-arrow-up"></i> <span class="ml-1 text-xs text-gray-400">3 Teratas</span>
+                    <span class="text-sm font-medium">
+                        <span class="ml-1 text-xs text-gray-400">Nilai</span>
                     </span>
                </div>
                <div class="flow-root">
@@ -239,11 +239,10 @@
             <div class="p-4 max-w-md bg-white rounded-lg border shadow-xl sm:p-8 dark:bg-gray-800 dark:border-gray-700">
                 <div class="flex justify-between items-center mb-4">
                     <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">
-                        Keaktifan
+                        <i class="fas fa-arrow-down text-red-600"></i> 3 Terbawah
                     </h5>
-                    <span class="text-sm font-medium text-red-600">
-                        {{-- <span>3 Terbawah</span> --}}
-                        <i class="fas fa-arrow-down"></i> <span class="ml-1 text-xs text-gray-400">3 Terbawah</span>
+                    <span class="text-sm font-medium">
+                        <span class="ml-1 text-xs text-gray-400">Nilai</span>
                     </span>
                </div>
                <div class="flow-root">

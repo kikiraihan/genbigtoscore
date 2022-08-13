@@ -26,6 +26,7 @@
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white inline">Pembina : </h3>
                 <span class="inline-flex space-x-2">
                     <div class="text-sm text-gray-500 pl-2">Mas Abdullah Ulil Albab </div>
+                    <div class="text-sm text-gray-500 border-l-2 pl-2">Mas Hilmy Munis </div>
                     <div class="text-sm text-gray-500 border-l-2 pl-2">Mba Siti Murtafi'ah Mooduto </div>
                 </span>
                 <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
@@ -64,22 +65,22 @@
 
                     <div class="duration-700 ease-in-out absolute inset-0 transition-all transform brightness-90"
                         data-carousel-item="active">
-                        <img src="{{ asset('asset_landing/2021-2022/20212022.JPG') }}" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2">
+                        <img src="{{ asset('asset_landing/2021-2022/20212022.jpg') }}" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2">
                     </div>
 
                     <div class="duration-700 ease-in-out absolute inset-0 transition-all transform brightness-90"
                         data-carousel-item="">
-                        <img src="{{ asset('asset_landing/2021-2022/ung.JPG') }}" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2">
+                        <img src="{{ asset('asset_landing/2021-2022/ung.jpg') }}" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2">
                     </div>
 
                     <div class="duration-700 ease-in-out absolute inset-0 transition-all transform brightness-90"
                         data-carousel-item="">
-                        <img src="{{ asset('asset_landing/2021-2022/iain.JPG') }}" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2">
+                        <img src="{{ asset('asset_landing/2021-2022/iain.jpg') }}" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2">
                     </div>
 
                     <div class="duration-700 ease-in-out absolute inset-0 transition-all transform brightness-90"
                         data-carousel-item="">
-                        <img src="{{ asset('asset_landing/2021-2022/ug.JPG') }}" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2">
+                        <img src="{{ asset('asset_landing/2021-2022/ug.jpg') }}" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2">
                     </div>
 
                     {{-- <div class="duration-700 ease-in-out absolute inset-0 transition-all transform brightness-90"
