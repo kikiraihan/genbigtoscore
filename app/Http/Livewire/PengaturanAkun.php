@@ -120,7 +120,7 @@ class PengaturanAkun extends Component
         if($this->avatar)//jika tidak null
         {
             if($userToUpdate->getRawOriginal('avatar')) //jika tidak null
-            Storage::disk('avatars')->delete($userToUpdate->getRawOriginal('avatar'));
+                Storage::disk('avatars')->delete($userToUpdate->getRawOriginal('avatar'));
 
             $avatar=$this->avatar->store($this->idUser, 'avatars');
             $userToUpdate->avatar = $avatar;
