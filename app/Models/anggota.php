@@ -643,7 +643,7 @@ class anggota extends Model
         return ( ($j_eb/($n*30))*100 );
     }
 
-    //akan deprecated, karena terlalu lama diproses
+    //akan deprecated, karena terlalu lama diproses. tidak lagi digunakan dan sudah digantikan trait hitung nilai
     public function getNilaiAkhir(Beasiswa $beasiswa)
     {
         //70% atp // 30% eb

@@ -75,7 +75,7 @@
                         @endphp
                         <div
                             class="text-4xl justify-center self-end font-medium text-gray-100 f-robotomon flex items-end col-span-3 mb-2">
-                            @if ($nilai<70)
+                            @if ($nilai < (int)$standar_lulus)
                                 <span
                                     class="material-icons text-xs rounded-full px-1 font-bold bg-white text-red-400 mb-1">
                                     priority_high

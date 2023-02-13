@@ -4,6 +4,7 @@ namespace App\Exports;
 
 use App\Models\anggota;
 use App\Models\Beasiswa;
+use App\Models\Konfigurasi;
 use App\Traits\HitungNilai;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromQuery;
@@ -39,7 +40,7 @@ class HasilPenilaianExport implements FromQuery, WithMapping, WithHeadings
     {
         $nilai=$this->nilaiAkhir[$ang->id];
 
-        if ($nilai<70)
+        if ($nilai < (int)Konfigurasi::langsung('standar_lulus'))
             $status="Tidak Lulus";
         elseif ($ang->Menerima4Kali)
             $status="Tidak Lulus, Karena menerima 4 kali";

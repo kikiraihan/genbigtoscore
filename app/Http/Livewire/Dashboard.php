@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Beasiswa;
+use App\Models\Konfigurasi;
 use App\Models\User;
 use App\Traits\HitungNilai;
 use Illuminate\Support\Facades\Auth;
@@ -16,9 +17,11 @@ class Dashboard extends Component
     public $beasiswa;
     public $tampilkanNilai;
     public $nilaiAkhir;
+    public $standar_lulus;
 
     public function mount()
     {
+        $this->standar_lulus=Konfigurasi::langsung('standar_lulus');
         $this->id_beasiswa=Beasiswa::idTerakhir();
         $this->beasiswa=Beasiswa::yangTerakhir();
         $this->tampilkanNilai=false;
