@@ -15,10 +15,11 @@ class Kegiatan extends Model
         'tanggal_pelaksanaan',
     ];
 
-    public function absensi()
-    {
-        return $this->hasMany(Absensi::class,'id_kegiatan','id');
-    }
+    // kosong tidak ada ini
+    // public function absensi()
+    // {
+    //     return $this->hasMany(Absensi::class,'id_kegiatan','id');
+    // }
 
     public function timkhu()
     {

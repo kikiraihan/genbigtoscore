@@ -257,7 +257,11 @@
                             </span>
                             @elseif ($item->skope=="timkhu")
                             <span class="bg-yellow-200 text-yellow-600 py-0.5 px-1.5 rounded text-xs">
-                                {{$item->absensiable->nama}}
+                                @if ($item->absensiable)
+                                    {{$item->absensiable->nama}}
+                                @else
+                                    {{$item->absensiable_id}}
+                                @endif
                             </span>
                             @elseif ($item->skope=="seluruh-genbi")
                             <span class="bg-blue-200 text-blue-600 py-0.5 px-1.5 rounded text-xs">
