@@ -160,12 +160,12 @@ class ManualTimkhu extends Component
     public function delete($id)
     {
         $toDelete=Timkhu::find($id);
-        dd($toDelete->kegiatan);
 
         // cek jika masih punya absen tidak bisa hapus
         if($toDelete->absensi->count() > 0)
             return $this->emit('swalMessageError', 'Tidak bisa menghapus tim yang masih memiliki absensi');
         else
+            $toDelete->kegiatan->delete();
             $toDelete->delete();
             
         // $this->mount();
