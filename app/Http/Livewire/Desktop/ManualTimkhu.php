@@ -118,10 +118,10 @@ class ManualTimkhu extends Component
         $this->validate([
             'id_kepala'           =>'required|integer',
             'id_sb_ToInput'       =>'required|integer',
-            'tim_nama'            =>'required|string',
+            'tim_nama'            =>'required|string|max:50',
             'bobot'               =>'required|integer',
             'jenis'               =>'required|in:panitia-besar,panitia-kecil',
-            'kegiatan_nama'       =>'required|string',
+            'kegiatan_nama'       =>'required|string|max:255',
             'keterangan'          =>'nullable|string',
             'tanggal_pelaksanaan' =>'required|string',
         ], $this->CustomMessages);

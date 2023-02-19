@@ -6,6 +6,7 @@ use App\Exports\HasilPenilaianExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\anggota;
 use App\Models\Beasiswa;
+use App\Models\Konfigurasi;
 use App\Models\Segmentbulanan;
 use App\Traits\HitungNilai;
 use Carbon\Carbon;
@@ -19,6 +20,7 @@ class HasilPenilaian extends Component
     public $id_beasiswa;
     public $beasiswa;
     public $nilaiAkhir;
+    public $standar_nilai;
 
     // untuk index
     public
@@ -33,6 +35,7 @@ class HasilPenilaian extends Component
             $this->beasiswa,
             anggota::hanyaYangAktif()->get()
         );
+        $this->standar_nilai=(int)Konfigurasi::langsung('standar_lulus');
     }
 
     public function render()

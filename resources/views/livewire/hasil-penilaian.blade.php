@@ -108,7 +108,7 @@
                     @endphp
 
                     <tr class="border-b border-gray-200 hover:bg-gray-100
-                    @if ($nilai<70)
+                    @if ($nilai < $standar_nilai)
                         bg-red-100
                     @endif
                     ">
@@ -148,7 +148,7 @@
 
                         <td class="py-3 px-6 text-center whitespace-nowrap">
                             <div class="font-medium ">
-                                @if ($nilai<70)
+                                @if ($nilai < $standar_nilai)
                                 Tidak Lulus
                                 @elseif ($item->Menerima4Kali)
                                 Menerima 4 kali
