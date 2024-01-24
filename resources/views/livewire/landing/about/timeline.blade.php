@@ -73,12 +73,12 @@
 
                 <div class="overflow-hidden relative rounded-lg h-96 bg-gray-500 shadow-xl">
                     @foreach ([
-                        'asset_landing/2022-2023/raw/w23-3.jpg',
-                        'asset_landing/2022-2023/raw/w23-1.jpg',
-                        'asset_landing/2022-2023/raw/w23-2.jpg',
-                        'asset_landing/2022-2023/raw/ung23.jpg',
-                        'asset_landing/2022-2023/raw/iain23.jpeg',
-                        'asset_landing/2022-2023/raw/ug23_cropped.jpg',
+                        'asset_landing/2022-2023/w23-3.jpg',
+                        'asset_landing/2022-2023/w23-1.jpg',
+                        'asset_landing/2022-2023/w23-2.jpg',
+                        'asset_landing/2022-2023/ung23.jpg',
+                        'asset_landing/2022-2023/iain23.jpeg',
+                        'asset_landing/2022-2023/ug23_cropped.jpg',
                     ] as $key=>$item)
                         <div class="duration-700 ease-in-out absolute inset-0 transition-all transform brightness-90"
                             data-carousel-item="{{$key}}">
