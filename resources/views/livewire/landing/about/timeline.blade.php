@@ -79,9 +79,9 @@
                         'asset_landing/2022-2023/iain23.jpeg ',
                         'asset_landing/2022-2023/ug23.jpeg ',
                         'asset_landing/2022-2023/w23-2.jpg ',
-                    ] as $item)
+                    ] as $key=>$item)
                         <div class="duration-700 ease-in-out absolute inset-0 transition-all transform brightness-90"
-                            data-carousel-item="active">
+                            data-carousel-item="{{$key}}">
                             <img src="{{ asset($item) }}" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2">
                         </div>
                     @endforeach
@@ -172,41 +172,25 @@
 
                 <div class="overflow-hidden relative rounded-lg h-96 bg-gray-500 shadow-xl">
 
-                    <div class="duration-700 ease-in-out absolute inset-0 transition-all transform brightness-90"
-                        data-carousel-item="active">
-                        <img src="{{ asset('asset_landing/2021-2022/20212022.jpg') }}" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2">
-                    </div>
-
-                    <div class="duration-700 ease-in-out absolute inset-0 transition-all transform brightness-90"
-                        data-carousel-item="">
-                        <img src="{{ asset('asset_landing/2021-2022/ung.jpg') }}" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2">
-                    </div>
-
-                    <div class="duration-700 ease-in-out absolute inset-0 transition-all transform brightness-90"
-                        data-carousel-item="">
-                        <img src="{{ asset('asset_landing/2021-2022/iain.jpg') }}" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2">
-                    </div>
-
-                    <div class="duration-700 ease-in-out absolute inset-0 transition-all transform brightness-90"
-                        data-carousel-item="">
-                        <img src="{{ asset('asset_landing/2021-2022/ug.jpg') }}" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2">
-                    </div>
-
-                    {{-- <div class="duration-700 ease-in-out absolute inset-0 transition-all transform brightness-90"
-                        data-carousel-item="">
-                        <img src="{{ asset('asset_landing/2021-2022/DSCF2127.JPG') }}" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2">
-                    </div> --}}
-
-                    <div class="duration-700 ease-in-out absolute inset-0 transition-all transform brightness-90"
-                        data-carousel-item="">
-                        <img src="{{ asset('asset_landing/2021-2022/DSCF25288.JPG') }}" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2">
-                    </div>
+                    @foreach ([
+                        'asset_landing/2021-2022/20212022.jpg',
+                        'asset_landing/2021-2022/ung.jpg',
+                        'asset_landing/2021-2022/iain.jpg',
+                        'asset_landing/2021-2022/ug.jpg',
+                        'asset_landing/2021-2022/DSCF2127.JPG',
+                        'asset_landing/2021-2022/DSCF25288.JPG',
+                    ] as $key=>$item)
+                        <div class="duration-700 ease-in-out absolute inset-0 transition-all transform brightness-90"
+                            data-carousel-item="{{$key}}">
+                            <img src="{{ asset($item) }}" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2">
+                        </div>
+                    @endforeach
 
                 </div>
 
                 <!-- Slider indicators -->
                 <div class="flex absolute bottom-5 left-1/2 z-30 space-x-3 -translate-x-1/2">
-                    @foreach ([0,1,2,3,4] as $item)
+                    @foreach ([0,1,2,3,4,5] as $item)
                         <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="{{$item}}"></button>
                     @endforeach
                 </div>
@@ -292,37 +276,19 @@
 
                 <div class="overflow-hidden relative rounded-lg h-96 bg-gray-500 shadow-xl">
 
-                    <div class="duration-700 ease-in-out absolute inset-0 transition-all transform brightness-90"
-                        data-carousel-item="active">
-                        <img src="{{ asset('asset_landing/2020-2021/wilayah.jpg') }}" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2">
-                    </div>
-
-                    <div class="duration-700 ease-in-out absolute inset-0 transition-all transform brightness-90 "
-                        data-carousel-item="">
-                        <img src="{{ asset('asset_landing/2020-2021/ung.jpg') }}" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2">
-                    </div>
-
-                    <div class="duration-700 ease-in-out absolute inset-0 transition-all transform brightness-90 translate-x-0 z-20"
-                        data-carousel-item="">
-                        <img src="{{ asset('asset_landing/2020-2021/iain.jpg') }}" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2">
-                    </div> 
-
-                    <div class="duration-700 ease-in-out absolute inset-0 transition-all transform brightness-90"
-                        data-carousel-item="">
-                        <img src="{{ asset('asset_landing/2020-2021/ug.jpg') }}" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2">
-                    </div>
-
-                    <div class="duration-700 ease-in-out absolute inset-0 transition-all transform brightness-90"
-                        data-carousel-item="">
-                        <img src="{{ asset('asset_landing/2020-2021/progenbi.jpg') }}" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2">
-                    </div>
-
-                    
-                    <div class="duration-700 ease-in-out absolute inset-0 transition-all transform brightness-90"
-                        data-carousel-item="">
-                        <img src="{{ asset('asset_landing/2020-2021/pelantikan.jpg') }}" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2">
-                    </div>
-
+                    @foreach ([
+                        'asset_landing/2020-2021/wilayah.jpg',
+                        'asset_landing/2020-2021/ung.jpg',
+                        'asset_landing/2020-2021/iain.jpg',
+                        'asset_landing/2020-2021/ug.jpg',
+                        'asset_landing/2020-2021/progenbi.jpg',
+                        'asset_landing/2020-2021/pelantikan.jpg',
+                    ] as $key=>$item)
+                        <div class="duration-700 ease-in-out absolute inset-0 transition-all transform brightness-90"
+                            data-carousel-item="{{$key}}">
+                            <img src="{{ asset($item) }}" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2">
+                        </div>
+                    @endforeach
                 </div>
 
                 <!-- Slider indicators -->
@@ -414,31 +380,23 @@
 
                 <div class="overflow-hidden relative rounded-lg h-96 bg-gray-500 shadow-xl">
 
-                    <div class="duration-700 ease-in-out absolute inset-0 transition-all transform brightness-90"
-                        data-carousel-item="active">
-                        <img src="{{ asset('asset_landing/2018-2020/struktur.jpg') }}" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2">
-                    </div>
-
-                    {{-- <div class="duration-700 ease-in-out absolute inset-0 transition-all transform brightness-90"
-                        data-carousel-item="">
-                        <img src="{{ asset('asset_landing/2018-2020/pembina.jpg') }}" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2">
-                    </div> --}}
-
-                    <div class="duration-700 ease-in-out absolute inset-0 transition-all transform brightness-90"
-                        data-carousel-item="">
-                        <img src="{{ asset('asset_landing/2018-2020/IMG_7079.jpg') }}" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2">
-                    </div>
-
-                    <div class="duration-700 ease-in-out absolute inset-0 transition-all transform brightness-90"
-                        data-carousel-item="">
-                        <img src="{{ asset('asset_landing/2018-2020/IMG-20210204-WA0007_3.jpg') }}" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2">
-                    </div>
+                    @foreach ([
+                        'asset_landing/2018-2020/struktur.jpg',
+                        'asset_landing/2018-2020/IMG_7079.jpg',
+                        'asset_landing/2018-2020/IMG-20210204-WA0007_3.jpg',
+                        'asset_landing/2018-2020/pembina.jpg',
+                    ] as $key=>$item)
+                        <div class="duration-700 ease-in-out absolute inset-0 transition-all transform brightness-90"
+                            data-carousel-item="{{$key}}">
+                            <img src="{{ asset($item) }}" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2">
+                        </div>
+                    @endforeach
 
                 </div>
 
                 <!-- Slider indicators -->
                 <div class="flex absolute bottom-5 left-1/2 z-30 space-x-3 -translate-x-1/2">
-                    @foreach ([0,1,2] as $item)
+                    @foreach ([0,1,2,3] as $item)
                         <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="{{$item}}"></button>
                     @endforeach
                 </div>
