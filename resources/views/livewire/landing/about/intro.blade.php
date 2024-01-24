@@ -7,10 +7,10 @@
 
 
 
-@include('livewire.landing.about.nav-side')
+{{-- @include('livewire.landing.about.nav-side') --}}
     
 
-<div class="container w-full md:max-w-4xl mx-auto pt-20 xl:pt-0">
+<div class="container w-full md:max-w-4xl mx-auto pt-20"> {{-- xl:pt-0 --}}
 
     <section class="bg-gray-100 border-b py-8">
         <iframe class="w-full" height="415" src="https://www.youtube.com/embed/JLN7Z0l2QrQ"

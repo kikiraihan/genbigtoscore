@@ -24,6 +24,7 @@
                 @foreach ([
                     ['route' => 'landing.home', 'title' => 'Beranda'],
                     ['route' => 'landing.schedule', 'title' => 'Aktivitas'],
+                    ['route'=>'landing.timeline','title'=>'Timeline'],
                     ['route' => 'landing.intro', 'title' => 'Tentang'],
                     ['route' => 'login', 'title' => 'Login'],
                 ] as $item)
