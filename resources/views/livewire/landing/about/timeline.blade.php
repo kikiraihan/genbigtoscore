@@ -45,7 +45,7 @@
 
             <div class="flex space-x-8 mt-2 divide-x-2 my-3 md:items-center items-start">
                 <div class="flex items-center space-x-4">
-                    <img class="w-10 h-10 rounded-full" src="{{$foto['komang']}}">
+                    <img class="w-10 h-10 rounded-full" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
                     <div class="space-y-1 font-medium">
                         <div>Ketua Umum</div>
                         <div class="text-sm text-gray-500">Muh Zamharir malongi</div>
@@ -53,9 +53,9 @@
                 </div>
 
                 <div class="flex items-center md:space-x-4 px-4">
-                    <img class="hidden md:inline w-10 h-10 rounded-full" src="{{$foto['aco']}}">
-                    <img class="hidden md:inline w-10 h-10 rounded-full" src="{{$foto['minarti']}}">
-                    <img class="hidden md:inline w-10 h-10 rounded-full" src="{{$foto['apik']}}">
+                    <img class="hidden md:inline w-10 h-10 rounded-full" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+                    <img class="hidden md:inline w-10 h-10 rounded-full" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+                    <img class="hidden md:inline w-10 h-10 rounded-full" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
                     <div class="space-y-1 font-medium">
                         <div>Ketua Komisariat (UNG | IAIN | UG)</div>
                         <span class="block md:flex md:space-x-2">
