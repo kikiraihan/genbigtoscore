@@ -13,7 +13,7 @@
 <div class="container w-full md:max-w-4xl mx-auto pt-20 px-4"> {{-- xl:pt-0 --}}
 
     <h2 class="w-full my-2 text-4xl font-black leading-tight text-gray-800">
-        Timeline sejarah
+        Timeline sejarah 
     </h2>
     <div>
         Dokumentasi perjanalan pergantian pengurus dari masa ke masa
