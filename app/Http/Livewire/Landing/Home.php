@@ -32,8 +32,8 @@ class Home extends Component
             anggota::hanyaYangAktif()->get()
         );
 
-        $this->AktifTigaTeratas();
-        $this->AktifTigaTerbawah();
+        // $this->AktifTigaTeratas();
+        // $this->AktifTigaTerbawah();
     }
 
     public function getModel($id)
