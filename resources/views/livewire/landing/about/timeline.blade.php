@@ -78,7 +78,7 @@
                         'asset_landing/2022-2023/w23-2.jpg',
                         'asset_landing/2022-2023/ung23.jpg',
                         'asset_landing/2022-2023/iain23.jpeg',
-                        'asset_landing/2022-2023/ug23_cropped.jpg',
+                        'asset_landing/2022-2023/ug23.jpg',
                     ] as $key=>$item)
                         <div class="duration-700 ease-in-out absolute inset-0 transition-all transform brightness-90"
                             data-carousel-item="{{$key}}">
