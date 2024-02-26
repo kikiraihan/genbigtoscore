@@ -108,6 +108,7 @@
                     <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                         <th class="py-3 px-6 text-left">No</th>
                         <th class="py-3 px-6 text-left">Badan</th>
+                        <th class="py-3 px-6 text-left">KODE/ID</th>
                         <th class="py-3 px-6 text-left">Nama</th>
                         <th class="py-3 px-6 text-left hidden lg:table-cell">Anggota</th>
                         <th class="py-3 px-6 text-center">Status</th>
@@ -141,6 +142,9 @@
                         @endif
                         ">
                             {{$item->badan->nama}}
+                        </td>
+                        <td class="py-3 px-6 text-left">
+                            {{$item->singkat}}/{{$item->id}}
                         </td>
                         <td class="py-3 px-6 text-left">
                             {{$item->nama}}
