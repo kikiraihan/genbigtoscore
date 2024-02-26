@@ -99,7 +99,7 @@
                                 <span>Setiap univ memiliki kode id berikut :</span>
                                 <ul class="ml-3">
                                     @foreach ($univ as $item)
-                                        <li>{{$item->nama}} : {{$item->id}}</li>
+                                        <li>- {{$item->nama}} : {{$item->id}}</li>
                                     @endforeach
                                 </ul>
                             </li>
@@ -111,7 +111,7 @@
                                     <b class="text-xs block text-gray-600">{{$badan[0]->badan->nama}}</b>
                                     <div class="grid md:grid-cols-2 text-xs">
                                         @foreach ($badan as $item)
-                                            <span>{{$item->nama}} : {{$item->id}}</span>
+                                            <span>- {{$item->nama}} : {{$item->id}}</span>
                                         @endforeach
                                     </div>
                                 </div>
