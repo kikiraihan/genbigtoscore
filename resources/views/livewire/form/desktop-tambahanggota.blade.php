@@ -109,7 +109,7 @@
                                 @foreach ($unit as $badan)
                                 <div class="ml-3 mt-2">
                                     <b class="text-xs block text-gray-600">{{$badan[0]->badan->nama}}</b>
-                                    <div class="grid md:grid-cols-2 text-xs">
+                                    <div class="grid md:grid-cols-2 grid-flow-row text-xs">
                                         @foreach ($badan as $item)
                                             <span>- {{$item->nama}} : {{$item->id}}</span>
                                         @endforeach
