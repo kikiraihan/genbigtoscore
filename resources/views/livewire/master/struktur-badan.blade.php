@@ -96,6 +96,7 @@
                 <thead>
                     <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                         <th class="py-3 px-6 text-left">No</th>
+                        <th class="py-3 px-6 text-left">ID</th>
                         <th class="py-3 px-6 text-left">Nama</th>
                         <th class="py-3 px-6 text-left">Unit</th>
                         <th class="py-3 px-6 text-center">Aksi</th>
@@ -115,6 +116,9 @@
                             <span class="font-medium">
                                 {{ $loop->iteration + $isiTabel->firstItem() - 1 }}
                             </span>
+                        </td>
+                        <td class="py-3 px-6 text-left">
+                            {{$item->id}}
                         </td>
                         <td class="py-3 px-6 text-left">
                             {{$item->nama}}
