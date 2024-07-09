@@ -20,6 +20,7 @@ use App\Http\Livewire\Landing\About\Intro;
 use App\Http\Livewire\Landing\About\Timeline;
 use App\Http\Livewire\Landing\Home;
 use App\Http\Livewire\Landing\Schedule;
+use App\Http\Livewire\Master\ManajemenRole;
 use App\Http\Livewire\Master\StrukturBadan;
 use App\Http\Livewire\Master\StrukturUnit;
 use App\Http\Livewire\Mobfirst\AbsenAll;
@@ -123,6 +124,8 @@ Route::get('desktop/master/struktur/unit', StrukturUnit::class)
     ->middleware(['auth','role:Admin|Korwil|Kekom'])->name('master.unit');
 Route::get('desktop/master/struktur/unit/{id}/edit-anggota', EditAnggotaUnit::class)
     ->middleware(['auth','role:Admin|Korwil|Kekom'])->name('master.unit.edit-anggota');
+Route::get('desktop/master/manajemen-role', ManajemenRole::class)
+    ->middleware(['auth','role:Admin|Korwil'])->name('master.manajemen-role');
 
 
 // lainnya

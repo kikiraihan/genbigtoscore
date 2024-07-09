@@ -134,11 +134,11 @@
                         <th class="py-3 px-6 text-left">No</th>
                         <th class="py-3 px-6 text-left">Nama</th>
                         {{-- <th class="py-3 px-6 text-left">Universitas</th> --}}
-                        <th class="py-3 px-6 text-left">Role</th>
+                        {{-- <th class="py-3 px-6 text-left">Role</th> --}}
                         <th class="py-3 px-6 text-right">Unit</th>
                         <th class="py-3 px-6 text-right">Angkatan</th>
                         <th class="py-3 px-6 text-center">Penerima</th>
-                        <th class="py-3 px-6 text-center">Aktif/Pasif</th>
+                        <th class="py-3 px-6 text-center">Aktif/Demis</th>
                         
                         <th class="py-3 px-6 text-center">Actions</th>
                     </tr>
@@ -171,11 +171,11 @@
                             </div>
                         </td> --}}
 
-                        <td class="py-3 px-6 text-left whitespace-nowrap">
+                        {{-- <td class="py-3 px-6 text-left whitespace-nowrap">
                             <div class="font-medium ">
                                 {{json_encode($item->user->getRoleNames())}}
                             </div>
-                        </td>
+                        </td> --}}
 
                         <td class="py-3 px-6 text-right whitespace-nowrap">
                             <div class="font-medium ">
