@@ -247,7 +247,7 @@
                     <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                         <th class="py-3 px-6 text-left">No</th>
                         <th class="py-3 px-6 text-left">Nama</th>
-                        <th class="py-3 px-6 text-left">Role Sebelumnya</th>
+                        <th class="py-3 px-6 text-left">Unit Terakhir</th>
                         <th class="py-3 px-6 text-left">Tanggal Demis</th>
                         <th class="py-3 px-6 text-center">Aksi</th>
                     </tr>
@@ -271,7 +271,7 @@
                             {{$item->anggota->nama}}
                         </td>
                         <td class="py-3 px-6 text-left text-xs">
-                            {{$item->jabatan}} | {{$item->anggota->namaunitsingkat}}
+                            {{$item->anggota->namaunitsingkat}}
                         </td>
                         <td class="py-3 px-6 text-left">
                             {{$item->anggota->kepengurusan->tanggal_demisioner->diffForHumans()}}

@@ -375,7 +375,7 @@ class AnggotaSeeder extends Seeder
             $kep =new Kepengurusan;
             $kep->id_Anggota        =$ang->id;
             $kep->id_unit           =$per[4];
-            $kep->jabatan           =$per[5];
+            // $kep->jabatan           =$per[5];
 
             $kep->save();
             $i++;

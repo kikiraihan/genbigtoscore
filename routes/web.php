@@ -18,6 +18,7 @@ use App\Http\Livewire\Form\EditAnggotaUnit;
 use App\Http\Livewire\HasilPenilaian;
 use App\Http\Livewire\Landing\About\Intro;
 use App\Http\Livewire\Landing\About\Timeline;
+use App\Http\Livewire\Landing\FormPengurusBaru;
 use App\Http\Livewire\Landing\Home;
 use App\Http\Livewire\Landing\Schedule;
 use App\Http\Livewire\Master\ManajemenRole;
@@ -43,6 +44,7 @@ Route::group(['prefix' => ''], function ($landing) {
     $landing->get('/schedule', Schedule::class)->name('landing.schedule');
     $landing->get('/intro', Intro::class)->name('landing.intro');
     $landing->get('/timeline', Timeline::class)->name('landing.timeline');
+    $landing->get('/form-pengurus-baru', FormPengurusBaru::class)->name('landing.form-pengurus-baru');
 });
 
 

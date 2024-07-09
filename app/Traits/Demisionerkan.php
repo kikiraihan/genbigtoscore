@@ -65,7 +65,7 @@ trait Demisionerkan
             $us->syncRoles(['Anggota']);
 
         $ang->kepengurusan->tanggal_demisioner=Carbon::now();
-        $ang->kepengurusan->jabatan=$this->getJabatanFromRole($us);
+        // $ang->kepengurusan->jabatan=$this->getJabatanFromRole($us);
         $ang->kepengurusan->save();
 
         return true;
