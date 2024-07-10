@@ -1,16 +1,23 @@
-<x-slot name="header">
+{{-- <x-slot name="header">
     @include('layouts.navigation',['warna'=>'bg-white'])
 </x-slot>
 
 <x-slot name="footer">
+</x-slot> --}}
+{{-- <x-slot name="stylehalaman">
 </x-slot>
-<x-slot name="stylehalaman">
+<x-slot name="scripthalaman">    
+</x-slot> --}}
+
+{{--------------------------------------------------------------------------------}}
+
+
+<div>
+    {{-- styleHalaman --}}
     @livewireStyles
-</x-slot>
-<x-slot name="scripthalaman">
+    {{-- scripthalaman --}}
     @livewireScripts
     @include('layouts.scriptsweetalert')
-
     <script>
         window.livewire.on('swalMulaiBeasiswaBaru', (judul,isi) => {
             
@@ -33,12 +40,6 @@
             
         })
     </script>
-</x-slot>
-
-{{--------------------------------------------------------------------------------}}
-
-
-<div>
     {{-- Be like water. --}}
 
 
@@ -189,7 +190,10 @@
                 <div>
                     <label class="f-roboto ml-1 text-gray-500 text-sm">Tambah penerima banyak</label>
                     <x-kiki.textarea-standar wire:model.lazy="namabanyak" id="namabanyak"
-                        placeholder="A. Rehan Fajrul Islam;Abd. Wahid Ibrahim;Adinda Pratiwi Musa;" />
+                        placeholder="A. Rehan Fajrul Islam
+Abd. Wahid Ibrahim
+Adinda Pratiwi Musa
+                        " />
                     <x-kiki.error-input :kolom="'namabanyak'" />
                 </div>
 

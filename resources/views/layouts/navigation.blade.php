@@ -147,9 +147,9 @@
         @endhasanyrole
         
         @hasanyrole('Admin')
-        <x-kiki.sidebar-link :lvroute="'beasiswa'" :icon="'school'">
+        {{-- <x-kiki.sidebar-link :lvroute="'beasiswa'" :icon="'school'">
             Beasiswa
-        </x-kiki.sidebar-link>
+        </x-kiki.sidebar-link> --}}
         @endhasanyrole
 
         @hasanyrole('Admin|Korwil')

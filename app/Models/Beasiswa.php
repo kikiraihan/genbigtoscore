@@ -15,9 +15,9 @@ class Beasiswa extends Model
         'semester',
     ];
 
-    protected $casts = [
-        'tanggal' => 'datetime:Y-m-d',
-    ];
+    // protected $casts = [
+    //     'tanggal' => 'datetime:Y-m-d',
+    // ];
 
 
 

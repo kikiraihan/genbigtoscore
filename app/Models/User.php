@@ -54,6 +54,10 @@ class User extends Authenticatable
         return $this->anggota->nama;
     }
 
+    public function getJumlahroleAttribute(){
+        return $this->roles->count();
+    }
+
     public function getGravatarAttribute(){
 
         // asset('assets_landing/img/avatar_2x.png')

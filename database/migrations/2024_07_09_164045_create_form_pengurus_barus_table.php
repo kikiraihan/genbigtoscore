@@ -15,7 +15,8 @@ class CreateFormPengurusBarusTable extends Migration
     {
         Schema::create('form_pengurus_barus', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_user')->constrained('users')->onDelete('cascade');//FK
+            $table->foreignId('id_anggota')->constrained('anggotas')->onDelete('cascade');//FK
+            $table->foreignId('id_unit')->constrained('units')->onDelete('cascade')->nullable();//FK
             $table->timestamps();
         });
     }

@@ -9,12 +9,17 @@ class FormPengurusBaru extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'id_user',
+        'id_anggota',
+        'id_unit',
     ];
 
     // relasi
-    public function user()
+    public function anggota()
     {
-        return $this->belongsTo(User::class, 'id_user');
+        return $this->belongsTo(anggota::class, 'id_anggota');
+    }
+    public function unit()
+    {
+        return $this->belongsTo(unit::class, 'id_unit');
     }
 }

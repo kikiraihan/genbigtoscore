@@ -74,10 +74,10 @@
         </div>
 
         <div class="mt-2">
-            <x-kiki.button-with-google-icon :icon="'flag'" class="bg-white shadow-sm text-gray-500  inline-flex p-2 rounded cursor-pointer hover:shadow-md hover:text-gray-600 "
+            {{-- <x-kiki.button-with-google-icon :icon="'flag'" class="bg-white shadow-sm text-gray-500  inline-flex p-2 rounded cursor-pointer hover:shadow-md hover:text-gray-600 "
             wire:click="$emit('swalMulaiKepengurusanBaru')">
                 Mulai kepengurusan baru
-            </x-kiki.button-with-google-icon>
+            </x-kiki.button-with-google-icon> --}}
 
             <x-kiki.button-with-google-icon href="{{ route('form.tambahanggota') }}" :icon="'group_add'" class="bg-white shadow-sm text-green-500  inline-flex p-2 rounded cursor-pointer   hover:shadow-md  hover:text-green-600">
                 Import Anggota Baru

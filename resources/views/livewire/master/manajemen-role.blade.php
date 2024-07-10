@@ -67,15 +67,17 @@
                             </span>
                         </td>
                         <td class="py-3 px-6 text-left">
-                            {{$item->anggota->nama}} 
-                            @if ($item->anggota->kepengurusan->tanggal_demisioner==NULL)
-                            <x-kiki.badge class="bg-green-300 text-white">
-                                Aktif
-                            </x-kiki.badge>
-                            @else
-                            <x-kiki.badge class="bg-gray-200 text-gray-500">
-                                <small>Demis</small>
-                            </x-kiki.badge>
+                            @if ($item->anggota)
+                                {{$item->anggota->nama}} 
+                                @if ($item->anggota->kepengurusan->tanggal_demisioner==NULL)
+                                <x-kiki.badge class="bg-green-300 text-white">
+                                    Aktif
+                                </x-kiki.badge>
+                                @else
+                                <x-kiki.badge class="bg-gray-200 text-gray-500">
+                                    <small>Demis</small>
+                                </x-kiki.badge>
+                                @endif
                             @endif
                         </td>
                         <td class="py-3 px-6 text-left">

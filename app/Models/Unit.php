@@ -48,6 +48,11 @@ class Unit extends Model
             $query->where('status', 'aktif');
     }
 
+    public function scopeBernama($query,$search)
+    {
+        return $query->where('nama', 'like', '%'.$search.'%');
+    }
+
 
     // MANY TO MANY
     public function anggotaAktif()
