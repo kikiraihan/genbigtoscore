@@ -37,6 +37,7 @@ class UserResource extends Resource
                 Columns\Text::make('email')->primary()->sortable()->searchable(),
                 // Columns\Text::make('Jumlahrole')->primary()->sortable()->searchable(),
                 Columns\Text::make('roles')->getValueUsing($callback = fn ($record) => $record->getAttribute('roles')->pluck('name'))->sortable()->searchable(),
+                Columns\Text::make('created_at')->primary()->sortable()->searchable(),
             ])
             ->filters([
                 Filter::make(

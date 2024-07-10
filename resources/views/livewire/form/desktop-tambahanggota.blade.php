@@ -1,20 +1,20 @@
-<x-slot name="header">
+{{-- <x-slot name="header">
     @include('layouts.navigation',['warna'=>'bg-white'])
 </x-slot>
 
 <x-slot name="footer">
 </x-slot>
 <x-slot name="stylehalaman">
-    @livewireStyles
 </x-slot>
 <x-slot name="scripthalaman">
-    @livewireScripts
-    @include('layouts.scriptsweetalert')
-</x-slot>
+</x-slot> --}}
 
 {{--------------------------------------------------------------------------------}}
 
 <div>
+    @livewireStyles
+    @livewireScripts
+    @include('layouts.scriptsweetalert')
 
     <div id="atas" class="container mx-auto bg-gray-100 mb-28">
 

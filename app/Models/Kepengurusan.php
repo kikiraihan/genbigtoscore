@@ -12,8 +12,8 @@ class Kepengurusan extends Model
     protected $fillable=[
         'id_anggota',
         'id_unit',
-        'jabatan',
-        'periode',
+        // 'jabatan',
+        // 'periode',
         'tanggal_demisioner',
     ];
 

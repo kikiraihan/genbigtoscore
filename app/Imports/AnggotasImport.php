@@ -112,7 +112,7 @@ class AnggotasImport implements ToModel, WithHeadingRow, SkipsOnError, WithValid
         $kep=new Kepengurusan([
             // 'id_Anggota'      =>$ang->id,
             'id_unit'         =>trim($row['id_unit']),
-            'jabatan'         =>'Anggota',
+            // 'jabatan'         =>'Anggota',
         ]);
 
         $user->save();

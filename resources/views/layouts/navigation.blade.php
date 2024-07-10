@@ -159,9 +159,9 @@
         @endhasanyrole
 
         @hasanyrole('Admin|Korwil')
-        <x-kiki.sidebar-link :lvroute="'master.manajemen-role'" :icon="'account_tree'">
+        {{-- <x-kiki.sidebar-link :lvroute="'master.manajemen-role'" :icon="'account_tree'">
             Manajemen Role
-        </x-kiki.sidebar-link>
+        </x-kiki.sidebar-link> --}}
         @endhasanyrole
 
     </div>

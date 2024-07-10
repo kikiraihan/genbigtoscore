@@ -79,9 +79,9 @@
                 Mulai kepengurusan baru
             </x-kiki.button-with-google-icon> --}}
 
-            <x-kiki.button-with-google-icon href="{{ route('form.tambahanggota') }}" :icon="'group_add'" class="bg-white shadow-sm text-green-500  inline-flex p-2 rounded cursor-pointer   hover:shadow-md  hover:text-green-600">
+            {{-- <x-kiki.button-with-google-icon href="{{ route('form.tambahanggota') }}" :icon="'group_add'" class="bg-white shadow-sm text-green-500  inline-flex p-2 rounded cursor-pointer   hover:shadow-md  hover:text-green-600">
                 Import Anggota Baru
-            </x-kiki.button-with-google-icon>
+            </x-kiki.button-with-google-icon> --}}
 
         </div>
 
