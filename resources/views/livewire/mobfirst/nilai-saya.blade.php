@@ -57,7 +57,7 @@
     <!-- info bar -->
     <div class="container mx-auto p-3 bg-gradient-to-b from-gray-50 to-gray-100 ">
 
-        <div class="grid grid-cols-2 gap-2">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
 
             {{-- grid1 --}}
             <div>
