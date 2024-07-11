@@ -6,10 +6,10 @@ use Filament\Pages\Page;
 
 class AnggotaTambah extends Page
 {
-    public static $icon = 'heroicon-o-collection';
-    public static $navigationLabel = 'Import GenBI Baru - Resource';
+    public static $icon = 'heroicon-o-user-add';
+    public static $navigationLabel = 'Penerima Baru - Import';
     public static $navigationSort = 2;
-    public static $title="Import Anggota GenBI Baru - Resource";
+    public static $title="Import Penerima Beasiswa (GenBI Baru)";
 
     public static $view = 'filament.pages.anggota-tambah';
 

@@ -24,9 +24,10 @@
                 @foreach ([
                     ['route' => 'landing.home', 'title' => 'Beranda'],
                     ['route' => 'landing.schedule', 'title' => 'Aktivitas'],
-                    ['route'=>'landing.timeline','title'=>'Timeline'],
-                    ['route' => 'landing.intro', 'title' => 'Tentang'],
-                    ['route' => 'landing.form-pengurus-baru', 'title' => 'Form A'],
+                    ['route' => 'landing.statistik', 'title' => 'Statistik'],
+                    ['route'=>'landing.timeline','title'=>'Kepengurusan'],
+                    // ['route' => 'landing.intro', 'title' => 'Tentang'],
+                    // ['route' => 'landing.form-pengurus-baru', 'title' => 'Form A'],
                     ['route' => 'login', 'title' => 'Login'],
                 ] as $item)
                 <li class="mr-3">

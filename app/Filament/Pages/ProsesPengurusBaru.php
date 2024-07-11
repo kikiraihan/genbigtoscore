@@ -11,10 +11,10 @@ class ProsesPengurusBaru extends Page
 {
     use Demisionerkan;
 
-    public static $icon = 'heroicon-o-lightning-bolt'; #'heroicon-o-document-download';
+    public static $icon = 'heroicon-o-document-text'; #'heroicon-o-document-download';
     public static $navigationLabel = 'Pengurus Baru - Form Run';
     public static $navigationSort = 0;
-    public static $title="Run Form Pengurus Baru";
+    public static $title="Run Form Calon Pengurus Baru";
 
     public static $view = 'filament.pages.proses-pengurus-baru';
 

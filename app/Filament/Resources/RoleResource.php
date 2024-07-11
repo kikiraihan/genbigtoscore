@@ -17,8 +17,8 @@ class RoleResource extends Resource
 {
     public static $model = Role::class;
     public static $icon = 'heroicon-o-collection';
-    public static $navigationLabel = 'Roles - Resource';
-    public static $navigationSort = 1;
+    public static $navigationLabel = 'Master - Role';
+    public static $navigationSort = 3-0.9;
 
     public static function form(Form $form)
     {

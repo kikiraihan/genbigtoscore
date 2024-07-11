@@ -17,8 +17,8 @@ class UserResource extends Resource
 {
     public static $model = User::class;
     public static $icon = 'heroicon-o-collection';
-    public static $navigationLabel = 'User, Role - Resource';
-    public static $navigationSort = 1;
+    public static $navigationLabel = 'Master - User Role';
+    public static $navigationSort = 3-0.9;
 
     public static function form(Form $form)
     {

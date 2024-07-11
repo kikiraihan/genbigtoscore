@@ -22,6 +22,7 @@ class FormPengurusBaruResource extends Resource
     public static $icon = 'heroicon-o-document-text';
     public static $navigationLabel = 'Pengurus Baru - Form';
     public static $navigationSort = 0;
+    public static $label='Form Calon Pengurus Baru';
 
     public static function form(Form $form)
     {

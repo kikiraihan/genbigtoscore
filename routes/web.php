@@ -21,6 +21,7 @@ use App\Http\Livewire\Landing\About\Timeline;
 use App\Http\Livewire\Landing\FormPengurusBaru;
 use App\Http\Livewire\Landing\Home;
 use App\Http\Livewire\Landing\Schedule;
+use App\Http\Livewire\Landing\Statistik;
 use App\Http\Livewire\Master\ManajemenRole;
 use App\Http\Livewire\Master\StrukturBadan;
 use App\Http\Livewire\Master\StrukturUnit;
@@ -28,6 +29,7 @@ use App\Http\Livewire\Mobfirst\AbsenAll;
 use App\Http\Livewire\Mobfirst\KaunitAbsen;
 use App\Http\Livewire\Mobfirst\KaunitKehadiran;
 use App\Http\Livewire\Mobfirst\KepalaEvaluasibulanan;
+use App\Http\Livewire\Mobfirst\NilaiSaya;
 use App\Http\Livewire\TglUangKas;
 use App\Models\anggota;
 use App\Models\Nilaieb;
@@ -44,6 +46,7 @@ Route::group(['prefix' => ''], function ($landing) {
     $landing->get('/schedule', Schedule::class)->name('landing.schedule');
     $landing->get('/intro', Intro::class)->name('landing.intro');
     $landing->get('/timeline', Timeline::class)->name('landing.timeline');
+    $landing->get('/statistik', Statistik::class)->name('landing.statistik');
     $landing->get('/form-pengurus-baru', FormPengurusBaru::class)->name('landing.form-pengurus-baru');
 });
 
@@ -154,8 +157,10 @@ Route::get('/absen/kaunit', KaunitAbsen::class)
     ->middleware(['auth','role:Kepala Unit'])->name('kaunit.absen');
 Route::get('absen/kaunit/kehadiran/{id}', KaunitKehadiran::class)
     ->middleware(['auth','role:Kepala Unit'])->name('kaunit.absen.kehadiran');
-Route::get('absen/all', AbsenAll::class)
+Route::get('dashboard/absen/all', AbsenAll::class)
     ->middleware(['auth'])->name('absen.all');
+Route::get('dashboard/nilai-saya', NilaiSaya::class)
+    ->middleware(['auth'])->name('dashboard.nilai-saya');
 
 
 

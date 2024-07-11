@@ -9,16 +9,27 @@ class Timeline extends Component
 {
     public function render()
     {
-        $foto=[
-            'kiki'=>User::find(1)->avatar,
-            'naswa'=>User::find(37)->avatar,
-            'tasya'=>User::find(147)->avatar,
-            'roly'=>User::find(208)->avatar,
-            'komang'=>User::find(5)->avatar,
-            'aco'=>User::find(114)->avatar,
-            'minarti'=>User::find(149)->avatar,
-            'apik'=>User::find(219)->avatar,
+        $user=User::whereIn('id',[
+            1,
+            37,
+            147,
+            208,
+            5,
+            114,
+            149,
+            219,
+        ])->get();
+        $key=[
+            'kiki',
+            'naswa',
+            'tasya',
+            'roly',
+            'komang',
+            'aco',
+            'minarti',
+            'apik',
         ];
+        $foto = array_combine($key, $user->pluck('avatar')->toArray());
 
         return view('livewire.landing.about.timeline',[
             'foto'=>$foto

@@ -37,10 +37,10 @@
             </span>
             <div class="p-0 m-0">
                 <span class="f-roboto text-xs bg-white rounded-l px-1 py-0.5 text-gray-400 shadow-sm">
-                    {{$userlogin->anggota->namaBadan}}
+                    {{$anggota->namaBadan}}
                 </span>
                 <span class="f-robotomon text-xs bg-gray-400 rounded-r px-1 py-0.5 text-gray-100 shadow-sm">
-                    {{$userlogin->anggota->namaUnitSingkat}}
+                    {{$anggota->namaUnitSingkat}}
                 </span>
             </div>
         </div>
@@ -60,131 +60,6 @@
         <div class="grid grid-cols-2 gap-2">
 
             {{-- grid1 --}}
-            <div>
-                <div x-data="{detail_nilai:false}" class="bg-white rounded-xl shadow-md">
-                    <div class="grid grid-cols-3 p-2 mx-auto bg-blue-400 items-end gap-2 rounded-xl ">
-                        <x-kiki.sublabel class="uppercase text-sm justify-between flex items-center col-span-3">
-                            <span class="text-gray-100">Nilai</span>
-                            <span class="material-icons text-yellow-200">
-                                emoji_events
-                            </span>
-                        </x-kiki.sublabel>
-
-                        @php
-                            $nilai=$nilaiAkhir;
-                        @endphp
-                        <div
-                            class="text-4xl justify-center self-end font-medium text-gray-100 f-robotomon flex items-end col-span-3 mb-2">
-                            @if ($nilai < (int)$standar_lulus)
-                                <span
-                                    class="material-icons text-xs rounded-full px-1 font-bold bg-white text-red-400 mb-1">
-                                    priority_high
-                                </span>
-                            @else
-                                <span
-                                    class="material-icons text-xs rounded-full px-1 font-bold bg-white text-green-400 mb-1">
-                                    check
-                                </span>
-                            @endif
-                            <span>
-                                @if ($tampilkanNilai or $nilai==0)
-                                    {{round($nilai,2)}}
-                                @else
-                                    ---
-                                @endif
-                            </span>
-                        </div>
-
-                        <x-kiki.select-standar wire:model="id_beasiswa" class="py-0.5 bg-gray-200 opacity-60 text-gray-600 col-span-3 mt-3">
-                            <option value="" hidden selected>...</option>
-                            @foreach ($selectBeasiswa as $item)
-                                <option class="w-full" value="{{$item->id}}"> {{$item->tahun}}/{{$item->semester}}
-                            </option>
-                            @endforeach
-                        </x-kiki.select-standar>
-
-                        <a href="#" x-on:click="detail_nilai=!detail_nilai"
-                            class="py-0.5 p-2 rounded justify-between flex bg-blue-200 text-white bg-opacity-60 col-span-3 hover:shadow">
-                            <span class="material-icons-outlined text-base">
-                                info
-                            </span>
-                            <span>Detail </span>
-                        </a>
-
-                    </div>
-
-
-                    <div x-show="detail_nilai" x-transition class="transition duration-200 ease-in-out">
-                        <div
-                            class="grid grid-cols-3 grid-flow-row-dense items-center gap-2 text-sm py-2 font-bold shadow-sm">
-                            <div class=" text-center">
-                                Bulan
-                            </div>
-                            <div class=" text-center">
-                                ATP
-                            </div>
-                            <div class=" text-center">
-                                EB
-                            </div>
-                        </div>
-
-                        @foreach ($beasiswa->segmentbulanan as $seg)
-                        <div
-                            class="grid grid-cols-3 grid-flow-row-dense items-center gap-2 text-sm f-robotomon  divide-y divide-y-reverse">
-                            <div class="text-center">
-                                {{substr($seg->namaBulan,0,3)}}
-                            </div>
-                            <div class=" text-center">
-                                @if ($tampilkanNilai or $nilai==0)
-                                {{round($userlogin->anggota->getAtpSayaPadaSegment($seg->id)+30,2)}}
-                                @else
-                                -
-                                @endif
-                            </div>
-                            <div class=" text-center">
-                                @if ($tampilkanNilai or $nilai==0)
-                                {{round($userlogin->anggota->getEbSayaPadaSegment($seg->id),2)}}
-                                @else
-                                -
-                                @endif
-                            </div>
-                        </div>
-                        @endforeach
-
-                        <div class="py-3 grid grid-cols-3 grid-flow-row-dense items-center gap-2 text-sm">
-                            <div class=" text-center f-nunito font-bold">
-                                Total
-                            </div>
-                            <div class=" text-center f-robotomon">
-                                @if ($tampilkanNilai or $nilai==0)
-                                    {{round($userlogin->anggota->getAtpBeasiswaFull($beasiswa),2)}}
-                                @else
-                                    -
-                                @endif
-                            </div>
-                            <div class=" text-center f-robotomon">
-                                @if ($tampilkanNilai or $nilai==0)
-                                    {{round($userlogin->anggota->getEbBeasiswaFull($beasiswa),2)}}
-                                @else
-                                    -
-                                @endif
-                            </div>
-                        </div>
-
-                        <a href="{{ route('detailnilai', ['id'=>$userlogin->anggota->id,'kembali'=>'dashboard']) }}" x-on:click="detail_nilai=!detail_nilai"
-                            class="py-0.5 p-2 rounded-b justify-between flex bg-gray-200 text-gray-500 bg-opacity-60 col-span-3 hover:shadow">
-                            <span class="font-bold f-roboto">Selengkapnya </span>
-                            <span class="material-icons-outlined text-base">
-                                double_arrow
-                            </span>
-                        </a>
-
-                    </div>
-
-                </div>
-            </div>
-            {{-- endgrid1 --}}
-
 
 
             {{-- grid2 --}}
@@ -200,13 +75,13 @@
 
                     <div class="md:grid-cols-2 md:grid space-y-1">
                         <x-kiki.molecul.data-dash :label="'Badan'">
-                            {{$userlogin->anggota->namaBadan}}
+                            {{$anggota->namaBadan}}
                         </x-kiki.molecul.data-dash>
                         <x-kiki.molecul.data-dash :label="'Unit'">
-                            {{$userlogin->anggota->namaUnit}}
+                            {{$anggota->namaUnit}}
                         </x-kiki.molecul.data-dash>
                         {{-- <x-kiki.molecul.data-dash :label="'Jabatan'">
-                            {{$userlogin->anggota->Kepengurusan->jabatan}}
+                            {{$anggota->Kepengurusan->jabatan}}
                         </x-kiki.molecul.data-dash> --}}
                         <x-kiki.molecul.data-dash :label="'Role'">
                             <span class="f-robotomon text-xs bg-gray-50 rounded px-1 ml-2 py-0.5 text-gray-500 shadow-sm">
@@ -214,10 +89,10 @@
                             </span>
                         </x-kiki.molecul.data-dash>
                         {{-- <x-kiki.molecul.data-dash :label="'Periode'">
-                            {{$userlogin->anggota->Kepengurusan->periode}}
+                            {{$anggota->Kepengurusan->periode}}
                         </x-kiki.molecul.data-dash> --}}
                         <x-kiki.molecul.data-dash :label="'Status Beasiswa'">
-                            @if ($userlogin->anggota->isMenerimaBeasiswa($id_beasiswa))
+                            @if ($anggota->isMenerimaBeasiswa($id_beasiswa))
                             <x-kiki.badge class="bg-green-200 text-gray-500">
                                 Penerima
                             </x-kiki.badge>
@@ -229,9 +104,9 @@
                         </x-kiki.molecul.data-dash>
 
                         <x-kiki.molecul.data-dash :label="'Uang Kas Terakhir'">
-                            @if ($userlogin->anggota->TanggalBayarUangKas)
+                            @if ($anggota->TanggalBayarUangKas)
                             <x-kiki.badge class="bg-green-200 text-gray-500">
-                                Dibayar {{$userlogin->anggota->TanggalBayarUangKas->format('d F Y')}}
+                                Dibayar {{$anggota->TanggalBayarUangKas->format('d F Y')}}
                             </x-kiki.badge>
                             @else
                             <x-kiki.badge class="bg-red-200 text-gray-500">
@@ -241,19 +116,19 @@
                         </x-kiki.molecul.data-dash>
 
                         <x-kiki.molecul.data-dash :label="'Status Keanggotaan'">
-                            @if ($userlogin->anggota->kepengurusan->tanggal_demisioner==NULL)
+                            @if ($anggota->kepengurusan->tanggal_demisioner==NULL)
                             <x-kiki.badge class="bg-green-200 text-gray-500">
                                 Pengurus Aktif
                             </x-kiki.badge>
                             @else
                             <x-kiki.badge class="bg-gray-200 text-gray-500">
                                 Demisioner
-                                {{$userlogin->anggota->kepengurusan->tanggal_demisioner->format('d M y')}}
+                                {{$anggota->kepengurusan->tanggal_demisioner->format('d M y')}}
                             </x-kiki.badge>
                             @endif
                         </x-kiki.molecul.data-dash>
                         <x-kiki.molecul.data-dash :label="'Angkatan GenBI'">
-                            {{$userlogin->anggota->awalmasukgenbi}}
+                            {{$anggota->awalmasukgenbi}}
                         </x-kiki.molecul.data-dash>
                     </div>
 

@@ -25,7 +25,7 @@ class FormPengurusBaru extends Component
 
         return view('livewire.landing.form-pengurus-baru',[
             "isiTabel"=>$ini->paginate(10),
-        ])->layout('layouts.landing.app');
+        ])->layout('layouts.public-form.app');
     }
 
     public function addForm()

@@ -33,7 +33,7 @@
                 2022-2023</time>
 
             <div class="mt-2">
-                <h3 class="text-lg font-semibold text-gray-900 dark:text-white inline">Pembina : </h3>
+                <h3 class="text-lg font-semibold text-gray-900 inline">Pembina : </h3>
                 <span class="inline-flex space-x-2">
                     <div class="text-sm text-gray-500 pl-2">Mas Hilmy Munis </div>
                     <div class="text-sm text-gray-500 border-l-2 pl-2">Mba Anisa Kurniarahman </div>
@@ -132,7 +132,7 @@
                 2021-2022</time>
 
             <div class="mt-2">
-                <h3 class="text-lg font-semibold text-gray-900 dark:text-white inline">Pembina : </h3>
+                <h3 class="text-lg font-semibold text-gray-900 inline">Pembina : </h3>
                 <span class="inline-flex space-x-2">
                     <div class="text-sm text-gray-500 pl-2">Mas Abdullah Ulil Albab </div>
                     <div class="text-sm text-gray-500 border-l-2 pl-2">Mas Hilmy Munis </div>
@@ -234,7 +234,7 @@
                 2020-2021</time>
 
             <div class="mt-2">
-                <h3 class="text-lg font-semibold text-gray-900 dark:text-white inline">Pembina : </h3>
+                <h3 class="text-lg font-semibold text-gray-900 inline">Pembina : </h3>
                 <span class="inline-flex space-x-2">
                     <div class="text-sm text-gray-500 pl-2">Mas Arief Setyowidodo </div>
                     <div class="text-sm text-gray-500 border-l-2 pl-2">Mas Abdullah Ulil Albab </div>
@@ -337,7 +337,7 @@
                 2018-2020</time>
 
             <div class="mt-2">
-                <h3 class="text-lg font-semibold text-gray-900 dark:text-white inline">Pembina : </h3>
+                <h3 class="text-lg font-semibold text-gray-900 inline">Pembina : </h3>
                 <span class="inline-flex space-x-2">
                     <div class="text-sm text-gray-500 pl-2">Pak One Yusril Fikar</div>
                     <div class="text-sm text-gray-500 border-l-2 pl-2">Bang Rahmi Mabruri</div>
@@ -440,7 +440,7 @@
                 2014-2018</time>
 
             <div class="mt-2">
-                <h3 class="text-lg font-semibold text-gray-900 dark:text-white inline">Pembina : </h3>
+                <h3 class="text-lg font-semibold text-gray-900 inline">Pembina : </h3>
                 <span class="inline-flex space-x-2">
                     <div class="text-sm text-gray-500 pl-2">Pak Unggul Priyatna</div>
                     <div class="text-sm text-gray-500 border-l-2 pl-2">Mas Imam</div>

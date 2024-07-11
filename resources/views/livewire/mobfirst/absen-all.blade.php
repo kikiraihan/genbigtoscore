@@ -21,7 +21,6 @@
 <div>
     {{-- To attain knowledge, add things every day; To attain wisdom, subtract things every day. --}}
 
-
     <!-- info bar -->
     <div class="container mx-auto p-3 bg-gradient-to-b from-gray-50 to-gray-100 divide-y-2 divide-gray-50">
         

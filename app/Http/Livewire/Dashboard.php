@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\anggota;
 use App\Models\Beasiswa;
 use App\Models\Konfigurasi;
 use App\Models\User;
@@ -21,30 +22,18 @@ class Dashboard extends Component
 
     public function mount()
     {
-        $this->standar_lulus=Konfigurasi::langsung('standar_lulus');
-        $this->id_beasiswa=Beasiswa::idTerakhir();
-        $this->beasiswa=Beasiswa::yangTerakhir();
-        $this->tampilkanNilai=false;
-
-        $userlogin=User::find(Auth::user()->id)->load('anggota.kepengurusan.unit.badan');
-        $anggota=$userlogin->anggota;
-        $this->nilaiAkhir=$this->getNilaiAkhir($this->beasiswa, $anggota->id);
     }
 
 
     public function render()
     {
-        $userlogin=User::find(Auth::user()->id)->load('anggota.kepengurusan.unit.badan');
-        $anggota=$userlogin->anggota;
+        $userlogin=Auth::user();
+        $anggota=anggota::with('kepengurusan.unit.badan')
+            ->where('id_user', $userlogin->id)->first();
 
         return view('livewire.dashboard',[
             'userlogin'=>$userlogin,
-            'selectBeasiswa'=>
-            // Beasiswa::with(['anggotas'])->whereHas('anggotas', function($q){
-            //     return $q->where('id',auth::user()->anggota->id);
-            // })->last(),
-            Beasiswa::whereBetween('id', [$anggota->beasiswas->first()->id, Beasiswa::idTerakhir()])->get(),
-            'beasiswa'=>Beasiswa::find($this->id_beasiswa),
+            'anggota'=>$anggota,
         ]);
         // ->layout('layouts.app')// defaultnya bgtu jadi tida usah edit
     }
