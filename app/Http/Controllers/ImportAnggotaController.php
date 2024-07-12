@@ -4,10 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Imports\AnggotasImport;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
+use PDO;
 
 class ImportAnggotaController extends Controller
 {
+    public function tes(){
+        dd(Auth::guard('filament')->check());
+        dd(Auth::user());
+        dd('jadi');
+    }
+    
     public function store(Request $request)
     {
         $file =$request->file('anggotabaru');

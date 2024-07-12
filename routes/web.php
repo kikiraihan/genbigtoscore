@@ -120,8 +120,6 @@ Route::group(['prefix' => 'manual'], function ($manual) {
 //ANGGOTA
 Route::group(['middleware' => ['auth','role:Admin|Korwil']], function ($anggota) {
     $anggota->get('desktop/anggota', DesktopAnggota::class)->name('desktop.anggota');
-    $anggota->get('desktop/tambahanggota', DesktopTambahanggota::class)->name('form.tambahanggota');
-    $anggota->post('desktop/tambahanggota', [ImportAnggotaController::class,'store'])->name('form.tambahanggota.store');
 });
 
 //MASTER STRUKTUR
@@ -166,4 +164,5 @@ Route::get('dashboard/nilai-saya', NilaiSaya::class)
 
 
 
-
+// filament admin punya
+Route::post('filament/tambahanggota', [ImportAnggotaController::class,'store'])->name('form.tambahanggota.store')->middleware(['filament.user']);
