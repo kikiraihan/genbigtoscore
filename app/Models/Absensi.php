@@ -18,6 +18,7 @@ class Absensi extends Model
         'absensiable_id',
         'pengurangan',
         'id_sb',
+        'open',
     ];
 
     protected $casts = [

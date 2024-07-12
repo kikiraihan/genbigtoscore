@@ -138,6 +138,10 @@ class anggota extends Model
     RELATION
     ---------------------------------------------------------------- */
 
+    public function formPengurusBaru(){
+        return $this->hasOne(FormPengurusBaru::class,'id_anggota','id');
+    }
+
     // MANY TO MANY
     public function beasiswas()
     {

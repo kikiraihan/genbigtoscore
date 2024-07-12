@@ -50,19 +50,19 @@ trait Demisionerkan
         return $return;
     }
 
-    public function dems(anggota $ang,$mulaiBaru=false)
+    public function dems(anggota $ang,$untukFungsiKepengurusanBaru=false)
     {
         $us=$ang->user;
 
-        if ($us->hasRole(['Korwil','Kekom']) and !$mulaiBaru)
-        {
-            $this->emit('swalMessageError','Korwil/Kekom tidak dapat didemisionerkan sebelum korwil atau kekom baru dipilih. Silahkan tentukan calon pengganti dahulu, kemudian edit rolenya menjadi Korwil/Kekom di menu anggota');
-            return false;
-        }
-        elseif($us->hasRole(['Korwil','Admin']))
-            $us->syncRoles(['Anggota','Admin']);
-        else
-            $us->syncRoles(['Anggota']);
+        // if ($us->hasRole(['Korwil','Kekom']) and !$mulaiBaru)
+        // {
+        //     $this->emit('swalMessageError','Korwil/Kekom tidak dapat didemisionerkan sebelum korwil atau kekom baru dipilih. Silahkan tentukan calon pengganti dahulu, kemudian edit rolenya menjadi Korwil/Kekom di menu anggota');
+        //     return false;
+        // }
+        // elseif($us->hasRole(['Korwil','Admin']))
+        //     $us->syncRoles(['Anggota','Admin']);
+        // else
+        $us->syncRoles(['Anggota']);
 
         $ang->kepengurusan->tanggal_demisioner=Carbon::now();
         // $ang->kepengurusan->jabatan=$this->getJabatanFromRole($us);

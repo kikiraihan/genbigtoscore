@@ -162,7 +162,7 @@
                         </td>
                         <td class="py-3 px-6 text-left whitespace-nowrap">
                             <div class="font-medium ">
-                                {{$item->nama}} <sup>id:{{$item->id}}</sup>
+                                {{$item->nama}} <sup>username:{{$item->user->username}}</sup>
                             </div>
                         </td>
                         {{-- <td class="py-3 px-6 text-left whitespace-nowrap">

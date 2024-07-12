@@ -21,9 +21,21 @@ class ManualKehadiran extends Component
     // form
     public $namabanyak;
 
+    public $openAbsen;
+    protected $abs;
+
     public function mount($id)
     {
         $this->idAbsen=$id;
+        $abs=Absensi::findOrFail($this->idAbsen)->load('kehadiran','absensiable','absenanggota');
+        $this->openAbsen=$abs->open;
+    }
+
+    public function updatedOpenAbsen(){
+        $abs=Absensi::findOrFail($this->idAbsen)->load('kehadiran','absensiable','absenanggota');
+        $abs->open=$this->openAbsen;
+        $abs->save();
+        $this->emit('swalUpdated');
     }
 
     public function render()
@@ -36,7 +48,7 @@ class ManualKehadiran extends Component
             // ->orderBy('pivot_kondisi', 'desc')
             ->orderBy('nama', 'asc')
             ;
-                
+        
         if ($this->filterKehadiran) $anggota->wherePivot('kondisi',$this->filterKehadiran);
 
         return view('livewire.desktop.manual-kehadiran',[

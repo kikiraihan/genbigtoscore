@@ -19,8 +19,13 @@ class StrukturUnit extends Component
         'terkonfirmasiEditMasterUnit'=>'fixEdit',
         'terkonfirmasiTambahMasterUnit'=>'fixTambah',
         'masterUnitFixHapus'=>'fixHapus',
-        'terkonfirmasiAktifkanAnggotaUnit'=>'aktifkanKembali'
+        'terkonfirmasiAktifkanAnggotaUnit'=>'_aktifkanKembali'
     ];
+
+    // _aktifkanKembali
+    public function _aktifkanKembali($id){
+        $this->aktifkanKembali($id);
+    }
 
     // untuk index
     public

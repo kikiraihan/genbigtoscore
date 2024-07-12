@@ -19,6 +19,7 @@ use App\Http\Livewire\HasilPenilaian;
 use App\Http\Livewire\Landing\About\Intro;
 use App\Http\Livewire\Landing\About\Timeline;
 use App\Http\Livewire\Landing\FormPengurusBaru;
+use App\Http\Livewire\Landing\FromAbsenPublic;
 use App\Http\Livewire\Landing\Home;
 use App\Http\Livewire\Landing\Schedule;
 use App\Http\Livewire\Landing\Statistik;
@@ -48,6 +49,7 @@ Route::group(['prefix' => ''], function ($landing) {
     $landing->get('/timeline', Timeline::class)->name('landing.timeline');
     $landing->get('/statistik', Statistik::class)->name('landing.statistik');
     $landing->get('/form-pengurus-baru', FormPengurusBaru::class)->name('landing.form-pengurus-baru');
+    $landing->get('/form-absen/{id_absen}', FromAbsenPublic::class)->name('landing.form-absen-public');
 });
 
 

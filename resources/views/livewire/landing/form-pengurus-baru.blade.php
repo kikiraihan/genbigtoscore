@@ -10,7 +10,7 @@
 <div class="container w-full md:max-w-4xl mx-auto pt-20"> {{-- xl:pt-0 --}}
 
     <div class="f-playfair font-bold text-2xl capitalize">
-        Form Pengurus Baru
+        Form Pendaftaran Pengurus Baru
     </div>
 
         <div class="flex p-2 space-x-1 col-span-3">

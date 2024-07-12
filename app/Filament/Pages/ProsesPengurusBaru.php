@@ -19,32 +19,31 @@ class ProsesPengurusBaru extends Page
     public static $view = 'filament.pages.proses-pengurus-baru';
 
     protected $listeners=[
-        'terkonfirmasiKepengurusanBaru'=>'kepengurusanBaru',
+        'terkonfirmasiFormKepengurusanBaru'=>'kepengurusanBaruForm',
     ];
 
-    public function kepengurusanBaru()
+    public function kepengurusanBaruForm()
     {
-        $form=FormPengurusBaru::with('anggota.kepengurusan')->get();
-
+        // demis pengurus lama
         $this->demisPengurusLama();
-        // $this->emit('swalMessage','info','Berhasi, Pengurus baru telah diaktifkan!');
 
-        //aktifkan lagi
-        foreach ($form as $key => $value) {
-            $value->anggota->kepengurusan->tanggal_demisioner = NULL;
-            $value->anggota->kepengurusan->id_unit = $value->id_unit;
-            $value->anggota->kepengurusan->save();
+
+        //aktifkan calon pengurus
+        // Klo disini wajib pemanggilan setelah di demis. soalnya mengikut session database. dua kali pemanggilan
+        $calon = anggota::with(['kepengurusan','formPengurusBaru'])->whereHas('formPengurusBaru')->get();
+        foreach ($calon as $key => $value) {
+            $value->kepengurusan->tanggal_demisioner = NULL;
+            $value->kepengurusan->id_unit = $value->formPengurusBaru->id_unit;
+            $value->kepengurusan->save();
         }
+
         return $this->emit('swalMessage','success','Berhasi, Pengurus baru telah diaktifkan!');
-        // return true;
     }
 
     public function demisPengurusLama(){
-        //demisionerkan semua pengurus lama dulu
-        foreach (
-            anggota::with(['kepengurusan'])
-            ->hanyaYangAktif()->get() as $key => $ang
-            ) 
+        $aktiflama=anggota::with(['kepengurusan'])
+            ->hanyaYangAktif()->get();
+        foreach ($aktiflama as $key => $ang) 
         {
             $this->dems($ang,TRUE);
         }

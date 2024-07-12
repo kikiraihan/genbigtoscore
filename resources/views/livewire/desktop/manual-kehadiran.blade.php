@@ -77,14 +77,25 @@ Adinda Pratiwi Musa
                     <x-kiki.error-input :kolom="'namabanyak'"/>
                 </div>
                 {{-- Keterangan --}}
-                <div class="p-2">
-                    <div class="mb-2">Keterangan</div>
+                <div class="p-2 flex flex-col gap-1">
+                    <div class="mb-2">Konfigurasi</div>
+                    {{-- <div class="text-justify py-2 px-4 bg-gray-50  rounded shadow-sm">
+                        <x-kiki.button-with-google-icon class="hover:text-blue-500 text-blue-400 inline-flex italic" href="https://beautifytools.com/excel-to-csv-converter.php" :icon="'link'">
+                            <span>Link web konversi excell ke text</span>
+                        </x-kiki.button-with-google-icon>
+                    </div> --}}
+
                     <div class="text-justify py-2 px-4 bg-gray-50  rounded shadow-sm">
-                        <div>
-                            <x-kiki.button-with-google-icon class="hover:text-blue-500 text-blue-400 inline-flex italic" href="https://beautifytools.com/excel-to-csv-converter.php" :icon="'link'">
-                                <span>Link web konversi excell ke text</span>
-                            </x-kiki.button-with-google-icon>
-                        </div>
+                        <label for="toggle" class="text-xs text-gray-700 mr-2 hidden lg:inline">
+                            Tutup absen
+                        </label>
+                        <x-kiki.toggle :label="'Buka'">
+                            <input wire:model="openAbsen" type="checkbox" name="toggle" id="toggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
+                        </x-kiki.toggle>
+                    </div>
+
+                    <div class="py-2 px-4 bg-gray-50  rounded shadow-sm">
+                        <x-kiki.button-copy-url :url="route('landing.form-absen-public', ['id_absen'=>$abs->id])" :id="1" :text="'Salin link form absen'" />
                     </div>
                 </div>
     

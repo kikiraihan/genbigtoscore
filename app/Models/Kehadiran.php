@@ -16,6 +16,7 @@ class Kehadiran extends Model
         'catatan',
         'valid',
         'id_validator',
+        'sudah_diisi',
         'kondisi',
     ];
 

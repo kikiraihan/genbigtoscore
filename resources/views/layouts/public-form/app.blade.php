@@ -48,7 +48,7 @@
 
 <body class="bg-gray-100 font-sans leading-normal tracking-normal">
 
-    @include('layouts.landing.nav')
+    {{-- @include('layouts.landing.nav') --}}
 
     {{-- <div class="container w-full md:max-w-4xl mx-auto pt-20">
     </div> --}}

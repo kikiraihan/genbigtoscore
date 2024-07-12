@@ -22,12 +22,13 @@ class DesktopAnggota extends Component
     use WithPagination,PindahUnit,Demisionerkan, EditRole;
 
     protected $listeners=[
-        'terkonfirmasiDemisioner'=>'demisionerkan',
-        'terkonfirmasiPindahUnit'=>'fixPindahUnit',
+        'terkonfirmasiDemisioner'=>'_demisionerkan',
+        'terkonfirmasiPindahUnit'=>'_fixPindahUnit',
         'terkonfirmasiResetPasswordAnggota'=>'resetPassword',
-        'terkonfirmasiEditRole'=>'fixEditRole',
+        'terkonfirmasiEditRole'=>'_fixEditRole',
         // 'terkonfirmasiKepengurusanBaru'=>'kepengurusanBaru',
     ];
+
 
     public 
     $idBeasiswaTerakhir,
@@ -64,7 +65,7 @@ class DesktopAnggota extends Component
         // {{$userlogin->anggota->awalmasukgenbi}}
 
         return view('livewire.desktop.desktop-anggota',[
-            'isiTabel'=>$ang->paginate(100),
+            'isiTabel'=>$ang->paginate(10),
             'jumlahWilayah'=>(clone $ang)->hanyaYangAktif()->HanyaPengurusIni(1)->count(),
             'jumlahung'=>(clone $ang)->hanyaYangAktif()->HanyaPengurusIni(2)->count(),
             'jumlahIAIN'=>(clone $ang)->hanyaYangAktif()->HanyaPengurusIni(3)->count(),
@@ -76,11 +77,17 @@ class DesktopAnggota extends Component
     /*------------------------------
     ...... info : FUNGSI Demisioner PAKE TRAIT demisionerkan
     ------------------------------*/ 
+    public function _demisionerkan($id){
+        $this->demisionerkan($id);
+    }
+    
     
     /*------------------------------
     ...... info : FUNGSI PINDAH UNIT PAKE TRAIT PindahUnit
     ------------------------------*/ 
-
+    public function _fixPindahUnit($idUnit,$idAnggota){
+        $this->fixPindahUnit($idUnit,$idAnggota);
+    }
 
     public function resetPassword($id)
     {
@@ -94,17 +101,13 @@ class DesktopAnggota extends Component
     /*------------------------------
     ...... info : FUNGSI EDIT ROLE PAKE TRAIT EditRole
     ------------------------------*/ 
-
-
-
-    /*------------------------------
-    ...... info : FUNGSI kepengurusan baru dipindah di Trait kepengurusanBaruStringNim
-    ------------------------------*/ 
+    public function _fixEditRole($satu,$dua,$idAnggota){
+        $this->fixEditRole($satu,$dua,$idAnggota);
+    }
 
     public function export() 
     {
         $waktu=Carbon::now();
-
         return Excel::download(new AnggotaExport($this->statusAktif), 'anggota_export_'.$waktu->format('Y_M_d').'.xlsx');
     }
 }

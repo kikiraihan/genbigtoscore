@@ -60,7 +60,7 @@ class ManualAbsen extends Component
 
     public function mount()
     {
-        $this->inisial_kondisi='hadir';
+        $this->inisial_kondisi='tidakhadir';
         $this->pengurangan='-2';
         $this->metode='newAbsen';
         // $this->id_sb=Segmentbulanan::idTerkini();
@@ -80,7 +80,7 @@ class ManualAbsen extends Component
         // $this->ditemukan=$absensi->count();
 
         return view('livewire.desktop.manual-absen',[
-            'isiTabel' => $absensi->paginate(30),
+            'isiTabel' => $absensi->paginate(10),
             // 'selectsegment'=>$this->selectsegment(),
             'selectBeasiswa'=>$this->selectBeasiswa(),
             'selectAbsensiable'=>$this->selectabsensiable(),
@@ -184,6 +184,7 @@ class ManualAbsen extends Component
         $abs->absensiable_type  =$this->absensiable_type;
         $abs->absensiable_id    =$this->absensiable_id;
         $abs->pengurangan       =$this->pengurangan;
+        $abs->open              =1;
         $abs->id_sb             =Segmentbulanan::idSegmentPadaBeasiswaIdDanBulan($this->idBea,$abs->date->month);
 
         $abs->save();

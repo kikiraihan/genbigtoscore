@@ -186,7 +186,7 @@
                         <th class="py-3 px-6 text-left">Date</th>
                         <th class="py-3 px-6 text-left">Judul Absen</th>
                         <th class="py-3 px-6 text-center">Lingkup</th>
-                        <th class="py-3 px-6 text-center">Peserta</th>
+                        {{-- <th class="py-3 px-6 text-center">Peserta</th> --}}
                         <th class="py-3 px-6 text-center">Actions</th>
                     </tr>
                 </thead>
@@ -232,44 +232,46 @@
                             </div>
                         </td>
                         <td class="py-3 px-6 text-left whitespace-nowrap">
-                            <div class="flex space-x-2">
-                                <x-kiki.badge class="bg-blue-100 text-gray-500 text-xs">
-                                    {{$item->pengurangan}}
-                                </x-kiki.badge>
+                            <div class="flex">
                                 <span class="font-medium w-96 truncate">
-                                    {{$item->title}}
+                                    <x-kiki.button-copy-url :url="route('landing.form-absen-public', ['id_absen'=>$item->id])" :id="$item->id" :text="$item->title" />
                                 </span>
                             </div>
                         </td>
                         <td class="py-3 px-6 text-center capitalize font-semibold">
-                            @if ($item->skope=="badan")
-                            <div class="inline-flex items-center space-x-1 bg-gray-200 text-gray-600 rounded">
-                                <span class="material-icons-outlined text-sm rounded-l p-0.5 text-white @if ($item->absensiable->id==1) bg-blue-500 @elseif ($item->absensiable->id==2) bg-red-400 @elseif ($item->absensiable->id==3) bg-green-400 @elseif ($item->absensiable->id==4) bg-yellow-400 @endif">
-                                    people
+                            <div class="flex space-x-2">
+                                <x-kiki.badge class="bg-blue-100 text-gray-500 text-xs">
+                                    {{$item->pengurangan}}
+                                </x-kiki.badge>
+                                @if ($item->skope=="badan")
+                                <div class="inline-flex items-center space-x-1 bg-gray-200 text-gray-600 rounded">
+                                    <span class="material-icons-outlined text-sm rounded-l p-0.5 text-white @if ($item->absensiable->id==1) bg-blue-500 @elseif ($item->absensiable->id==2) bg-red-400 @elseif ($item->absensiable->id==3) bg-green-400 @elseif ($item->absensiable->id==4) bg-yellow-400 @endif">
+                                        people
+                                    </span>
+                                    <span class="text-xs py-0.5 px-1.5">
+                                        All {{$item->absensiable->nama}}
+                                    </span>
+                                </div>
+                                @elseif ($item->skope=="unit")
+                                <span class="bg-gray-100 text-gray-500 border border-gray-200 py-0.5 px-1.5 rounded text-xs">
+                                    {{$item->absensiable->singkat}}
                                 </span>
-                                <span class="text-xs py-0.5 px-1.5">
-                                    All {{$item->absensiable->nama}}
+                                @elseif ($item->skope=="timkhu")
+                                <span class="bg-yellow-200 text-yellow-600 py-0.5 px-1.5 rounded text-xs">
+                                    @if ($item->absensiable)
+                                        {{$item->absensiable->nama}}
+                                    @else
+                                        {{$item->absensiable_id}}
+                                    @endif
                                 </span>
-                            </div>
-                            @elseif ($item->skope=="unit")
-                            <span class="bg-gray-100 text-gray-500 border border-gray-200 py-0.5 px-1.5 rounded text-xs">
-                                {{$item->absensiable->singkat}}
-                            </span>
-                            @elseif ($item->skope=="timkhu")
-                            <span class="bg-yellow-200 text-yellow-600 py-0.5 px-1.5 rounded text-xs">
-                                @if ($item->absensiable)
-                                    {{$item->absensiable->nama}}
-                                @else
-                                    {{$item->absensiable_id}}
+                                @elseif ($item->skope=="seluruh-genbi")
+                                <span class="bg-blue-200 text-blue-600 py-0.5 px-1.5 rounded text-xs">
+                                    All GenBI
+                                </span>
                                 @endif
-                            </span>
-                            @elseif ($item->skope=="seluruh-genbi")
-                            <span class="bg-blue-200 text-blue-600 py-0.5 px-1.5 rounded text-xs">
-                                All GenBI
-                            </span>
-                            @endif
+                            </div>
                         </td>
-                        <td class="py-3 px-6  flex items-center justify-center space-x-2">
+                        {{-- <td class="py-3 px-6  flex items-center justify-center space-x-2">
                             <div class="text-green-500 items-center flex space-x-1">
                                 <span class="material-icons-outlined text-base">
                                     task_alt
@@ -294,8 +296,7 @@
                                     {{$item->kehadiran()->hanyayangizin()->count()}}
                                 </span> 
                             </div>
-                            {{-- /{{$item->kehadiran->count()}}  --}}
-                        </td>
+                        </td> --}}
 
                         
                         <td class="py-3 px-6 text-center">

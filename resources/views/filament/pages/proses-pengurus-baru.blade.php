@@ -30,7 +30,7 @@
         </div>
 
         <div class="flex justify-end">
-            <x-filament::button type="button" color="primary" class="mr-2" wire:click="$emit('swalAndaYakinTrigger','terkonfirmasiKepengurusanBaru')">Proses</x-filament::button>
+            <x-filament::button type="button" color="primary" class="mr-2" wire:click="$emit('swalAndaYakinTrigger','terkonfirmasiFormKepengurusanBaru')">Proses</x-filament::button>
         </div>
         
     </x-filament::app-content>
