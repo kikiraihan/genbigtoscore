@@ -23,9 +23,10 @@
             <div class="text-justify py-2 px-4">
                 Daftar penerima beasiswa baru selain genbi lama.
             </div>
-            <li>Penerima beasiswa terbaru, termasuk</li>
+            <li>GenBI baru Penerima beasiswa, <b class="text-blue-500">termasuk</b></li>
             <li>GenBI lama yang diperpanjang beasiswa, <b>tidak termasuk</b></li>
             <li>GenBI lama yang tidak diperpanjang beasiswa tapi masih mau aktif, <b>tidak termasuk</b></li>
+            <li>nama, email, nim, id_univ, id_unit (lihat dibawah)</li>
         </div>
 
         <div class="flex justify-between items-center mt-6">

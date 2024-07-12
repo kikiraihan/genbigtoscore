@@ -24,7 +24,10 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Components\TextInput::make('username')
+                    ->placeholder('username (harus nim)'),
+                Components\TextInput::make('anggota.nim')
+                    ->placeholder('anggota.nim (harus nim)'),
             ]);
     }
 

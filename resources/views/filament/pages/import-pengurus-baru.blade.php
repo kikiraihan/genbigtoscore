@@ -33,9 +33,9 @@
             <div class="text-justify py-2 px-4">
                 Daftar username(nim) semua calon pengurus.
                 <ul class="list-disc list-inside text-sm">
-                    <li>Penerima beasiswa terbaru, termasuk</li>
-                    <li>GenBI lama yang diperpanjang beasiswa, termasuk</li>
-                    <li>GenBI lama yang tidak diperpanjang beasiswa tapi masih mau aktif, termasuk</li>
+                    <li>GenBI baru Penerima beasiswa, <b class="text-blue-500">termasuk</b></li>
+                    <li>GenBI lama yang diperpanjang beasiswa, <b class="text-blue-500">termasuk</b></li>
+                    <li>GenBI lama yang tidak diperpanjang beasiswa tapi masih mau aktif, <b class="text-blue-500">termasuk</b></li>
                     <li>Hanya nim saja</li>
                 </ul>
             </div>
