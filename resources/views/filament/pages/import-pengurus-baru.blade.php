@@ -25,7 +25,23 @@
             //$('#modalInput').modal('hide');
         })
         </script>
+
+
         {{-- Page content --}}
+        <div class="bg-blue-100 p-2 rounded shadow-sm">
+            <div class="font-bold">Kebutuhan data: </div>
+            <div class="text-justify py-2 px-4">
+                Daftar username(nim) semua calon pengurus.
+                <ul class="list-disc list-inside text-sm">
+                    <li>Penerima beasiswa terbaru, termasuk</li>
+                    <li>GenBI lama yang diperpanjang beasiswa, termasuk</li>
+                    <li>GenBI lama yang tidak diperpanjang beasiswa tapi masih mau aktif, termasuk</li>
+                    <li>Hanya nim saja</li>
+                </ul>
+            </div>
+        </div>
+        <br>
+
         <x-kiki.button-with-google-icon :icon="'flag'" class="bg-white shadow-sm text-gray-500  inline-flex p-2 rounded cursor-pointer hover:shadow-md hover:text-gray-600 "
             wire:click="$emit('swalMulaiKepengurusanBaru')">
                 Mulai kepengurusan baru

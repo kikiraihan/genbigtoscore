@@ -18,6 +18,16 @@
 
     <div id="atas" class="container mx-auto bg-gray-100 mb-28">
 
+        <div class="bg-blue-100 p-2 rounded shadow-sm">
+            <div class="font-bold">Kebutuhan data: </div>
+            <div class="text-justify py-2 px-4">
+                Daftar penerima beasiswa baru selain genbi lama.
+            </div>
+            <li>Penerima beasiswa terbaru, termasuk</li>
+            <li>GenBI lama yang diperpanjang beasiswa, <b>tidak termasuk</b></li>
+            <li>GenBI lama yang tidak diperpanjang beasiswa tapi masih mau aktif, <b>tidak termasuk</b></li>
+        </div>
+
         <div class="flex justify-between items-center mt-6">
             <div class="f-playfair font-bold text-2xl capitalize">
                 Import Anggota Baru
