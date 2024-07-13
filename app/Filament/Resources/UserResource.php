@@ -45,7 +45,7 @@ class UserResource extends Resource
                 Filter::make(
                     'User Yang Nim dan Username tidak sama', 
                     fn ($query) => $query->whereHas('anggota', function ($query) {
-                        $query->whereColumn('user.username', '!=', 'nim');
+                        $query->whereColumn('users.username', '!=', 'anggotas.nim');
                     })
                 ),
                 Filter::make(
