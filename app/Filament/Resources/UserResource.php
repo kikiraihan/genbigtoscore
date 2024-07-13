@@ -35,12 +35,19 @@ class UserResource extends Resource
             ->columns([
                 Columns\Text::make('anggota.nama')->primary()->sortable()->searchable(),
                 Columns\Text::make('username')->primary()->sortable()->searchable(),
+                Columns\Text::make('anggota.nim')->primary()->sortable()->searchable(),
                 Columns\Text::make('email')->primary()->sortable()->searchable(),
                 // Columns\Text::make('Jumlahrole')->primary()->sortable()->searchable(),
                 Columns\Text::make('roles')->getValueUsing($callback = fn ($record) => $record->getAttribute('roles')->pluck('name'))->sortable()->searchable(),
                 Columns\Text::make('created_at')->primary()->sortable()->searchable(),
             ])
             ->filters([
+                Filter::make(
+                    'User Yang Nim dan Username tidak sama', 
+                    fn ($query) => $query->whereHas('anggota', function ($query) {
+                        $query->whereColumn('user.username', '!=', 'nim');
+                    })
+                ),
                 Filter::make(
                     'User Tanpa Anggota', 
                     fn ($query) => $query->doesntHave('anggota')
