@@ -11,8 +11,8 @@
         {{-- Page content --}}
         <div class="gap-2 flex-col flex">
             @foreach ([
+            [route('landing.form-pengurus-baru'),'Form Pengurus Baru'],
             ['https://s.id/genbi-penilaian-panduan','Catatan Panduan'],
-            ['landing.form-pengurus-baru','Form Pengurus Baru'],
             ['https://s.id/drive-gss','Drive Video Tutorial'],
         ] as $key=>$item)
             <div class="py-2 px-4 bg-gray-50  rounded shadow-sm inline-flex gap-2 justify-between">
