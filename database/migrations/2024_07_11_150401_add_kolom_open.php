@@ -13,7 +13,7 @@ class AddKolomOpen extends Migration
      */
     public function up()
     {
-        Schema::table('Absensis', function (Blueprint $table) {
+        Schema::table('absensis', function (Blueprint $table) {
             $table->boolean('open')->default(false);
         });
     }
@@ -25,7 +25,7 @@ class AddKolomOpen extends Migration
      */
     public function down()
     {
-        Schema::table('Absensis', function (Blueprint $table) {
+        Schema::table('absensis', function (Blueprint $table) {
             $table->dropColumn('open');
         });
     }
