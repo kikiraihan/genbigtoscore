@@ -7,13 +7,13 @@ use App\Models\Badan;
 use App\Models\Kepengurusan;
 use App\Models\Unit;
 use App\Traits\demisionerkan;
-use App\Traits\pindahUnit;
+use App\Traits\PindahUnit;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class StrukturUnit extends Component
 {
-    use WithPagination,pindahUnit,demisionerkan;
+    use WithPagination,PindahUnit,demisionerkan;
 
     protected $listeners=[
         'terkonfirmasiEditMasterUnit'=>'fixEdit',
