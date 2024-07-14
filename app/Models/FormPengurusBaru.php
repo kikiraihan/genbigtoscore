@@ -20,6 +20,6 @@ class FormPengurusBaru extends Model
     }
     public function unit()
     {
-        return $this->belongsTo(unit::class, 'id_unit');
+        return $this->belongsTo(Unit::class, 'id_unit');
     }
 }
