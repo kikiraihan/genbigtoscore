@@ -44,7 +44,7 @@
 
 
 <!-- sidebar -->
-<div class="ini-sidebar min-h-screen w-64 md:pb-7 md:pt-0 py-7 bg-gradient-to-br from-white to-blue-100 mb-24 absolute inset-y-0 left-0 transform -translate-x-full transition duration-200 ease-in-out z-20">
+<div class="ini-sidebar min-h-screen w-64 md:pb-7 md:pt-0 py-7 bg-gradient-to-br from-white to-blue-100 mb-24 absolute inset-y-0 left-0 transform -translate-x-full transition duration-200 ease-in-out z-20 overflow-auto">
     <!-- md:relative md:translate-x-0  -->
     <div class="hidden mb-0 text-left md:block">
         <span class="ini-tombol-tutup material-icons-outlined py-2 px-6 hover:bg-gray-200 hover:bg-transparent text-blue-500 rounded-br-md cursor-pointer select-none">
