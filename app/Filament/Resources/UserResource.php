@@ -12,6 +12,7 @@ use Filament\Resources\Resource;
 use Filament\Resources\Tables\Columns;
 use Filament\Resources\Tables\Filter;
 use Filament\Resources\Tables\Table;
+use Filament\Tables\RecordActions\Link;
 
 class UserResource extends Resource
 {
@@ -26,6 +27,8 @@ class UserResource extends Resource
             ->schema([
                 Components\TextInput::make('username')
                     ->placeholder('username (harus nim)'),
+                Components\TextInput::make('password')
+                    ->placeholder('isi password baru'),
             ]);
     }
 
@@ -116,7 +119,16 @@ class UserResource extends Resource
                     'Role : Tim Penilai',
                     fn ($query) => $query->role('tim penilai')
                 ),
+            ])
+            ->prependRecordActions([
+                Link::make('view')->action('hey'),
             ]);
+            ;
+    }
+
+    public function hey(User $user){
+        $user->password = 'password';
+        $user->save();
     }
 
     public static function relations()
